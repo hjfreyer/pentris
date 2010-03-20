@@ -1,41 +1,61 @@
-
-package pentris;
+package com.hjfreyer.pentris.client;
 
 public class Point {
-    private int x, y;
+	private final int x, y;
 
-    public Point(int x, int y){
-	this.x=x;
-	this.y=y;
-    }
+	public Point(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 
-    public Point(Point p){
-	this.x=p.x;
-	this.y=p.y;
-    }
+	public Point plus(int dx, int dy) {
+		return new Point(x + dx, y + dy);
+	}
 
-    public Point add(int dx,int dy){ return new Point(x+dx,y+dy); }
-    public Point add(Point p){ return add(p.x,p.y); }
-    
-    public void addIt(int dx,int dy){ x+=dx;y+=dy; }
-    public void addIt(Point p){ addIt(p.x,p.y); }
-    
-    public Point opposite(){ return new Point(-x,-y); }
-    public void oppositeIt(){ x=-x;y=-y; }
-    
-    public int getX(){ return x; }
-    public int getY(){ return y; }
+	public Point plus(Point p) {
+		return plus(p.x, p.y);
+	}
 
-    public String toString(){
-	return "("+x+", "+y+") ";
-    }
-    
-    
-    public boolean equals(Object o){
-	return o.toString().equals(toString());
-    }
+	public Point opposite() {
+		return new Point(-x, -y);
+	}
 
-    public int hashCode(){
-	return toString().hashCode();
-    }
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	@Override
+	public String toString() {
+		return "Point [x=" + x + ", y=" + y + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Point other = (Point) obj;
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		return true;
+	}
+
 }

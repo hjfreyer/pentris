@@ -1,568 +1,476 @@
+package com.hjfreyer.pentris.client;
 
-package pentris;
-
-import java.util.*;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class ShapeFactory {
 
-    private static Random rand;
+	private static Random rand;
 
+	// Pentominos
+	public static Shape getF() {
+		Set<Point> s = new HashSet<Point>();
 
-    // Pentominos 
-    public static Shape getF(){
-	Shape s=new Shape();
+		s.add(new Point(0, 0));
+		s.add(new Point(1, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
+		s.add(new Point(-1, 1));
 
-	s.color=Color.blue;
-	
-	s.add(new Point(0,0));
-	s.add(new Point(1,0));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-	s.add(new Point(-1,1));
-
-	s.center();
-	
-	return s;
-    }
-    public static Shape getI(){
-	Shape s=new Shape();
-
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-	s.add(new Point(0,3));
-	s.add(new Point(0,4));
-
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getL(){
-	Shape s=new Shape();
-
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-	s.add(new Point(0,3));
-	s.add(new Point(1,3));
-
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getN(){
-	Shape s=new Shape();
-
-	s.add(new Point(1,0));
-	s.add(new Point(1,1));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-	s.add(new Point(0,3));
-
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getP(){
-	Shape s=new Shape();
-
-	s.add(new Point(0,0));
-	s.add(new Point(1,0));
-	s.add(new Point(0,1));
-	s.add(new Point(1,1));
-	s.add(new Point(1,-1));
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getT(){
-	Shape s=new Shape();
-
-	s.add(new Point(-1,0));
-	s.add(new Point(1,0));
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getU(){
-	Shape s=new Shape();
-
-	s.add(new Point(0,0));
-	s.add(new Point(-1,0));
-	s.add(new Point(1,0));
-	s.add(new Point(1,-1));
-	s.add(new Point(-1,-1));
-
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getV(){
-	Shape s=new Shape();
-
-	s.add(new Point(0,-2));
-	s.add(new Point(0,-1));
-	s.add(new Point(0,0));
-	s.add(new Point(1,0));
-	s.add(new Point(2,0));
-
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getW(){
-	Shape s=new Shape();
-
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(1,1));
-	s.add(new Point(1,2));
-	s.add(new Point(2,2));
-
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getX(){
-	Shape s=new Shape();
-
-	s.add(new Point(0,0));
-	s.add(new Point(-1,0));
-	s.add(new Point(1,0));
-	s.add(new Point(0,-1));
-	s.add(new Point(0,1));
-
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getY(){
-	Shape s=new Shape();
-	
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-	s.add(new Point(0,3));
-	s.add(new Point(-1,1));
-	
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getZ(){
-	Shape s=new Shape();
-	
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-	s.add(new Point(-1,0));
-	s.add(new Point(1,2));
-	
-	s.center();
-
-	return s;
-
-    }
-    public static Shape getF2(){
-	Shape s=getF();
-	
-	s.mirror();
-
-	return s;
-
-    }
-    public static Shape getJ(){
-	Shape s=getL();
-		
-	s.mirror();
-
-	return s;
-    }
-
-    public static Shape getN2(){
-	Shape s=getN();
-		
-	s.mirror();
-
-	return s;
-    }
-
-    public static Shape getQ(){
-	Shape s=getP();
-		
-	s.mirror();
-
-	return s;
-    }
-
-    public static Shape getY2(){
-	Shape s=getY();
-		
-	s.mirror();
-
-	return s;
-    }
-
-    public static Shape getS(){
-	Shape s=getZ();
-		
-	s.mirror();
-
-	return s;
-    }
-
-
-    
-
-    private static Color randomColor(){
-	int a=0,b=0,c=0;
-	
-	int HI_BOUND=175;
-	int LO_BOUND=100;
-
-	while(!( ( a > HI_BOUND || b > HI_BOUND || c > HI_BOUND ) && 
-		 ( a < LO_BOUND || b < LO_BOUND || c < LO_BOUND ))) {
-	    a=rand.nextInt(255);
-	    b=rand.nextInt(255);
-	    c=rand.nextInt(255);
+		return new Shape(s);
 	}
-	       
 
-	return new Color(a,b,c);
-    }
+	public static Shape getI() {
+		Set<Point> s = new HashSet<Point>();
 
-    public static List<Shape> getPentominos(){
-	List<Shape> res=new ArrayList<Shape>(18);
-	
-	Shape s=null;
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
+		s.add(new Point(0, 3));
+		s.add(new Point(0, 4));
 
-	rand= new Random(1);
+		return new Shape(s);
 
+	}
 
-	s=getF();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getL() {
+		Set<Point> s = new HashSet<Point>();
 
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
+		s.add(new Point(0, 3));
+		s.add(new Point(1, 3));
 
-	s=getI();
-	s.color=randomColor();
-	res.add(s);
+		return new Shape(s);
 
+	}
 
-	s=getN();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getN() {
+		Set<Point> s = new HashSet<Point>();
 
+		s.add(new Point(1, 0));
+		s.add(new Point(1, 1));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
+		s.add(new Point(0, 3));
 
-	s=getP();
-	s.color=randomColor();
-	res.add(s);
+		return new Shape(s);
 
+	}
 
-	s=getT();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getP() {
+		Set<Point> s = new HashSet<Point>();
 
+		s.add(new Point(0, 0));
+		s.add(new Point(1, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(1, 1));
+		s.add(new Point(1, -1));
 
-	s=getU();
-	s.color=randomColor();
-	res.add(s);
+		return new Shape(s);
 
+	}
 
-	s=getV();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getT() {
+		Set<Point> s = new HashSet<Point>();
 
+		s.add(new Point(-1, 0));
+		s.add(new Point(1, 0));
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
 
-	s=getW();
-	s.color=randomColor();
-	res.add(s);
+		return new Shape(s);
 
+	}
 
-	s=getX();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getU() {
+		Set<Point> s = new HashSet<Point>();
 
+		s.add(new Point(0, 0));
+		s.add(new Point(-1, 0));
+		s.add(new Point(1, 0));
+		s.add(new Point(1, -1));
+		s.add(new Point(-1, -1));
 
-	s=getY();
-	s.color=randomColor();
-	res.add(s);
+		return new Shape(s);
 
+	}
 
-	s=getZ();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getV() {
+		Set<Point> s = new HashSet<Point>();
 
+		s.add(new Point(0, -2));
+		s.add(new Point(0, -1));
+		s.add(new Point(0, 0));
+		s.add(new Point(1, 0));
+		s.add(new Point(2, 0));
 
-	s=getF2();
-	s.color=randomColor();
-	res.add(s);
+		return new Shape(s);
 
+	}
 
-	s=getJ();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getW() {
+		Set<Point> s = new HashSet<Point>();
 
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(1, 1));
+		s.add(new Point(1, 2));
+		s.add(new Point(2, 2));
 
-	s=getN2();
-	s.color=randomColor();
-	res.add(s);
+		return new Shape(s);
 
+	}
 
-	s=getQ();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getX() {
+		Set<Point> s = new HashSet<Point>();
 
+		s.add(new Point(0, 0));
+		s.add(new Point(-1, 0));
+		s.add(new Point(1, 0));
+		s.add(new Point(0, -1));
+		s.add(new Point(0, 1));
 
-	s=getY2();
-	s.color=randomColor();
-	res.add(s);
+		return new Shape(s);
 
+	}
 
-	s=getS();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getY() {
+		Set<Point> s = new HashSet<Point>();
 
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
+		s.add(new Point(0, 3));
+		s.add(new Point(-1, 1));
 
-	s=getL();
-	s.color=randomColor();
-	res.add(s);
-
-	return res;
-    }
-
-    // Tetrominos
-    public static Shape get4I(){
-	Shape s=new Shape();
-
-	s.color=Color.blue;
-	
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-	s.add(new Point(0,3));
-
-	s.center();
-	
-	return s;
-    }    
-
-    public static Shape get4J(){
-	Shape s=new Shape();
-
-	s.color=Color.blue;
-	
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-	s.add(new Point(-1,2));
+		return new Shape(s);
 
-	s.center();
-	
-	return s;
-    }    
+	}
 
-    public static Shape get4L(){
-	Shape s=get4J();
-		
-	s.mirror();
+	public static Shape getZ() {
+		Set<Point> s = new HashSet<Point>();
 
-	return s;
-    }    
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
+		s.add(new Point(-1, 0));
+		s.add(new Point(1, 2));
 
-    public static Shape get4O(){
-	Shape s=new Shape();
+		return new Shape(s);
 
-	s.color=Color.blue;
-	
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(1,0));
-	s.add(new Point(1,1));
+	}
 
-	s.center();
-	
-	return s;
-    }    
+	public static Shape getF2() {
+		Shape s = getF();
 
-    public static Shape get4S(){
-	Shape s=new Shape();
+		return Shapes.mirrored(s);
+	}
 
-	s.color=Color.blue;
-	
-	s.add(new Point(0,1));
-	s.add(new Point(1,1));
-	s.add(new Point(1,0));
-	s.add(new Point(2,0));
+	public static Shape getJ() {
+		Shape s = getL();
 
-	s.center();
-	
-	return s;
-    }    
-
-    public static Shape get4Z(){
-	Shape s=get4S();
-
-	s.mirror();
-	
-	return s;
-    }    
-
-    public static Shape get4T(){
-	Shape s=new Shape();
+		return Shapes.mirrored(s);
+	}
 
-	s.color=Color.blue;
-	
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-	s.add(new Point(1,1));
+	public static Shape getN2() {
+		Shape s = getN();
 
-	s.center();
-	
-	return s;
-    }    
+		return Shapes.mirrored(s);
+	}
 
-    public static List<Shape> getTetrominos(){
-	List<Shape> res=new ArrayList<Shape>(7);
-	
-	Shape s=null;
+	public static Shape getQ() {
+		Shape s = getP();
 
-	if(rand==null)
-	    rand=new Random(1);
+		return Shapes.mirrored(s);
+	}
 
-	s=get4I();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getY2() {
+		Shape s = getY();
 
+		return Shapes.mirrored(s);
+	}
 
-	s=get4J();
-	s.color=randomColor();
-	res.add(s);
+	public static Shape getS() {
+		Shape s = getZ();
 
+		return Shapes.mirrored(s);
+	}
 
-	s=get4L();
-	s.color=randomColor();
-	res.add(s);
+	private static Color randomColor() {
+		int a = 0, b = 0, c = 0;
 
+		int HI_BOUND = 175;
+		int LO_BOUND = 100;
 
-	s=get4O();
-	s.color=randomColor();
-	res.add(s);
+		while (!((a > HI_BOUND || b > HI_BOUND || c > HI_BOUND) && (a < LO_BOUND
+				|| b < LO_BOUND || c < LO_BOUND))) {
+			a = rand.nextInt(255);
+			b = rand.nextInt(255);
+			c = rand.nextInt(255);
+		}
 
+		return new Color(a, b, c);
+	}
 
-	s=get4S();
-	s.color=randomColor();
-	res.add(s);
+	public static List<Shape> getPentominos() {
+		List<Shape> res = new ArrayList<Shape>(18);
 
+		Shape s = null;
 
-	s=get4Z();
-	s.color=randomColor();
-	res.add(s);
+		rand = new Random(1);
 
+		s = getF();
 
-	s=get4T();
-	s.color=randomColor();
-	res.add(s);
+		res.add(s);
 
-	return res;
-    }
+		s = getI();
 
-    //Tromino
+		res.add(s);
 
-    public static Shape get3I(){
-	Shape s=new Shape();
+		s = getN();
 
-	s.color=Color.blue;
-	
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(0,2));
-	
-	s.center();
-	
-	return s;
-    }    
+		res.add(s);
 
-    public static Shape get3L(){
-	Shape s=new Shape();
+		s = getP();
 
-	s.color=Color.blue;
-	
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
-	s.add(new Point(1,1));
+		res.add(s);
 
-	s.center();
-	
-	return s;
-    }    
+		s = getT();
 
-    public static List<Shape> getTrominos(){
-	List<Shape> res=new ArrayList<Shape>(2);
-	
-	Shape s=null;
+		res.add(s);
 
-	if(rand==null)
-	    rand=new Random(1);
+		s = getU();
 
-	s=get3I();
-	s.color=randomColor();
-	res.add(s);
+		res.add(s);
 
+		s = getV();
 
-	s=get3L();
-	s.color=randomColor();
-	res.add(s);
+		res.add(s);
 
-	return res;
-    }
+		s = getW();
 
-    public static Shape getDomino(){
+		res.add(s);
 
-	if(rand==null)
-	    rand=new Random(1);
+		s = getX();
 
-	Shape s=new Shape();
+		res.add(s);
 
-	s.color=randomColor();
-	
-	s.add(new Point(0,0));
-	s.add(new Point(0,1));
+		s = getY();
 
-	s.center();
-	
-	return s;
-    }
+		res.add(s);
 
-    public static Shape getMonomino(){
+		s = getZ();
 
-	if(rand==null)
-	    rand=new Random(1);
+		res.add(s);
 
-	Shape s=new Shape();
+		s = getF2();
 
-	s.color=randomColor();
-	
-	s.add(new Point(0,0));
+		res.add(s);
 
-	s.center();
-	
-	return s;
-    }
+		s = getJ();
+
+		res.add(s);
+
+		s = getN2();
+
+		res.add(s);
+
+		s = getQ();
+
+		res.add(s);
+
+		s = getY2();
+
+		res.add(s);
+
+		s = getS();
+
+		res.add(s);
+
+		s = getL();
+
+		res.add(s);
+
+		return res;
+	}
+
+	// Tetrominos
+	public static Shape get4I() {
+		Set<Point> s = new HashSet<Point>();
+
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
+		s.add(new Point(0, 3));
+
+		return new Shape(s);
+	}
+
+	public static Shape get4J() {
+		Set<Point> s = new HashSet<Point>();
+
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
+		s.add(new Point(-1, 2));
+
+		return new Shape(s);
+	}
+
+	public static Shape get4L() {
+		Shape s = get4J();
+
+		return Shapes.mirrored(s);
+	}
+
+	public static Shape get4O() {
+		Set<Point> s = new HashSet<Point>();
+
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(1, 0));
+		s.add(new Point(1, 1));
+
+		return new Shape(s);
+	}
+
+	public static Shape get4S() {
+		Set<Point> s = new HashSet<Point>();
+
+		s.add(new Point(0, 1));
+		s.add(new Point(1, 1));
+		s.add(new Point(1, 0));
+		s.add(new Point(2, 0));
+
+		return new Shape(s);
+	}
+
+	public static Shape get4Z() {
+		Shape s = get4S();
+
+		return Shapes.mirrored(s);
+	}
+
+	public static Shape get4T() {
+		Set<Point> s = new HashSet<Point>();
+
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
+		s.add(new Point(1, 1));
+
+		return new Shape(s);
+	}
+
+	public static List<Shape> getTetrominos() {
+		List<Shape> res = new ArrayList<Shape>(7);
+
+		Shape s = null;
+
+		if (rand == null)
+			rand = new Random(1);
+
+		s = get4I();
+
+		res.add(s);
+
+		s = get4J();
+
+		res.add(s);
+
+		s = get4L();
+
+		res.add(s);
+
+		s = get4O();
+
+		res.add(s);
+
+		s = get4S();
+
+		res.add(s);
+
+		s = get4Z();
+
+		res.add(s);
+
+		s = get4T();
+
+		res.add(s);
+
+		return res;
+	}
+
+	// Tromino
+
+	public static Shape get3I() {
+		Set<Point> s = new HashSet<Point>();
+
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(0, 2));
+
+		return new Shape(s);
+	}
+
+	public static Shape get3L() {
+		Set<Point> s = new HashSet<Point>();
+
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+		s.add(new Point(1, 1));
+
+		return new Shape(s);
+	}
+
+	public static List<Shape> getTrominos() {
+		List<Shape> res = new ArrayList<Shape>(2);
+
+		Shape s = null;
+
+		if (rand == null)
+			rand = new Random(1);
+
+		s = get3I();
+
+		res.add(s);
+
+		s = get3L();
+
+		res.add(s);
+
+		return res;
+	}
+
+	public static Shape getDomino() {
+
+		if (rand == null)
+			rand = new Random(1);
+
+		Set<Point> s = new HashSet<Point>();
+
+		s.add(new Point(0, 0));
+		s.add(new Point(0, 1));
+
+		return new Shape(s);
+	}
+
+	public static Shape getMonomino() {
+
+		if (rand == null)
+			rand = new Random(1);
+
+		Set<Point> s = new HashSet<Point>();
+
+		s.add(new Point(0, 0));
+
+		return new Shape(s);
+	}
 }
