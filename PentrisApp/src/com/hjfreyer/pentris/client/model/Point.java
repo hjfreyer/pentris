@@ -1,4 +1,4 @@
-package com.hjfreyer.pentris.client;
+package com.hjfreyer.pentris.client.model;
 
 public class Point {
 	private final int x, y;

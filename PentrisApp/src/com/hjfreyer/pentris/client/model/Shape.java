@@ -1,4 +1,4 @@
-package com.hjfreyer.pentris.client;
+package com.hjfreyer.pentris.client.model;
 
 import java.util.Set;
 

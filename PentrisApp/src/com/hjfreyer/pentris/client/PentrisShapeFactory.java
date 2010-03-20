@@ -2,14 +2,33 @@ package com.hjfreyer.pentris.client;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class ShapeFactory {
+import com.google.gwt.dev.util.collect.HashSet;
+import com.hjfreyer.pentris.client.model.Point;
+import com.hjfreyer.pentris.client.model.Shape;
+import com.hjfreyer.pentris.client.model.Shapes;
+
+public class PentrisShapeFactory implements ShapeFactory {
 
 	private static Random rand;
+
+	/* (non-Javadoc)
+	 * @see com.hjfreyer.pentris.client.ShapeFactory#getShapes()
+	 */
+	public Set<Shape> getShapes() {
+		Set<Shape> shapes = new HashSet<Shape>();
+
+		shapes.add(getMonomino());
+		shapes.add(getDomino());
+		shapes.addAll(getTrominos());
+		shapes.addAll(getTetrominos());
+		shapes.addAll(getPentominos());
+
+		return shapes;
+	}
 
 	// Pentominos
 	public static Shape getF() {

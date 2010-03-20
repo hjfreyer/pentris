@@ -1,4 +1,4 @@
-package com.hjfreyer.pentris.client;
+package com.hjfreyer.pentris.client.model;
 
 import java.util.Set;
 
@@ -62,38 +62,46 @@ public class Shapes {
 		return new Shape(rotatedLeft(s.getPoints()), s.getColor());
 	}
 
-	public static Shape mirrored(Shape s) {
+	public static Set<Point> mirrored(Set<Point> points) {
+		Set<Point> newPoints = new HashSet<Point>();
+
 		for (Point p : points) {
-			p.addIt(-p.getX() * 2, 0);
-		}
-	}
-
-	public boolean isInBounds(int width, int height) {
-		int top = height, bottom = 0, left = width, right = 0;
-
-		for (Point p : getShape()) {
-			if (p.getX() > right)
-				right = p.getX();
-			if (p.getX() < left)
-				left = p.getX();
-			if (p.getY() > bottom)
-				bottom = p.getY();
-			if (p.getY() < top)
-				top = p.getY();
+			newPoints.add(new Point(-p.getX(), -p.getY()));
 		}
 
-		// System.out.printf("%d %d %d %d\n",top,bottom,left,right);
-
-		return top >= 0 && bottom < height && left >= 0 && right < width;
+		return centered(newPoints);
 	}
 
-	public Shape duplicate() {
-		Shape res = new Shape();
-
-		for (Point p : points)
-			res.add(new Point(p));
-		res.color = color;
-
-		return res;
+	public static Shape mirrored(Shape s) {
+		return new Shape(mirrored(s.getPoints()), s.getColor());
 	}
+
+	// public boolean isInBounds(int width, int height) {
+	// int top = height, bottom = 0, left = width, right = 0;
+	//
+	// for (Point p : getShape()) {
+	// if (p.getX() > right)
+	// right = p.getX();
+	// if (p.getX() < left)
+	// left = p.getX();
+	// if (p.getY() > bottom)
+	// bottom = p.getY();
+	// if (p.getY() < top)
+	// top = p.getY();
+	// }
+	//
+	// // System.out.printf("%d %d %d %d\n",top,bottom,left,right);
+	//
+	// return top >= 0 && bottom < height && left >= 0 && right < width;
+	// }
+	//
+	// public Shape duplicate() {
+	// Shape res = new Shape();
+	//
+	// for (Point p : points)
+	// res.add(new Point(p));
+	// res.color = color;
+	//
+	// return res;
+	// }
 }
