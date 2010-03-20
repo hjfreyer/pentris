@@ -2,24 +2,26 @@ package com.hjfreyer.pentris.client.model;
 
 import java.util.Set;
 
+import com.hjfreyer.pentris.client.util.Color;
+
 public class Shape {
 	private final Set<Point> points;
-	private final String color;
+	private final Color color;
 
-	public Shape(Set<Point> points, String color) {
+	public Shape(Set<Point> points, Color color) {
 		this.points = points;
 		this.color = color;
 	}
 
 	public Shape(Set<Point> s) {
-		this(s, "white");
+		this(s, Color.GRAY);
 	}
 
 	public Set<Point> getPoints() {
 		return points;
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 

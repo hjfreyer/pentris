@@ -20,6 +20,10 @@ public class Point {
 		return new Point(-x, -y);
 	}
 
+	public boolean isInBounds(int width, int height) {
+		return 0 <= x && x < width && 0 <= y && y < height;
+	}
+
 	public int getX() {
 		return x;
 	}

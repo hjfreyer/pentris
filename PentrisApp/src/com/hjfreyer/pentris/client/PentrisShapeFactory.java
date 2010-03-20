@@ -1,6 +1,5 @@
 package com.hjfreyer.pentris.client;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -222,22 +221,6 @@ public class PentrisShapeFactory implements ShapeFactory {
 		Shape s = getZ();
 
 		return Shapes.mirrored(s);
-	}
-
-	private static Color randomColor() {
-		int a = 0, b = 0, c = 0;
-
-		int HI_BOUND = 175;
-		int LO_BOUND = 100;
-
-		while (!((a > HI_BOUND || b > HI_BOUND || c > HI_BOUND) && (a < LO_BOUND
-				|| b < LO_BOUND || c < LO_BOUND))) {
-			a = rand.nextInt(255);
-			b = rand.nextInt(255);
-			c = rand.nextInt(255);
-		}
-
-		return new Color(a, b, c);
 	}
 
 	public static List<Shape> getPentominos() {
