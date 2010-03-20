@@ -1,0 +1,1651 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+JArrayType (Google Web Toolkit Javadoc)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="JArrayType (Google Web Toolkit Javadoc)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+GWT 2.0.3</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JAnnotationType.html" title="class in com.google.gwt.core.ext.typeinfo"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?com/google/gwt/core/ext/typeinfo/JArrayType.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="JArrayType.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+com.google.gwt.core.ext.typeinfo</FONT>
+<BR>
+Class JArrayType</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">com.google.gwt.core.ext.typeinfo.JType</A>
+      <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">com.google.gwt.core.ext.typeinfo.JClassType</A>
+          <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>com.google.gwt.core.ext.typeinfo.JArrayType</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/HasAnnotations.html" title="interface in com.google.gwt.core.ext.typeinfo">HasAnnotations</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/HasMetaData.html" title="interface in com.google.gwt.core.ext.typeinfo">HasMetaData</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>JArrayType</B><DT>extends <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></DL>
+</PRE>
+
+<P>
+Type representing a Java array.
+<P>
+
+<P>
+<HR>
+
+<P>
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#acceptSubtype(com.google.gwt.core.ext.typeinfo.JClassType)">acceptSubtype</A></B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>&nbsp;me)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#addImplementedInterface(com.google.gwt.core.ext.typeinfo.JClassType)">addImplementedInterface</A></B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>&nbsp;intf)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#addModifierBits(int)">addModifierBits</A></B>(int&nbsp;bits)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JConstructor.html" title="class in com.google.gwt.core.ext.typeinfo">JConstructor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#findConstructor(com.google.gwt.core.ext.typeinfo.JType[])">findConstructor</A></B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A>[]&nbsp;paramTypes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JField.html" title="class in com.google.gwt.core.ext.typeinfo">JField</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#findField(java.lang.String)">findField</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#findMethod(java.lang.String, com.google.gwt.core.ext.typeinfo.JType[])">findMethod</A></B>(java.lang.String&nbsp;name,
+           <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A>[]&nbsp;paramTypes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#findNestedType(java.lang.String)">findNestedType</A></B>(java.lang.String&nbsp;typeName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T extends java.lang.annotation.Annotation&gt; 
+<BR>
+T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getAnnotation(java.lang.Class)">getAnnotation</A></B>(java.lang.Class&lt;T&gt;&nbsp;annotationClass)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an instance of the specified annotation type if it is present on
+ this element or <code>null</code> if it is not.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getComponentType()">getComponentType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JConstructor.html" title="class in com.google.gwt.core.ext.typeinfo">JConstructor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getConstructor(com.google.gwt.core.ext.typeinfo.JType[])">getConstructor</A></B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A>[]&nbsp;paramTypes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JConstructor.html" title="class in com.google.gwt.core.ext.typeinfo">JConstructor</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getConstructors()">getConstructors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getEnclosingType()">getEnclosingType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getErasedType()">getErasedType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JField.html" title="class in com.google.gwt.core.ext.typeinfo">JField</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getField(java.lang.String)">getField</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JField.html" title="class in com.google.gwt.core.ext.typeinfo">JField</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getFields()">getFields</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getImplementedInterfaces()">getImplementedInterfaces</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getJNISignature()">getJNISignature</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getLeafType()">getLeafType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getMethod(java.lang.String, com.google.gwt.core.ext.typeinfo.JType[])">getMethod</A></B>(java.lang.String&nbsp;name,
+          <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A>[]&nbsp;paramTypes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getMethods()">getMethods</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getModifierBits()">getModifierBits</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getName()">getName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getNestedType(java.lang.String)">getNestedType</A></B>(java.lang.String&nbsp;typeName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getNestedTypes()">getNestedTypes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/TypeOracle.html" title="class in com.google.gwt.core.ext.typeinfo">TypeOracle</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getOracle()">getOracle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getOverloads(java.lang.String)">getOverloads</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getOverridableMethods()">getOverridableMethods</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterates over the most-derived declaration of each unique overridable
+ method available in the type hierarchy of the specified type, including
+ those found in superclasses and superinterfaces.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getOverridableMethodsOnSuperclassesAndThisClass(java.util.Map)">getOverridableMethodsOnSuperclassesAndThisClass</A></B>(java.util.Map&lt;java.lang.String,<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A>&gt;&nbsp;methodsBySignature)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getOverridableMethodsOnSuperinterfacesAndMaybeThisInterface(java.util.Map)">getOverridableMethodsOnSuperinterfacesAndMaybeThisInterface</A></B>(java.util.Map&lt;java.lang.String,<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A>&gt;&nbsp;methodsBySignature)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the methods declared in interfaces that this type extends.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JPackage.html" title="class in com.google.gwt.core.ext.typeinfo">JPackage</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getPackage()">getPackage</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getParameterizedQualifiedSourceName()">getParameterizedQualifiedSourceName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getQualifiedBinaryName()">getQualifiedBinaryName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TODO(scottb): remove if we can resolve param names differently.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getQualifiedSourceName()">getQualifiedSourceName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getRank()">getRank</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getSimpleSourceName()">getSimpleSourceName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html" title="class in com.google.gwt.core.ext.typeinfo">JArrayType</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getSubtypes()">getSubtypes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#getSuperclass()">getSuperclass</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isAbstract()">isAbstract</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isAnnotationPresent(java.lang.Class)">isAnnotationPresent</A></B>(java.lang.Class&lt;? extends java.lang.annotation.Annotation&gt;&nbsp;annotationClass)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <code>true</code> if this item has an annotation of the specified
+ type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html" title="class in com.google.gwt.core.ext.typeinfo">JArrayType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isArray()">isArray</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isClass()">isClass</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isDefaultInstantiable()">isDefaultInstantiable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determines if the class can be constructed using a simple <code>new</code>
+ operation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JEnumType.html" title="class in com.google.gwt.core.ext.typeinfo">JEnumType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isEnum()">isEnum</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns this instance if it is an enumeration or <code>null</code> if it
+ is not.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isFinal()">isFinal</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JGenericType.html" title="class in com.google.gwt.core.ext.typeinfo">JGenericType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isGenericType()">isGenericType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isInterface()">isInterface</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isLocalType()">isLocalType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tests if this type is a local type (within a method).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isMemberType()">isMemberType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tests if this type is contained within another type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JParameterizedType.html" title="class in com.google.gwt.core.ext.typeinfo">JParameterizedType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isParameterized()">isParameterized</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JPrimitiveType.html" title="class in com.google.gwt.core.ext.typeinfo">JPrimitiveType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isPrimitive()">isPrimitive</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isPrivate()">isPrivate</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isProtected()">isProtected</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isPublic()">isPublic</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JRawType.html" title="class in com.google.gwt.core.ext.typeinfo">JRawType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isRawType()">isRawType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isStatic()">isStatic</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JWildcardType.html" title="class in com.google.gwt.core.ext.typeinfo">JWildcardType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#isWildcard()">isWildcard</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#notifySuperTypesOf(com.google.gwt.core.ext.typeinfo.JClassType)">notifySuperTypesOf</A></B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>&nbsp;me)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tells this type's superclasses and superinterfaces about it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#removeSubtype(com.google.gwt.core.ext.typeinfo.JClassType)">removeSubtype</A></B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>&nbsp;me)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#setLeafType(com.google.gwt.core.ext.typeinfo.JType)">setLeafType</A></B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A>&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#setSuperclass(com.google.gwt.core.ext.typeinfo.JClassType)">setSuperclass</A></B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_com.google.gwt.core.ext.typeinfo.JClassType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class com.google.gwt.core.ext.typeinfo.<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#addMetaData(java.lang.String, java.lang.String[])">addMetaData</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#asParameterizationOf(com.google.gwt.core.ext.typeinfo.JGenericType)">asParameterizationOf</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#findAnnotationInTypeHierarchy(java.lang.Class)">findAnnotationInTypeHierarchy</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getFlattenedSupertypeHierarchy()">getFlattenedSupertypeHierarchy</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getFlattenedSuperTypeHierarchy(com.google.gwt.core.ext.typeinfo.JClassType)">getFlattenedSuperTypeHierarchy</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getMetaData(java.lang.String)">getMetaData</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getMetaDataTags()">getMetaDataTags</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isAssignableFrom(com.google.gwt.core.ext.typeinfo.JClassType)">isAssignableFrom</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isAssignableTo(com.google.gwt.core.ext.typeinfo.JClassType)">isAssignableTo</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isEnhanced()">isEnhanced</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isMaybeParameterizedType()">isMaybeParameterizedType</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#setEnhanced()">setEnhanced</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_com.google.gwt.core.ext.typeinfo.JType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class com.google.gwt.core.ext.typeinfo.<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#equals(java.lang.Object)">equals</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#hashCode()">hashCode</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isAnnotation()">isAnnotation</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isClassOrInterface()">isClassOrInterface</A>, <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isTypeParameter()">isTypeParameter</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="addImplementedInterface(com.google.gwt.core.ext.typeinfo.JClassType)"><!-- --></A><H3>
+addImplementedInterface</H3>
+<PRE>
+public void <B>addImplementedInterface</B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>&nbsp;intf)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#addImplementedInterface(com.google.gwt.core.ext.typeinfo.JClassType)">addImplementedInterface</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addModifierBits(int)"><!-- --></A><H3>
+addModifierBits</H3>
+<PRE>
+public void <B>addModifierBits</B>(int&nbsp;bits)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#addModifierBits(int)">addModifierBits</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findConstructor(com.google.gwt.core.ext.typeinfo.JType[])"><!-- --></A><H3>
+findConstructor</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JConstructor.html" title="class in com.google.gwt.core.ext.typeinfo">JConstructor</A> <B>findConstructor</B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A>[]&nbsp;paramTypes)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#findConstructor(com.google.gwt.core.ext.typeinfo.JType[])">findConstructor</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findField(java.lang.String)"><!-- --></A><H3>
+findField</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JField.html" title="class in com.google.gwt.core.ext.typeinfo">JField</A> <B>findField</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#findField(java.lang.String)">findField</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findMethod(java.lang.String, com.google.gwt.core.ext.typeinfo.JType[])"><!-- --></A><H3>
+findMethod</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A> <B>findMethod</B>(java.lang.String&nbsp;name,
+                          <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A>[]&nbsp;paramTypes)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#findMethod(java.lang.String, com.google.gwt.core.ext.typeinfo.JType[])">findMethod</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findNestedType(java.lang.String)"><!-- --></A><H3>
+findNestedType</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A> <B>findNestedType</B>(java.lang.String&nbsp;typeName)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#findNestedType(java.lang.String)">findNestedType</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAnnotation(java.lang.Class)"><!-- --></A><H3>
+getAnnotation</H3>
+<PRE>
+public &lt;T extends java.lang.annotation.Annotation&gt; T <B>getAnnotation</B>(java.lang.Class&lt;T&gt;&nbsp;annotationClass)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/HasAnnotations.html#getAnnotation(java.lang.Class)">HasAnnotations</A></CODE></B></DD>
+<DD>Returns an instance of the specified annotation type if it is present on
+ this element or <code>null</code> if it is not.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/HasAnnotations.html#getAnnotation(java.lang.Class)">getAnnotation</A></CODE> in interface <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/HasAnnotations.html" title="interface in com.google.gwt.core.ext.typeinfo">HasAnnotations</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getAnnotation(java.lang.Class)">getAnnotation</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>annotationClass</CODE> - annotation type to search for
+<DT><B>Returns:</B><DD>instance of the specified annotation type if it is present on this
+         element or <code>null</code> if it is not</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getComponentType()"><!-- --></A><H3>
+getComponentType</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A> <B>getComponentType</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getConstructor(com.google.gwt.core.ext.typeinfo.JType[])"><!-- --></A><H3>
+getConstructor</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JConstructor.html" title="class in com.google.gwt.core.ext.typeinfo">JConstructor</A> <B>getConstructor</B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A>[]&nbsp;paramTypes)
+                            throws <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/NotFoundException.html" title="class in com.google.gwt.core.ext.typeinfo">NotFoundException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getConstructor(com.google.gwt.core.ext.typeinfo.JType[])">getConstructor</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/NotFoundException.html" title="class in com.google.gwt.core.ext.typeinfo">NotFoundException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getConstructors()"><!-- --></A><H3>
+getConstructors</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JConstructor.html" title="class in com.google.gwt.core.ext.typeinfo">JConstructor</A>[] <B>getConstructors</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getConstructors()">getConstructors</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEnclosingType()"><!-- --></A><H3>
+getEnclosingType</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A> <B>getEnclosingType</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getEnclosingType()">getEnclosingType</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getErasedType()"><!-- --></A><H3>
+getErasedType</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A> <B>getErasedType</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getErasedType()">getErasedType</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getField(java.lang.String)"><!-- --></A><H3>
+getField</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JField.html" title="class in com.google.gwt.core.ext.typeinfo">JField</A> <B>getField</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getField(java.lang.String)">getField</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFields()"><!-- --></A><H3>
+getFields</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JField.html" title="class in com.google.gwt.core.ext.typeinfo">JField</A>[] <B>getFields</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getFields()">getFields</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getImplementedInterfaces()"><!-- --></A><H3>
+getImplementedInterfaces</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>[] <B>getImplementedInterfaces</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getImplementedInterfaces()">getImplementedInterfaces</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJNISignature()"><!-- --></A><H3>
+getJNISignature</H3>
+<PRE>
+public java.lang.String <B>getJNISignature</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#getJNISignature()">getJNISignature</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLeafType()"><!-- --></A><H3>
+getLeafType</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A> <B>getLeafType</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#getLeafType()">getLeafType</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMethod(java.lang.String, com.google.gwt.core.ext.typeinfo.JType[])"><!-- --></A><H3>
+getMethod</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A> <B>getMethod</B>(java.lang.String&nbsp;name,
+                         <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A>[]&nbsp;paramTypes)
+                  throws <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/NotFoundException.html" title="class in com.google.gwt.core.ext.typeinfo">NotFoundException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getMethod(java.lang.String, com.google.gwt.core.ext.typeinfo.JType[])">getMethod</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/NotFoundException.html" title="class in com.google.gwt.core.ext.typeinfo">NotFoundException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMethods()"><!-- --></A><H3>
+getMethods</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A>[] <B>getMethods</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getMethods()">getMethods</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getName()"><!-- --></A><H3>
+getName</H3>
+<PRE>
+public java.lang.String <B>getName</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getName()">getName</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNestedType(java.lang.String)"><!-- --></A><H3>
+getNestedType</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A> <B>getNestedType</B>(java.lang.String&nbsp;typeName)
+                         throws <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/NotFoundException.html" title="class in com.google.gwt.core.ext.typeinfo">NotFoundException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getNestedType(java.lang.String)">getNestedType</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/NotFoundException.html" title="class in com.google.gwt.core.ext.typeinfo">NotFoundException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNestedTypes()"><!-- --></A><H3>
+getNestedTypes</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>[] <B>getNestedTypes</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getNestedTypes()">getNestedTypes</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOracle()"><!-- --></A><H3>
+getOracle</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/TypeOracle.html" title="class in com.google.gwt.core.ext.typeinfo">TypeOracle</A> <B>getOracle</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getOracle()">getOracle</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOverloads(java.lang.String)"><!-- --></A><H3>
+getOverloads</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A>[] <B>getOverloads</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getOverloads(java.lang.String)">getOverloads</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOverridableMethods()"><!-- --></A><H3>
+getOverridableMethods</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A>[] <B>getOverridableMethods</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getOverridableMethods()">JClassType</A></CODE></B></DD>
+<DD>Iterates over the most-derived declaration of each unique overridable
+ method available in the type hierarchy of the specified type, including
+ those found in superclasses and superinterfaces. A method is overridable if
+ it is not <code>final</code> and its accessibility is <code>public</code>,
+ <code>protected</code>, or package protected.
+ 
+ Deferred binding generators often need to generate method implementations;
+ this method offers a convenient way to find candidate methods to implement.
+ 
+ Note that the behavior does not match
+ <CODE>Class.getMethod(String, Class[])</CODE>, which does not return the most
+ derived method in some cases.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getOverridableMethods()">getOverridableMethods</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>an array of <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo"><CODE>JMethod</CODE></A> objects representing overridable
+         methods</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPackage()"><!-- --></A><H3>
+getPackage</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JPackage.html" title="class in com.google.gwt.core.ext.typeinfo">JPackage</A> <B>getPackage</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getPackage()">getPackage</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParameterizedQualifiedSourceName()"><!-- --></A><H3>
+getParameterizedQualifiedSourceName</H3>
+<PRE>
+public java.lang.String <B>getParameterizedQualifiedSourceName</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#getParameterizedQualifiedSourceName()">getParameterizedQualifiedSourceName</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getQualifiedBinaryName()"><!-- --></A><H3>
+getQualifiedBinaryName</H3>
+<PRE>
+public java.lang.String <B>getQualifiedBinaryName</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#getQualifiedBinaryName()">JType</A></CODE></B></DD>
+<DD>TODO(scottb): remove if we can resolve param names differently.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#getQualifiedBinaryName()">getQualifiedBinaryName</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getQualifiedSourceName()"><!-- --></A><H3>
+getQualifiedSourceName</H3>
+<PRE>
+public java.lang.String <B>getQualifiedSourceName</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#getQualifiedSourceName()">getQualifiedSourceName</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRank()"><!-- --></A><H3>
+getRank</H3>
+<PRE>
+public int <B>getRank</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSimpleSourceName()"><!-- --></A><H3>
+getSimpleSourceName</H3>
+<PRE>
+public java.lang.String <B>getSimpleSourceName</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#getSimpleSourceName()">getSimpleSourceName</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubtypes()"><!-- --></A><H3>
+getSubtypes</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html" title="class in com.google.gwt.core.ext.typeinfo">JArrayType</A>[] <B>getSubtypes</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getSubtypes()">getSubtypes</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSuperclass()"><!-- --></A><H3>
+getSuperclass</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A> <B>getSuperclass</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getSuperclass()">getSuperclass</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isAbstract()"><!-- --></A><H3>
+isAbstract</H3>
+<PRE>
+public boolean <B>isAbstract</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isAbstract()">isAbstract</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isAnnotationPresent(java.lang.Class)"><!-- --></A><H3>
+isAnnotationPresent</H3>
+<PRE>
+public boolean <B>isAnnotationPresent</B>(java.lang.Class&lt;? extends java.lang.annotation.Annotation&gt;&nbsp;annotationClass)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/HasAnnotations.html#isAnnotationPresent(java.lang.Class)">HasAnnotations</A></CODE></B></DD>
+<DD>Returns <code>true</code> if this item has an annotation of the specified
+ type.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/HasAnnotations.html#isAnnotationPresent(java.lang.Class)">isAnnotationPresent</A></CODE> in interface <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/HasAnnotations.html" title="interface in com.google.gwt.core.ext.typeinfo">HasAnnotations</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isAnnotationPresent(java.lang.Class)">isAnnotationPresent</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if this item has an annotation of the specified
+         type</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isArray()"><!-- --></A><H3>
+isArray</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JArrayType.html" title="class in com.google.gwt.core.ext.typeinfo">JArrayType</A> <B>isArray</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isArray()">isArray</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isClass()"><!-- --></A><H3>
+isClass</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A> <B>isClass</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isClass()">isClass</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isDefaultInstantiable()"><!-- --></A><H3>
+isDefaultInstantiable</H3>
+<PRE>
+public boolean <B>isDefaultInstantiable</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isDefaultInstantiable()">JClassType</A></CODE></B></DD>
+<DD>Determines if the class can be constructed using a simple <code>new</code>
+ operation. Specifically, the class must
+ <ul>
+ <li>be a class rather than an interface,</li>
+ <li>have either no constructors or a parameterless constructor, and</li>
+ <li>be a top-level class or a static nested class.</li>
+ </ul>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isDefaultInstantiable()">isDefaultInstantiable</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the type is default instantiable, or
+         <code>false</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isEnum()"><!-- --></A><H3>
+isEnum</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JEnumType.html" title="class in com.google.gwt.core.ext.typeinfo">JEnumType</A> <B>isEnum</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isEnum()">JType</A></CODE></B></DD>
+<DD>Returns this instance if it is an enumeration or <code>null</code> if it
+ is not.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isEnum()">isEnum</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>this instance if it is an enumeration or <code>null</code> if it
+         is not</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFinal()"><!-- --></A><H3>
+isFinal</H3>
+<PRE>
+public boolean <B>isFinal</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isFinal()">isFinal</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isGenericType()"><!-- --></A><H3>
+isGenericType</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JGenericType.html" title="class in com.google.gwt.core.ext.typeinfo">JGenericType</A> <B>isGenericType</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isGenericType()">isGenericType</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isInterface()"><!-- --></A><H3>
+isInterface</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A> <B>isInterface</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isInterface()">isInterface</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isLocalType()"><!-- --></A><H3>
+isLocalType</H3>
+<PRE>
+public boolean <B>isLocalType</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isLocalType()">JClassType</A></CODE></B></DD>
+<DD>Tests if this type is a local type (within a method).
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isLocalType()">isLocalType</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true if this type is a local type, whether it is named or
+         anonymous.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isMemberType()"><!-- --></A><H3>
+isMemberType</H3>
+<PRE>
+public boolean <B>isMemberType</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isMemberType()">JClassType</A></CODE></B></DD>
+<DD>Tests if this type is contained within another type.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isMemberType()">isMemberType</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true if this type has an enclosing type, false if this type is a
+         top-level type</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isParameterized()"><!-- --></A><H3>
+isParameterized</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JParameterizedType.html" title="class in com.google.gwt.core.ext.typeinfo">JParameterizedType</A> <B>isParameterized</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isParameterized()">isParameterized</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isPrimitive()"><!-- --></A><H3>
+isPrimitive</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JPrimitiveType.html" title="class in com.google.gwt.core.ext.typeinfo">JPrimitiveType</A> <B>isPrimitive</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isPrimitive()">isPrimitive</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isPrivate()"><!-- --></A><H3>
+isPrivate</H3>
+<PRE>
+public boolean <B>isPrivate</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isPrivate()">isPrivate</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isProtected()"><!-- --></A><H3>
+isProtected</H3>
+<PRE>
+public boolean <B>isProtected</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isProtected()">isProtected</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isPublic()"><!-- --></A><H3>
+isPublic</H3>
+<PRE>
+public boolean <B>isPublic</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isPublic()">isPublic</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isRawType()"><!-- --></A><H3>
+isRawType</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JRawType.html" title="class in com.google.gwt.core.ext.typeinfo">JRawType</A> <B>isRawType</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isRawType()">isRawType</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isStatic()"><!-- --></A><H3>
+isStatic</H3>
+<PRE>
+public boolean <B>isStatic</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#isStatic()">isStatic</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isWildcard()"><!-- --></A><H3>
+isWildcard</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JWildcardType.html" title="class in com.google.gwt.core.ext.typeinfo">JWildcardType</A> <B>isWildcard</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html#isWildcard()">isWildcard</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLeafType(com.google.gwt.core.ext.typeinfo.JType)"><!-- --></A><H3>
+setLeafType</H3>
+<PRE>
+public void <B>setLeafType</B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JType.html" title="class in com.google.gwt.core.ext.typeinfo">JType</A>&nbsp;type)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSuperclass(com.google.gwt.core.ext.typeinfo.JClassType)"><!-- --></A><H3>
+setSuperclass</H3>
+<PRE>
+public void <B>setSuperclass</B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>&nbsp;type)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#setSuperclass(com.google.gwt.core.ext.typeinfo.JClassType)">setSuperclass</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#toString()">toString</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="acceptSubtype(com.google.gwt.core.ext.typeinfo.JClassType)"><!-- --></A><H3>
+acceptSubtype</H3>
+<PRE>
+protected void <B>acceptSubtype</B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>&nbsp;me)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#acceptSubtype(com.google.gwt.core.ext.typeinfo.JClassType)">acceptSubtype</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getModifierBits()"><!-- --></A><H3>
+getModifierBits</H3>
+<PRE>
+protected int <B>getModifierBits</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getModifierBits()">getModifierBits</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOverridableMethodsOnSuperclassesAndThisClass(java.util.Map)"><!-- --></A><H3>
+getOverridableMethodsOnSuperclassesAndThisClass</H3>
+<PRE>
+protected void <B>getOverridableMethodsOnSuperclassesAndThisClass</B>(java.util.Map&lt;java.lang.String,<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A>&gt;&nbsp;methodsBySignature)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getOverridableMethodsOnSuperclassesAndThisClass(java.util.Map)">getOverridableMethodsOnSuperclassesAndThisClass</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOverridableMethodsOnSuperinterfacesAndMaybeThisInterface(java.util.Map)"><!-- --></A><H3>
+getOverridableMethodsOnSuperinterfacesAndMaybeThisInterface</H3>
+<PRE>
+protected void <B>getOverridableMethodsOnSuperinterfacesAndMaybeThisInterface</B>(java.util.Map&lt;java.lang.String,<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JMethod.html" title="class in com.google.gwt.core.ext.typeinfo">JMethod</A>&gt;&nbsp;methodsBySignature)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getOverridableMethodsOnSuperinterfacesAndMaybeThisInterface(java.util.Map)">JClassType</A></CODE></B></DD>
+<DD>Gets the methods declared in interfaces that this type extends. If this
+ type is a class, its own methods are not added. If this type is an
+ interface, its own methods are added. Used internally by
+ <A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getOverridableMethods()"><CODE>JClassType.getOverridableMethods()</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#getOverridableMethodsOnSuperinterfacesAndMaybeThisInterface(java.util.Map)">getOverridableMethodsOnSuperinterfacesAndMaybeThisInterface</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="notifySuperTypesOf(com.google.gwt.core.ext.typeinfo.JClassType)"><!-- --></A><H3>
+notifySuperTypesOf</H3>
+<PRE>
+protected void <B>notifySuperTypesOf</B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>&nbsp;me)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#notifySuperTypesOf(com.google.gwt.core.ext.typeinfo.JClassType)">JClassType</A></CODE></B></DD>
+<DD>Tells this type's superclasses and superinterfaces about it.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#notifySuperTypesOf(com.google.gwt.core.ext.typeinfo.JClassType)">notifySuperTypesOf</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeSubtype(com.google.gwt.core.ext.typeinfo.JClassType)"><!-- --></A><H3>
+removeSubtype</H3>
+<PRE>
+protected void <B>removeSubtype</B>(<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A>&nbsp;me)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html#removeSubtype(com.google.gwt.core.ext.typeinfo.JClassType)">removeSubtype</A></CODE> in class <CODE><A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo">JClassType</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+GWT 2.0.3</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JAnnotationType.html" title="class in com.google.gwt.core.ext.typeinfo"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../com/google/gwt/core/ext/typeinfo/JClassType.html" title="class in com.google.gwt.core.ext.typeinfo"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?com/google/gwt/core/ext/typeinfo/JArrayType.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="JArrayType.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+</BODY>
+</HTML>
