@@ -1,8 +1,7 @@
 package com.hjfreyer.pentris.client.model;
 
+import java.util.HashSet;
 import java.util.Set;
-
-import com.google.gwt.dev.util.collect.HashSet;
 
 public class Shapes {
 
