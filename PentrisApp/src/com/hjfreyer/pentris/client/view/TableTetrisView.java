@@ -72,9 +72,6 @@ public class TableTetrisView extends Composite implements TetrisView {
 
 	@Override
 	public void showShapes(Set<Shape> shapes) {
-		Set<Shape> oldShapes = new HashSet<Shape>();
-		Set<Shape> newShapes = new HashSet<Shape>();
-
 		for (Shape shape : shapeCache) {
 			if (!shapes.contains(shape)) {
 				// Old shape
