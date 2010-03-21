@@ -34,7 +34,7 @@ public class Shape {
 			max = Math.max(max, p.getY());
 		}
 
-		return max - min;
+		return max - min + 1;
 	}
 
 	@Override

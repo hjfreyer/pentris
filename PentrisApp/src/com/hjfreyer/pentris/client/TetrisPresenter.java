@@ -15,6 +15,7 @@ public class TetrisPresenter implements TetrisEventListener {
 	private final int width;
 	private final int height;
 	private final TetrisView mainView;
+	private final TetrisView preview;
 	private final List<Shape> shapeHeap;
 
 	private Shape deadShape;
@@ -27,11 +28,13 @@ public class TetrisPresenter implements TetrisEventListener {
 			int width,
 			int height,
 			TetrisView mainView,
+			TetrisView preview,
 			Set<Shape> shapeHeap) {
 
 		this.width = width;
 		this.height = height;
 		this.mainView = mainView;
+		this.preview = preview;
 		this.shapeHeap = new ArrayList<Shape>(shapeHeap);
 
 		init();
@@ -57,6 +60,9 @@ public class TetrisPresenter implements TetrisEventListener {
 			activeShape = onDeckShape;
 			onDeckShape = getRandomShape();
 
+			showPreviewPiece(onDeckShape);
+
+			// Update main board
 			Pair<Shape, Integer> cleared = Shapes.clear(deadShape, width);
 			deadShape = cleared.getFirst();
 			score += (int) Math.pow(2, cleared.getSecond()) - 1;
@@ -74,6 +80,26 @@ public class TetrisPresenter implements TetrisEventListener {
 		}
 
 		redraw();
+	}
+
+	private void showPreviewPiece(Shape shape) {
+		shape = bestPreviewRotate(shape);
+		shape = Shapes.translatedTo(shape, 3, 2);
+		Set<Shape> previewSet = new HashSet<Shape>();
+		previewSet.add(shape);
+		preview.showShapes(previewSet);
+	}
+
+	private Shape bestPreviewRotate(Shape shape) {
+		Shape rotated = Shapes.rotatedRight(shape);
+
+		if (shape.getHeight() == 3) {
+			return shape;
+		}
+		if (rotated.getHeight() == 3) {
+			return rotated;
+		}
+		return shape.getHeight() < rotated.getHeight() ? shape : rotated;
 	}
 
 	private void redraw() {
