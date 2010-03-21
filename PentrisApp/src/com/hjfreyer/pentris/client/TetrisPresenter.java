@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Random;
 import com.hjfreyer.pentris.client.model.Point;
 import com.hjfreyer.pentris.client.model.Shape;
@@ -46,7 +45,7 @@ public class TetrisPresenter implements TetrisEventListener {
 				Shapes.translatedTo(
 						activeShape,
 						width / 2,
-						-activeShape.getHeight() / 2 - 2);
+						-activeShape.getHeight() / 2);
 	}
 
 	public void step() {
@@ -66,9 +65,7 @@ public class TetrisPresenter implements TetrisEventListener {
 					Shapes.translatedTo(
 							activeShape,
 							width / 2,
-							-activeShape.getHeight() / 2 - 2);
-
-			GWT.log("" + activeShape);
+							-activeShape.getHeight() / 2);
 
 			if (deadShape.intersects(activeShape))
 				gameOver = true;
@@ -91,13 +88,15 @@ public class TetrisPresenter implements TetrisEventListener {
 		return shapeHeap.get(Random.nextInt(shapeHeap.size()));
 	}
 
-	public void attemptTranslate(int dx, int dy) {
+	public boolean attemptTranslate(int dx, int dy) {
 		Shape translated = Shapes.translated(activeShape, dx, dy);
 
-		if (!intersectsScenery(translated)) {
-			activeShape = translated;
-			redraw();
+		if (intersectsScenery(translated)) {
+			return false;
 		}
+
+		activeShape = translated;
+		return true;
 	}
 
 	public void attemptRotateRight() {
@@ -115,23 +114,37 @@ public class TetrisPresenter implements TetrisEventListener {
 
 	@Override
 	public void onDropped() {
-		// TODO Auto-generated method stub
-
+		while (attemptTranslate(0, 1)) {
+		}
+		redraw();
 	}
 
 	@Override
 	public void onMovedDown() {
 		attemptTranslate(0, 1);
+		redraw();
 	}
 
 	@Override
-	public void onMovedLeft() {
-		attemptTranslate(-1, 0);
+	public void onMovedLeft(boolean held) {
+		if (held) {
+			while (attemptTranslate(-1, 0)) {
+			}
+		} else {
+			attemptTranslate(-1, 0);
+		}
+		redraw();
 	}
 
 	@Override
-	public void onMovedRight() {
-		attemptTranslate(1, 0);
+	public void onMovedRight(boolean held) {
+		if (held) {
+			while (attemptTranslate(1, 0)) {
+			}
+		} else {
+			attemptTranslate(1, 0);
+		}
+		redraw();
 	}
 
 	@Override
@@ -149,6 +162,7 @@ public class TetrisPresenter implements TetrisEventListener {
 	@Override
 	public void onRotatedRight() {
 		attemptRotateRight();
+		redraw();
 	}
 
 }

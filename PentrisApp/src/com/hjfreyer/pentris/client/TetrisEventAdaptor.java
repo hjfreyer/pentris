@@ -14,10 +14,13 @@ public class TetrisEventAdaptor
 		KeyUpHandler {
 	private final TetrisEventListener tetrisListener;
 
-	private boolean left = false;
-	private boolean right = false;
-	private boolean up = false;
-	private boolean down = false;
+	enum State {
+		NONE, UP, DOWN, LEFT, RIGHT, SPACE
+	}
+
+	private State lastState = State.NONE;
+	private State currentState = State.NONE;
+	private final boolean held = false;
 
 	public TetrisEventAdaptor(TetrisEventListener tetrisListener) {
 		this.tetrisListener = tetrisListener;
@@ -25,49 +28,50 @@ public class TetrisEventAdaptor
 
 	@Override
 	public void onKeyDown(KeyDownEvent event) {
-		if (event.isDownArrow()) {
-			down = true;
-		}
-
+		currentState = State.NONE;
 		if (event.isLeftArrow()) {
-			left = true;
+			currentState = State.LEFT;
 		}
-
 		if (event.isRightArrow()) {
-			right = true;
+			currentState = State.RIGHT;
 		}
-
+		if (event.isDownArrow()) {
+			currentState = State.DOWN;
+		}
 		if (event.isUpArrow()) {
-			up = true;
+			currentState = State.UP;
 		}
-
 		event.preventDefault();
 	}
 
 	@Override
 	public void onKeyPress(KeyPressEvent event) {
-		if (left) {
-			tetrisListener.onMovedLeft();
-		}
-		if (right) {
-			tetrisListener.onMovedRight();
-		}
-		if (down) {
+		switch (currentState) {
+		case DOWN:
 			tetrisListener.onMovedDown();
-		}
-		if (up) {
+			break;
+		case LEFT:
+			tetrisListener.onMovedLeft(lastState == State.LEFT);
+			break;
+		case NONE:
+			break;
+		case RIGHT:
+			tetrisListener.onMovedRight(lastState == State.RIGHT);
+			break;
+		case UP:
 			tetrisListener.onRotatedRight();
+			break;
 		}
-		if (left || right || up || down) {
-			event.preventDefault();
+		if (event.getCharCode() == ' ') {
+			tetrisListener.onDropped();
 		}
+		lastState = currentState;
+		event.preventDefault();
 	}
 
 	@Override
 	public void onKeyUp(KeyUpEvent event) {
-		left = false;
-		right = false;
-		up = false;
-		down = false;
+		lastState = State.NONE;
+		currentState = State.NONE;
 	}
 }

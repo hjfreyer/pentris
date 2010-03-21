@@ -6,9 +6,9 @@ public interface TetrisEventListener {
 
 	public void onRotatedLeft();
 
-	public void onMovedLeft();
+	public void onMovedLeft(boolean held);
 
-	public void onMovedRight();
+	public void onMovedRight(boolean held);
 
 	public void onMovedDown();
 

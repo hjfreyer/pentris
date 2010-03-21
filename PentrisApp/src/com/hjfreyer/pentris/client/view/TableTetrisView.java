@@ -1,5 +1,6 @@
 package com.hjfreyer.pentris.client.view;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.google.gwt.user.client.ui.Composite;
@@ -21,6 +22,8 @@ public class TableTetrisView extends Composite implements TetrisView {
 
 	private final Grid grid;
 	private final Panel[][] blocks;
+
+	private Set<Shape> shapeCache = new HashSet<Shape>();
 
 	public TableTetrisView(
 			int width,
@@ -69,26 +72,38 @@ public class TableTetrisView extends Composite implements TetrisView {
 
 	@Override
 	public void showShapes(Set<Shape> shapes) {
-		for (int i = 0; i < width * height; i++) {
-			blocks[i % width][i / width].getElement().getStyle().setBackgroundColor(
-					background.getHexValue());
-		}
+		Set<Shape> oldShapes = new HashSet<Shape>();
+		Set<Shape> newShapes = new HashSet<Shape>();
 
-		for (Shape shape : shapes) {
-			for (Point p : shape.getPoints()) {
-				if (p.isInBounds(width, height)) {
-					blocks[p.getX()][p.getY()]
-							.getElement()
-							.getStyle()
-							.setBackgroundColor(p.getColor().getHexValue());
+		for (Shape shape : shapeCache) {
+			if (!shapes.contains(shape)) {
+				// Old shape
+				for (Point p : shape.getPoints()) {
+					if (p.isInBounds(width, height)) {
+						blocks[p.getX()][p.getY()]
+								.getElement()
+								.getStyle()
+								.setBackgroundColor(background.getHexValue());
+					}
 				}
 			}
 		}
-	}
 
-	public Object getMainPanel() {
-		// TODO Auto-generated method stub
-		return null;
+		for (Shape shape : shapes) {
+			if (!shapeCache.contains(shape)) {
+				// New shape
+				for (Point p : shape.getPoints()) {
+					if (p.isInBounds(width, height)) {
+						blocks[p.getX()][p.getY()]
+								.getElement()
+								.getStyle()
+								.setBackgroundColor(p.getColor().getHexValue());
+					}
+				}
+			}
+		}
+
+		shapeCache = shapes;
 	}
 
 }
