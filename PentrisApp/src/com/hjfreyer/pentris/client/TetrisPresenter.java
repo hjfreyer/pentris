@@ -10,6 +10,7 @@ import com.hjfreyer.pentris.client.model.Shape;
 import com.hjfreyer.pentris.client.model.Shapes;
 import com.hjfreyer.pentris.client.util.Pair;
 import com.hjfreyer.pentris.client.view.ScoreDisplay;
+import com.hjfreyer.pentris.client.view.TetrisView;
 
 public class TetrisPresenter implements TetrisEventListener {
 	private final int width;
