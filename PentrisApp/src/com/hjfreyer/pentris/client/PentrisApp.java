@@ -30,7 +30,7 @@ public class PentrisApp implements EntryPoint {
 
 		final TetrisPresenter presenter =
 				new TetrisPresenter(12, 24, mainView, preview, PentrisShapeFactory
-						.getShapes());
+						.getShapes(), null, null);
 
 		TetrisEventAdaptor handler = new TetrisEventAdaptor(presenter);
 		focus.addKeyDownHandler(handler);

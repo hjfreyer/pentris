@@ -20,7 +20,7 @@ public class PentrisShapeFactory {
 	 * 
 	 * @see com.hjfreyer.pentris.client.ShapeFactory#getShapes()
 	 */
-	public static Set<Shape> getShapes() {
+	public static List<Shape> getShapes() {
 		Set<Shape> shapes = new HashSet<Shape>();
 
 		shapes.add(getMonomino());
@@ -29,7 +29,7 @@ public class PentrisShapeFactory {
 		shapes.addAll(getTetrominos());
 		shapes.addAll(getPentominos());
 
-		Set<Shape> coloredShapes = new HashSet<Shape>();
+		List<Shape> coloredShapes = new ArrayList<Shape>();
 
 		for (Shape s : shapes) {
 			Color color = randomColor();

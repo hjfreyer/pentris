@@ -1,6 +1,5 @@
 package com.hjfreyer.pentris.client;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,6 +9,7 @@ import com.hjfreyer.pentris.client.model.Point;
 import com.hjfreyer.pentris.client.model.Shape;
 import com.hjfreyer.pentris.client.model.Shapes;
 import com.hjfreyer.pentris.client.util.Pair;
+import com.hjfreyer.pentris.client.view.ScoreDisplay;
 
 public class TetrisPresenter implements TetrisEventListener {
 	private final int width;
@@ -17,6 +17,8 @@ public class TetrisPresenter implements TetrisEventListener {
 	private final TetrisView mainView;
 	private final TetrisView preview;
 	private final List<Shape> shapeHeap;
+	private final Runnable gameOverHandler;
+	private final ScoreDisplay scoreDisplay;
 
 	private Shape deadShape;
 	private Shape activeShape;
@@ -29,13 +31,17 @@ public class TetrisPresenter implements TetrisEventListener {
 			int height,
 			TetrisView mainView,
 			TetrisView preview,
-			Set<Shape> shapeHeap) {
-
+			List<Shape> shapeHeap,
+			Runnable gameOverHandler,
+			ScoreDisplay scoreDisplay) {
+		super();
 		this.width = width;
 		this.height = height;
 		this.mainView = mainView;
 		this.preview = preview;
-		this.shapeHeap = new ArrayList<Shape>(shapeHeap);
+		this.shapeHeap = shapeHeap;
+		this.gameOverHandler = gameOverHandler;
+		this.scoreDisplay = scoreDisplay;
 
 		init();
 	}
