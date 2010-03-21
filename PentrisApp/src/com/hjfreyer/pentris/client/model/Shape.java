@@ -2,27 +2,15 @@ package com.hjfreyer.pentris.client.model;
 
 import java.util.Set;
 
-import com.hjfreyer.pentris.client.util.Color;
-
 public class Shape {
 	private final Set<Point> points;
-	private final Color color;
 
-	public Shape(Set<Point> points, Color color) {
+	public Shape(Set<Point> points) {
 		this.points = points;
-		this.color = color;
-	}
-
-	public Shape(Set<Point> s) {
-		this(s, Color.GRAY);
 	}
 
 	public Set<Point> getPoints() {
 		return points;
-	}
-
-	public Color getColor() {
-		return color;
 	}
 
 	public Point getCenter() {
@@ -35,19 +23,29 @@ public class Shape {
 		x /= points.size();
 		y /= points.size();
 
-		return new Point((int) Math.round(x), (int) Math.round(y));
+		return new Point((int) Math.round(x), (int) Math.round(y), null);
+	}
+
+	public int getHeight() {
+		int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+
+		for (Point p : points) {
+			min = Math.min(min, p.getY());
+			max = Math.max(max, p.getY());
+		}
+
+		return max - min;
 	}
 
 	@Override
 	public String toString() {
-		return "Shape [color=" + color + ", points=" + points + "]";
+		return "Shape [points=" + points + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((points == null) ? 0 : points.hashCode());
 		return result;
 	}
@@ -61,11 +59,6 @@ public class Shape {
 		if (getClass() != obj.getClass())
 			return false;
 		Shape other = (Shape) obj;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
 		if (points == null) {
 			if (other.points != null)
 				return false;
@@ -74,4 +67,32 @@ public class Shape {
 		return true;
 	}
 
+	public boolean intersects(Shape other) {
+		for (Point p : points) {
+			if (other.getPoints().contains(p)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean isInBounds(int width, int height) {
+		for (Point p : points) {
+			if (!p.isInBoundsTopOpen(width, height)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public int getMaxY() {
+		int max = Integer.MIN_VALUE;
+
+		for (Point p : points) {
+			max = Math.max(max, p.getY());
+		}
+
+		return max;
+	}
 }

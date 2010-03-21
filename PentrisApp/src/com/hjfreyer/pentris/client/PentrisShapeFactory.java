@@ -9,8 +9,9 @@ import java.util.Set;
 import com.hjfreyer.pentris.client.model.Point;
 import com.hjfreyer.pentris.client.model.Shape;
 import com.hjfreyer.pentris.client.model.Shapes;
+import com.hjfreyer.pentris.client.util.Color;
 
-public class PentrisShapeFactory implements ShapeFactory {
+public class PentrisShapeFactory {
 
 	private static Random rand;
 
@@ -19,7 +20,7 @@ public class PentrisShapeFactory implements ShapeFactory {
 	 * 
 	 * @see com.hjfreyer.pentris.client.ShapeFactory#getShapes()
 	 */
-	public Set<Shape> getShapes() {
+	public static Set<Shape> getShapes() {
 		Set<Shape> shapes = new HashSet<Shape>();
 
 		shapes.add(getMonomino());
@@ -28,7 +29,18 @@ public class PentrisShapeFactory implements ShapeFactory {
 		shapes.addAll(getTetrominos());
 		shapes.addAll(getPentominos());
 
-		return shapes;
+		Set<Shape> coloredShapes = new HashSet<Shape>();
+
+		for (Shape s : shapes) {
+			Color color = randomColor();
+			Set<Point> coloredPoints = new HashSet<Point>();
+			for (Point p : s.getPoints()) {
+				coloredPoints.add(new Point(p.getX(), p.getY(), color));
+			}
+			coloredShapes.add(new Shape(coloredPoints));
+		}
+
+		return coloredShapes;
 	}
 
 	// Pentominos
@@ -476,5 +488,21 @@ public class PentrisShapeFactory implements ShapeFactory {
 		s.add(new Point(0, 0));
 
 		return new Shape(s);
+	}
+
+	private static Color randomColor() {
+		int a = 0, b = 0, c = 0;
+
+		int HI_BOUND = 175;
+		int LO_BOUND = 100;
+
+		while (!((a > HI_BOUND || b > HI_BOUND || c > HI_BOUND) && (a < LO_BOUND
+				|| b < LO_BOUND || c < LO_BOUND))) {
+			a = rand.nextInt(255);
+			b = rand.nextInt(255);
+			c = rand.nextInt(255);
+		}
+
+		return new Color(a, b, c);
 	}
 }

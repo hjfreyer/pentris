@@ -1,15 +1,23 @@
 package com.hjfreyer.pentris.client.model;
 
+import com.hjfreyer.pentris.client.util.Color;
+
 public class Point {
 	private final int x, y;
+	private final Color color;
 
-	public Point(int x, int y) {
+	public Point(int x, int y, Color color) {
 		this.x = x;
 		this.y = y;
+		this.color = color;
+	}
+
+	public Point(int x, int y) {
+		this(x, y, null);
 	}
 
 	public Point plus(int dx, int dy) {
-		return new Point(x + dx, y + dy);
+		return new Point(x + dx, y + dy, color);
 	}
 
 	public Point plus(Point p) {
@@ -17,11 +25,16 @@ public class Point {
 	}
 
 	public Point opposite() {
-		return new Point(-x, -y);
+		return new Point(-x, -y, color);
 	}
 
 	public boolean isInBounds(int width, int height) {
+		// Note that top is open ended
 		return 0 <= x && x < width && 0 <= y && y < height;
+	}
+
+	public boolean isInBoundsTopOpen(int width, int height) {
+		return 0 <= x && x < width && y < height;
 	}
 
 	public int getX() {
@@ -60,6 +73,10 @@ public class Point {
 		if (y != other.y)
 			return false;
 		return true;
+	}
+
+	public Color getColor() {
+		return color;
 	}
 
 }

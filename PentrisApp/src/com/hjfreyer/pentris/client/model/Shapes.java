@@ -1,106 +1,115 @@
 package com.hjfreyer.pentris.client.model;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+
+import com.hjfreyer.pentris.client.util.Pair;
 
 public class Shapes {
 
-	public static Set<Point> centered(Set<Point> points) {
-		double dx = 0, dy = 0;
-
-		for (Point p : points) {
-			dx += p.getX();
-			dy += p.getY();
-		}
-		dx /= points.size();
-		dy /= points.size();
-
+	public static Shape translated(Shape shape, int dx, int dy) {
 		Set<Point> newPoints = new HashSet<Point>();
 
-		for (Point p : points)
-			newPoints.add(p.plus(-(int) Math.round(dx), -(int) Math.round(dy)));
-
-		return newPoints;
-	}
-
-	public static Shape centered(Shape s) {
-		return new Shape(centered(s.getPoints()), s.getColor());
-	}
-
-	public static Set<Point> rotatedRight(Set<Point> points) {
-		Set<Point> newPoints = new HashSet<Point>();
-
-		for (Point p : points) {
-			int dx = -p.getX() - p.getY();
-			int dy = -p.getY() + p.getX();
-
+		for (Point p : shape.getPoints())
 			newPoints.add(p.plus(dx, dy));
-		}
 
-		return centered(newPoints);
+		return new Shape(newPoints);
 	}
 
-	public static Shape rotatedRight(Shape s) {
-		return new Shape(rotatedRight(s.getPoints()), s.getColor());
+	public static Shape translatedTo(Shape shape, int x, int y) {
+		Point center = shape.getCenter();
+
+		return translated(shape, x - center.getX(), y - center.getY());
 	}
 
-	public static Set<Point> rotatedLeft(Set<Point> points) {
+	public static Shape translatedTo(Shape shape, Point p) {
+		return translatedTo(shape, p.getX(), p.getY());
+	}
+
+	public static Shape rotatedRight(Shape shape) {
+		Point center = shape.getCenter();
 		Set<Point> newPoints = new HashSet<Point>();
 
-		for (Point p : points) {
-			int dx = -p.getX() + p.getY();
-			int dy = -p.getY() - p.getX();
-
-			newPoints.add(p.plus(dx, dy));
+		for (Point p : shape.getPoints()) {
+			newPoints.add(new Point(-p.getY(), p.getX(), p.getColor()));
 		}
 
-		return centered(newPoints);
+		return translatedTo(new Shape(newPoints), center);
 	}
 
-	public static Shape rotatedLeft(Shape s) {
-		return new Shape(rotatedLeft(s.getPoints()), s.getColor());
+	public static Shape rotatedLeft(Shape shape) {
+		Point center = shape.getCenter();
+		Set<Point> newPoints = new HashSet<Point>();
+
+		for (Point p : shape.getPoints()) {
+			newPoints.add(new Point(p.getY(), -p.getX(), p.getColor()));
+		}
+
+		return translatedTo(new Shape(newPoints), center);
 	}
 
 	public static Set<Point> mirrored(Set<Point> points) {
 		Set<Point> newPoints = new HashSet<Point>();
 
 		for (Point p : points) {
-			newPoints.add(new Point(-p.getX(), -p.getY()));
+			newPoints.add(new Point(-p.getX(), p.getY(), p.getColor()));
 		}
 
-		return centered(newPoints);
+		return newPoints;
 	}
 
 	public static Shape mirrored(Shape s) {
-		return new Shape(mirrored(s.getPoints()), s.getColor());
+		return new Shape(mirrored(s.getPoints()));
 	}
 
-	// public boolean isInBounds(int width, int height) {
-	// int top = height, bottom = 0, left = width, right = 0;
-	//
-	// for (Point p : getShape()) {
-	// if (p.getX() > right)
-	// right = p.getX();
-	// if (p.getX() < left)
-	// left = p.getX();
-	// if (p.getY() > bottom)
-	// bottom = p.getY();
-	// if (p.getY() < top)
-	// top = p.getY();
-	// }
-	//
-	// // System.out.printf("%d %d %d %d\n",top,bottom,left,right);
-	//
-	// return top >= 0 && bottom < height && left >= 0 && right < width;
-	// }
-	//
-	// public Shape duplicate() {
-	// Shape res = new Shape();
-	//
-	// for (Point p : points)
-	// res.add(new Point(p));
-	// res.color = color;
-	//
-	// return res;
-	// }
+	public static Pair<Shape, Integer> clear(Shape deadShape, int width) {
+		Map<Integer, Integer> rowCount = new HashMap<Integer, Integer>();
+		for (Point p : deadShape.getPoints()) {
+			if (!rowCount.containsKey(p.getY())) {
+				rowCount.put(p.getY(), 0);
+			}
+
+			rowCount.put(p.getY(), rowCount.get(p.getY()) + 1);
+		}
+
+		Set<Integer> clearedRows = new HashSet<Integer>();
+		for (int row : rowCount.keySet()) {
+			if (rowCount.get(row) == width) {
+				clearedRows.add(row);
+			}
+		}
+
+		Map<Integer, Integer> rowMap = new HashMap<Integer, Integer>();
+		for (int row : rowCount.keySet()) {
+			int shift = 0;
+			for (int clearedRow : clearedRows) {
+				if (clearedRow > row) {
+					shift++;
+				}
+			}
+
+			rowMap.put(row, row + shift);
+		}
+
+		Set<Point> newPoints = new HashSet<Point>();
+		for (Point p : deadShape.getPoints()) {
+			if (clearedRows.contains(p.getY())) {
+				continue;
+			}
+			newPoints.add(new Point(p.getX(), rowMap.get(p.getY()), p.getColor()));
+		}
+
+		return Pair.of(new Shape(newPoints), clearedRows.size());
+	}
+
+	public static Shape union(Shape a, Shape b) {
+		Set<Point> set = new HashSet<Point>();
+
+		set.addAll(a.getPoints());
+		set.addAll(b.getPoints());
+
+		return new Shape(set);
+	}
 }

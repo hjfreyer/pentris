@@ -80,10 +80,15 @@ public class TableTetrisView extends Composite implements TetrisView {
 					blocks[p.getX()][p.getY()]
 							.getElement()
 							.getStyle()
-							.setBackgroundColor(shape.getColor().getHexValue());
+							.setBackgroundColor(p.getColor().getHexValue());
 				}
 			}
 		}
+	}
+
+	public Object getMainPanel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
