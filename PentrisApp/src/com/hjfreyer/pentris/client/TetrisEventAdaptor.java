@@ -67,7 +67,25 @@ public class TetrisEventAdaptor
 	@Override
 	public void onKeyPress(KeyPressEvent event) {
 		if (held) {
-			repeatKey();
+			if (currentState == State.LEFT) {
+				tetrisListener.onMovedLeft(false);
+			}
+			if (currentState == State.RIGHT) {
+				tetrisListener.onMovedRight(false);
+				currentState = State.RIGHT;
+			}
+			if (currentState == State.DOWN) {
+				currentState = State.DOWN;
+				tetrisListener.onMovedDown();
+			}
+			if (currentState == State.UP) {
+				tetrisListener.onRotatedRight();
+				currentState = State.UP;
+			}
+			if (currentState == State.SPACE) {
+				tetrisListener.onDropped();
+				currentState = State.SPACE;
+			}
 		}
 		held = true;
 		event.preventDefault();
