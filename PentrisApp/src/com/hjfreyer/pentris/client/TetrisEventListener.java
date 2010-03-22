@@ -4,8 +4,6 @@ public interface TetrisEventListener {
 
 	public void onRotatedRight();
 
-	public void onRotatedLeft();
-
 	public void onMovedLeft(boolean held);
 
 	public void onMovedRight(boolean held);
@@ -15,4 +13,6 @@ public interface TetrisEventListener {
 	public void onDropped();
 
 	public void onPaused();
+
+	public void onReset();
 }

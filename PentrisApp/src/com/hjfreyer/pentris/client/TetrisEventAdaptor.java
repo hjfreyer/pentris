@@ -26,12 +26,12 @@ public class TetrisEventAdaptor
 	}
 
 	public void repeatKey() {
-		if (currentState == State.RIGHT) {
-			tetrisListener.onMovedRight(true);
-		}
-		if (currentState == State.LEFT) {
-			tetrisListener.onMovedLeft(true);
-		}
+		// if (currentState == State.RIGHT) {
+		// tetrisListener.onMovedRight(true);
+		// }
+		// if (currentState == State.LEFT) {
+		// tetrisListener.onMovedLeft(true);
+		// }
 	}
 
 	@Override
@@ -87,6 +87,15 @@ public class TetrisEventAdaptor
 				currentState = State.SPACE;
 			}
 		}
+
+		if (event.getCharCode() == 'p') {
+			tetrisListener.onPaused();
+		}
+
+		if (event.getCharCode() == 'n') {
+			tetrisListener.onReset();
+		}
+
 		held = true;
 		event.preventDefault();
 	}

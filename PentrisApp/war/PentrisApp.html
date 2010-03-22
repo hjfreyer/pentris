@@ -45,22 +45,60 @@
       </div>
     </noscript>
 
-    <h1>Web Application Starter Project</h1>
-    <center><table style="border:1px solid pink"><tr><td>
-    <div id="mainTetrisView"></div>
-</td></tr>    </table></center>
-
-    <table align="center">
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Please enter your name:</td>        
-      </tr>
-      <tr>
-        <td id="nameFieldContainer"></td>
-        <td id="sendButtonContainer"></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
-      </tr>
-    </table>
+    <center>
+    <div id="tetrisPanel">
+      <div id="loadingScreen">
+        <center>
+        <div class="loadingLabel">LOAD IT UP...</div>
+        </center>
+      </div>
+      <table class="columns">
+        <tr><td>          
+          <div class="tetrisWrapper">
+          <div id="welcomePopup" class="popup">
+            <div style="font-size:20pt">Welcome to Pentris!</div>
+            Press 'n' to start a new game.
+          </div> 
+          <div id="gameOverPopup" class="popup" style="display:none;">
+            <div style="font-size:30pt">OWNED!</div>
+            Press 'n' to start a new game.
+          </div> 
+          <div id="tetrisGame"></div>
+          </div>
+        </td>
+        <td>
+          <table>
+            <tr><td>
+              <div class="scoreLabel">SCORE</div>
+      
+              <div class="scoreValue" id="scorePanel"></div>
+            </td></tr>
+            <tr><td>
+              <div class="nextLabel">NEXT</div>
+            </td></tr>
+            <tr><td>
+              <div class="tetrisWrapper">
+                <div id="piecePreview"></div>
+              </div> 
+            </td></tr>  
+            <tr><td>
+              <div class="instructions">
+                <b>Controls:</b>
+                <ul>
+                <li><b>Up</b>: Rotate</li>
+                <li><b>Left</b>: Left</li>
+                <li><b>Right</b>: Right</li> 
+                <li><b>Down</b>: Down</li>
+                <li><b>Space</b>: Drop</li>
+                <li><b>P</b>: Pause</li>
+                </ul>
+              </div> 
+            </td></tr>
+          </table>
+        </td>
+        </tr>    
+      </table>
+    </div>
+    </center>
   </body>
 </html>

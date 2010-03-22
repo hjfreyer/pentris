@@ -25,7 +25,7 @@ public class TetrisPresenter implements TetrisEventListener {
 	private Shape activeShape;
 	private Shape onDeckShape;
 	private int score = 0;
-	private boolean gameOver = false;
+	private boolean paused = true;
 
 	public TetrisPresenter(
 			int width,
@@ -43,50 +43,53 @@ public class TetrisPresenter implements TetrisEventListener {
 		this.shapeHeap = shapeHeap;
 		this.gameOverHandler = gameOverHandler;
 		this.scoreDisplay = scoreDisplay;
-
-		init();
 	}
 
-	public void init() {
+	public void reset() {
+		score = 0;
 		deadShape = new Shape(new HashSet<Point>());
 		onDeckShape = getRandomShape();
-		activeShape = getRandomShape();
-		activeShape =
-				Shapes.translatedTo(
-						activeShape,
-						width / 2,
-						-activeShape.getHeight() / 2);
+		activeShape = null;
+		paused = false;
+
+		deployPiece();
 	}
 
 	public void step() {
+		if (paused)
+			return;
 		// If shape is settled
 		if (Shapes.translated(activeShape, 0, 1).intersects(deadShape)
 				|| activeShape.getMaxY() == height - 1) {
 			deadShape = Shapes.union(deadShape, activeShape);
 
-			activeShape = onDeckShape;
-			onDeckShape = getRandomShape();
-
-			showPreviewPiece(onDeckShape);
-
-			// Update main board
 			Pair<Shape, Integer> cleared = Shapes.clear(deadShape, width);
 			deadShape = cleared.getFirst();
 			score += (int) Math.pow(2, cleared.getSecond()) - 1;
 
-			activeShape =
-					Shapes.translatedTo(
-							activeShape,
-							width / 2,
-							-activeShape.getHeight() / 2);
+			deployPiece();
 
-			if (deadShape.intersects(activeShape))
-				gameOver = true;
+			if (activeShape.intersects(deadShape)) {
+				paused = true;
+				gameOverHandler.run();
+			}
 		} else {
 			activeShape = Shapes.translated(activeShape, 0, 1);
 		}
 
 		redraw();
+	}
+
+	private void deployPiece() {
+		activeShape = onDeckShape;
+		onDeckShape = getRandomShape();
+
+		showPreviewPiece(onDeckShape);
+		scoreDisplay.displayScore(score);
+
+		activeShape =
+				Shapes.translatedTo(activeShape, width / 2, -(int) Math
+						.ceil(activeShape.getHeight() / 2.0));
 	}
 
 	private void showPreviewPiece(Shape shape) {
@@ -122,6 +125,8 @@ public class TetrisPresenter implements TetrisEventListener {
 	}
 
 	public boolean attemptTranslate(int dx, int dy) {
+		if (paused)
+			return false;
 		Shape translated = Shapes.translated(activeShape, dx, dy);
 
 		if (intersectsScenery(translated)) {
@@ -133,6 +138,8 @@ public class TetrisPresenter implements TetrisEventListener {
 	}
 
 	public void attemptRotateRight() {
+		if (paused)
+			return;
 		Shape translated = Shapes.rotatedRight(activeShape);
 
 		if (!intersectsScenery(translated)) {
@@ -149,6 +156,7 @@ public class TetrisPresenter implements TetrisEventListener {
 	public void onDropped() {
 		while (attemptTranslate(0, 1)) {
 		}
+		step();
 		redraw();
 	}
 
@@ -182,14 +190,12 @@ public class TetrisPresenter implements TetrisEventListener {
 
 	@Override
 	public void onPaused() {
-		// TODO Auto-generated method stub
-
+		paused = !paused;
 	}
 
 	@Override
-	public void onRotatedLeft() {
-		// TODO Auto-generated method stub
-
+	public void onReset() {
+		reset();
 	}
 
 	@Override
