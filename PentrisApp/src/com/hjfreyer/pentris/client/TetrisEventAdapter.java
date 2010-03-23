@@ -23,7 +23,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 
-public class TetrisEventAdaptor
+public class TetrisEventAdapter
 		implements
 		KeyDownHandler,
 		KeyPressHandler,
@@ -37,7 +37,7 @@ public class TetrisEventAdaptor
 	private State currentState = State.NONE;
 	private boolean held = false;
 
-	public TetrisEventAdaptor(TetrisEventListener tetrisListener) {
+	public TetrisEventAdapter(TetrisEventListener tetrisListener) {
 		this.tetrisListener = tetrisListener;
 	}
 

@@ -58,7 +58,7 @@ public class PentrisApp implements EntryPoint {
 						PentrisShapeFactory.getShapes(),
 						gameOverCallback,
 						score);
-		TetrisEventAdaptor handler = new TetrisEventAdaptor(presenter);
+		TetrisEventAdapter handler = new TetrisEventAdapter(presenter);
 
 		Timer stepTimer = new Timer() {
 			@Override
