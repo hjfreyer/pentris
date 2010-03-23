@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.hjfreyer.pentris.client.util.Color;
 import com.hjfreyer.pentris.client.view.LabelScoreDisplay;
+import com.hjfreyer.pentris.client.view.PiecePreviewTetrisViewAdapter;
 import com.hjfreyer.pentris.client.view.TableTetrisView;
 
 /**
@@ -49,8 +50,14 @@ public class PentrisApp implements EntryPoint {
 		};
 
 		final TetrisPresenter presenter =
-				new TetrisPresenter(12, 24, mainView, preview, PentrisShapeFactory
-						.getShapes(), gameOverCallback, score);
+				new TetrisPresenter(
+						12,
+						24,
+						mainView,
+						new PiecePreviewTetrisViewAdapter(preview),
+						PentrisShapeFactory.getShapes(),
+						gameOverCallback,
+						score);
 		TetrisEventAdaptor handler = new TetrisEventAdaptor(presenter);
 
 		Timer stepTimer = new Timer() {

@@ -25,6 +25,7 @@ import com.hjfreyer.pentris.client.model.Point;
 import com.hjfreyer.pentris.client.model.Shape;
 import com.hjfreyer.pentris.client.model.Shapes;
 import com.hjfreyer.pentris.client.util.Pair;
+import com.hjfreyer.pentris.client.view.PiecePreviewView;
 import com.hjfreyer.pentris.client.view.ScoreDisplay;
 import com.hjfreyer.pentris.client.view.TetrisView;
 
@@ -32,7 +33,7 @@ public class TetrisPresenter implements TetrisEventListener {
 	private final int width;
 	private final int height;
 	private final TetrisView mainView;
-	private final TetrisView preview;
+	private final PiecePreviewView preview;
 	private final List<Shape> shapeHeap;
 	private final Runnable gameOverHandler;
 	private final ScoreDisplay scoreDisplay;
@@ -47,7 +48,7 @@ public class TetrisPresenter implements TetrisEventListener {
 			int width,
 			int height,
 			TetrisView mainView,
-			TetrisView preview,
+			PiecePreviewView preview,
 			List<Shape> shapeHeap,
 			Runnable gameOverHandler,
 			ScoreDisplay scoreDisplay) {
@@ -100,32 +101,12 @@ public class TetrisPresenter implements TetrisEventListener {
 		activeShape = onDeckShape;
 		onDeckShape = getRandomShape();
 
-		showPreviewPiece(onDeckShape);
+		preview.previewPiece(onDeckShape);
 		scoreDisplay.displayScore(score);
 
 		activeShape =
 				Shapes.translatedTo(activeShape, width / 2, -(int) Math
 						.ceil(activeShape.getHeight() / 2.0));
-	}
-
-	private void showPreviewPiece(Shape shape) {
-		shape = bestPreviewRotate(shape);
-		shape = Shapes.translatedTo(shape, 3, 2);
-		Set<Shape> previewSet = new HashSet<Shape>();
-		previewSet.add(shape);
-		preview.showShapes(previewSet);
-	}
-
-	private Shape bestPreviewRotate(Shape shape) {
-		Shape rotated = Shapes.rotatedRight(shape);
-
-		if (shape.getHeight() == 3) {
-			return shape;
-		}
-		if (rotated.getHeight() == 3) {
-			return rotated;
-		}
-		return shape.getHeight() < rotated.getHeight() ? shape : rotated;
 	}
 
 	private void redraw() {
