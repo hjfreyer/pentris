@@ -41,18 +41,8 @@ public class TetrisEventAdapter
 		this.tetrisListener = tetrisListener;
 	}
 
-	public void repeatKey() {
-		// if (currentState == State.RIGHT) {
-		// tetrisListener.onMovedRight(true);
-		// }
-		// if (currentState == State.LEFT) {
-		// tetrisListener.onMovedLeft(true);
-		// }
-	}
-
 	@Override
 	public void onKeyDown(KeyDownEvent event) {
-		repeatKey();
 		currentState = State.NONE;
 		if (event.isLeftArrow()) {
 			tetrisListener.onMovedLeft(false);
