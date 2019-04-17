@@ -111,9 +111,9 @@ function doInput(s: State, a: Input): State {
       case 'DOWN':
         if (s.dasDirection == 'NONE') {
           s.dasDelay = DAS_INITIAL_DELAY;
+          attemptTranslateDirection(s, a.input);
         }
         s.dasDirection = a.input;
-        attemptTranslateDirection(s, a.input);
         break;
     }
   });
