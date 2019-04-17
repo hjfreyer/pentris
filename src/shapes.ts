@@ -214,10 +214,12 @@ const monomino: shape.Shape = [
   [0, 0]
 ];
 
-export const SHAPES: shape.Shape[] = [
+const SHAPES: shape.Shape[] = [
   monomino,
   domino,
   ...TROMINOES,
   ...TETROMINOES,
   ...PENTOMINOES
 ];
+
+export default SHAPES;

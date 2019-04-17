@@ -1,9 +1,15 @@
 
+export type Shape = Array<[number, number]>;
 
-export type Shape = [number, number][];
+export function mirrored(s: Shape): Shape {
+  return s.map(([x, y]) => [-x, y]);
+}
 
-export function mirrored(s : Shape) : Shape {
-
+export function bbox(s: Shape): [number, number, number, number] {
+  const rows = s.map(([row, _]) => row);
+  const cols = s.map(([_, col]) => col);
+  return [Math.min(...rows), Math.min(...cols),
+    Math.max(...rows), Math.max(...cols)];
 }
 
 // /*

@@ -1,22 +1,32 @@
 import * as React from 'react';
+//import * as rx from 'rxjs';
 import './App.css';
+import Board from './Board';
+import * as state from './state';
+import SHAPES from './shapes';
+export type Input = {};
 
-import logo from './logo.svg';
+export type Properties = {
+  state: state.State
+}
 
-class App extends React.Component {
-  public render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
-    );
+function renderBoard(state: state.State): number[][] {
+  const res = state.board.map(row => row.slice());
+
+  const shape = SHAPES[state.activeShape.shapeIdx];
+
+  for (const [row, col] of shape) {
+    res[row + state.activeShape.dRow][col + state.activeShape.dCol] =
+      state.activeShape.shapeIdx + 1;
   }
+
+  return res;
+}
+
+function App({ state }: Properties): JSX.Element {
+  return <div className="App">
+    <Board cells={renderBoard(state)} />
+  </div>;
 }
 
 export default App;
