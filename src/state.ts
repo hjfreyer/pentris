@@ -3,9 +3,13 @@ import produce from 'immer';
 import * as shape from './shape';
 import SHAPES from './shapes';
 
+const DAS_INITIAL_DELAY = 16;
+const DAS_REFRESH_DELAY = 6;
+
 export type Action = Tick | Input;
 
-export type InputType = 'NONE' | 'LEFT' | 'RIGHT' | 'DOWN';
+export type Direction = 'LEFT' | 'RIGHT' | 'DOWN';
+export type InputType = 'NONE' | Direction;
 type Tick = { kind: 'tick' };
 type Input = {
   kind: 'input'
@@ -21,7 +25,9 @@ export type State = {
     dCol: number
   },
 
-  input: InputType
+  dasDirection: InputType,
+  dasDelay: number
+
   dropDelay: number
   board: number[][]
 };
@@ -30,7 +36,8 @@ export const INITIAL: State = {
   width: 12,
   height: 24,
   activeShape: { shapeIdx: 10, dRow: 0, dCol: 0 },
-  input: 'NONE',
+  dasDirection: 'NONE',
+  dasDelay: 0,
   dropDelay: 60,
   board: (() => {
     const board: number[][] = [];
@@ -62,6 +69,17 @@ function attemptTranslateActive(s: State, dRow: number, dCol: number): boolean {
   return true;
 }
 
+function attemptTranslateDirection(s: State, d: Direction): boolean {
+  switch (d) {
+    case 'LEFT':
+      return attemptTranslateActive(s, 0, -1);
+    case 'DOWN':
+      return attemptTranslateActive(s, 1, 0);
+    case 'RIGHT':
+      return attemptTranslateActive(s, 0, 1);
+  }
+}
+
 function doTick(s: State): State {
   return produce(s, s => {
     if (s.dropDelay == 0) {
@@ -70,23 +88,32 @@ function doTick(s: State): State {
     } else {
       s.dropDelay--;
     }
+
+    if (s.dasDirection != 'NONE') {
+      if (s.dasDelay == 0) {
+        s.dasDelay = DAS_REFRESH_DELAY;
+        attemptTranslateDirection(s, s.dasDirection);
+      } else {
+        s.dasDelay--;
+      }
+    }
   });
 }
 
 function doInput(s: State, a: Input): State {
   return produce(s, s => {
-    s.input = a.input;
     switch (a.input) {
       case 'NONE':
+        s.dasDirection = 'NONE';
         break;
       case 'LEFT':
-        attemptTranslateActive(s, 0, -1);
-        break;
-      case 'DOWN':
-        attemptTranslateActive(s, 1, 0);
-        break;
       case 'RIGHT':
-        attemptTranslateActive(s, 0, 1);
+      case 'DOWN':
+        if (s.dasDirection == 'NONE') {
+          s.dasDelay = DAS_INITIAL_DELAY;
+        }
+        s.dasDirection = a.input;
+        attemptTranslateDirection(s, a.input);
         break;
     }
   });
