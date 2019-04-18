@@ -9,23 +9,26 @@ const DAS_REFRESH_DELAY = 6;
 export type Action = Tick | Input;
 
 export type Direction = 'LEFT' | 'RIGHT' | 'DOWN';
-export type InputType = 'NONE' | Direction;
+export type InputType = 'NONE' | Direction | 'SPIN';
 type Tick = { kind: 'tick' };
 type Input = {
   kind: 'input'
   input: InputType
 }
 
+type ActiveShape = {
+  shapeIdx: number
+  dRow: number
+  dCol: number
+  rotation: 0 | 1 | 2 | 3
+}
+
 export type State = {
   width: number
   height: number
-  activeShape: {
-    shapeIdx: number
-    dRow: number
-    dCol: number
-  },
+  activeShape: ActiveShape,
 
-  dasDirection: InputType,
+  dasDirection: 'NONE' | Direction
   dasDelay: number
 
   dropDelay: number
@@ -35,7 +38,7 @@ export type State = {
 export const INITIAL: State = {
   width: 12,
   height: 24,
-  activeShape: { shapeIdx: 10, dRow: 0, dCol: 0 },
+  activeShape: { shapeIdx: 10, dRow: 0, dCol: 6, rotation: 0 },
   dasDirection: 'NONE',
   dasDelay: 0,
   dropDelay: 60,
@@ -48,35 +51,61 @@ export const INITIAL: State = {
   })(),
 };
 
-function attemptTranslateActive(s: State, dRow: number, dCol: number): boolean {
-  const [minRow, minCol, maxRow, maxCol] = shape.bbox(SHAPES[s.activeShape.shapeIdx]);
-  if (minRow + s.activeShape.dRow + dRow < 0) {
-    return false;
+export function getShape(s: ActiveShape): shape.Shape {
+  let res = SHAPES[s.shapeIdx];
+  for (let i = 0; i < s.rotation; i++) {
+    res = res.map(([row, col]) => [col, -row]);
   }
-  if (maxRow + s.activeShape.dRow + dRow >= s.height) {
-    return false;
+  return res.map(([row, col]) => [row + s.dRow, col + s.dCol]);
+}
+
+function activeShapeClips(s: State, a: ActiveShape): boolean {
+  const shp = getShape(a);
+
+  for (let [row, col] of shp) {
+    const clips = (function() {
+      if (s.height <= row || col < 0 || s.width <= col) {
+        return true;
+      }
+      if (row < 0) {
+        return false;
+      }
+      return s.board[row][col] != 0;
+    })();
+
+    if (clips) {
+      return true;
+    }
   }
-  if (minCol + s.activeShape.dCol + dCol < 0) {
-    return false;
+  return false;
+}
+
+function attemptMoveActive(s: State, dRow: number, dCol: number, dRot: number): boolean {
+  const newActive: ActiveShape = {
+    shapeIdx: s.activeShape.shapeIdx,
+    dRow: s.activeShape.dRow + dRow,
+    dCol: s.activeShape.dCol + dCol,
+    rotation: (s.activeShape.rotation + dRot) % 4 as 0 | 1 | 2 | 3,
   }
-  if (maxCol + s.activeShape.dCol + dCol >= s.width) {
+
+  if (activeShapeClips(s, newActive)) {
     return false;
   }
 
-  s.activeShape.dRow += dRow;
-  s.activeShape.dCol += dCol;
-
+  s.activeShape = newActive;
   return true;
 }
 
-function attemptTranslateDirection(s: State, d: Direction): boolean {
+function attemptTranslateDirection(s: State, d: Direction | 'SPIN'): boolean {
   switch (d) {
     case 'LEFT':
-      return attemptTranslateActive(s, 0, -1);
+      return attemptMoveActive(s, 0, -1, 0);
     case 'DOWN':
-      return attemptTranslateActive(s, 1, 0);
+      return attemptMoveActive(s, 1, 0, 0);
     case 'RIGHT':
-      return attemptTranslateActive(s, 0, 1);
+      return attemptMoveActive(s, 0, 1, 0);
+    case 'SPIN':
+      return attemptMoveActive(s, 0, 0, 1);
   }
 }
 
@@ -84,7 +113,7 @@ function doTick(s: State): State {
   return produce(s, s => {
     if (s.dropDelay == 0) {
       s.dropDelay = 60
-      attemptTranslateActive(s, 1, 0);
+      attemptMoveActive(s, 1, 0, 0);
     } else {
       s.dropDelay--;
     }
@@ -114,6 +143,9 @@ function doInput(s: State, a: Input): State {
           attemptTranslateDirection(s, a.input);
         }
         s.dasDirection = a.input;
+        break;
+      case 'SPIN':
+        attemptTranslateDirection(s, a.input);
         break;
     }
   });

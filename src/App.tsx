@@ -3,21 +3,20 @@ import * as React from 'react';
 import './App.css';
 import Board from './Board';
 import * as state from './state';
-import SHAPES from './shapes';
+//import SHAPES from './shapes';
 export type Input = {};
 
 export type Properties = {
   state: state.State
 }
 
-function renderBoard(state: state.State): number[][] {
-  const res = state.board.map(row => row.slice());
+function renderBoard(s: state.State): number[][] {
+  const res = s.board.map(row => row.slice());
 
-  const shape = SHAPES[state.activeShape.shapeIdx];
+  const shape = state.getShape(s.activeShape);
 
   for (const [row, col] of shape) {
-    res[row + state.activeShape.dRow][col + state.activeShape.dCol] =
-      state.activeShape.shapeIdx + 1;
+    res[row][col] = s.activeShape.shapeIdx + 1;
   }
 
   return res;

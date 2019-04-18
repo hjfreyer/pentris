@@ -25,6 +25,8 @@ function keyToInput(key: string): state.InputType | null {
       return 'RIGHT';
     case 'ArrowDown':
       return 'DOWN';
+    case 'ArrowUp':
+      return 'SPIN';
     default:
       return null;
   }

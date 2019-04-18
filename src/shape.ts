@@ -9,8 +9,20 @@ export function bbox(s: Shape): [number, number, number, number] {
   const rows = s.map(([row, _]) => row);
   const cols = s.map(([_, col]) => col);
   return [Math.min(...rows), Math.min(...cols),
-    Math.max(...rows), Math.max(...cols)];
+  Math.max(...rows), Math.max(...cols)];
 }
+
+export function center(s: Shape): [number, number] {
+  const [minRow, minCol, maxRow, maxCol] = bbox(s);
+  return [Math.floor((minRow + maxRow) / 2), Math.floor((minCol + maxCol) / 2)]
+}
+
+export function centered(s: Shape): Shape {
+  const [cRow, cCol] = center(s);
+  return s.map(([row, col]) => [row - cRow, col - cCol]);
+}
+
+
 
 // /*
 //  * Copyright 2010 Hunter Freyer <yt@hjfreyer.com>
