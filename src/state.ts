@@ -2,18 +2,17 @@
 import produce from 'immer';
 import * as shape from './shape';
 import SHAPES from './shapes';
+import * as input from './input';
 
 const DAS_INITIAL_DELAY = 16;
 const DAS_REFRESH_DELAY = 6;
 
 export type Action = Tick | Input;
 
-export type Direction = 'LEFT' | 'RIGHT' | 'DOWN';
-export type InputType = 'NONE' | Direction | 'SPIN';
 type Tick = { kind: 'tick' };
 type Input = {
   kind: 'input'
-  input: InputType
+  input: input.ControllerInput
 }
 
 type ActiveShape = {
@@ -28,7 +27,7 @@ export type State = {
   height: number
   activeShape: ActiveShape,
 
-  dasDirection: 'NONE' | Direction
+  dasDirection: input.DirectionValue
   dasDelay: number
 
   dropDelay: number
@@ -96,7 +95,7 @@ function attemptMoveActive(s: State, dRow: number, dCol: number, dRot: number): 
   return true;
 }
 
-function attemptTranslateDirection(s: State, d: Direction | 'SPIN'): boolean {
+function attemptTranslateDirection(s: State, d: input.DirectionButton | 'SPIN'): boolean {
   switch (d) {
     case 'LEFT':
       return attemptMoveActive(s, 0, -1, 0);
@@ -131,7 +130,7 @@ function doTick(s: State): State {
 
 function doInput(s: State, a: Input): State {
   return produce(s, s => {
-    switch (a.input) {
+    switch (a.input.direction) {
       case 'NONE':
         s.dasDirection = 'NONE';
         break;
@@ -140,12 +139,16 @@ function doInput(s: State, a: Input): State {
       case 'DOWN':
         if (s.dasDirection == 'NONE') {
           s.dasDelay = DAS_INITIAL_DELAY;
-          attemptTranslateDirection(s, a.input);
+          attemptTranslateDirection(s, a.input.direction);
         }
-        s.dasDirection = a.input;
+        s.dasDirection = a.input.direction;
+        break;
+    }
+    switch (a.input.action) {
+      case 'NONE':
         break;
       case 'SPIN':
-        attemptTranslateDirection(s, a.input);
+        attemptTranslateDirection(s, a.input.action);
         break;
     }
   });

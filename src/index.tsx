@@ -4,6 +4,7 @@ import * as rx from 'rxjs';
 import * as rxop from 'rxjs/operators';
 import App from './App';
 import * as state from './state';
+import * as input from './input';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -17,7 +18,7 @@ const keyDowns =
 const keyUps =
   rx.fromEvent(document, "keyup") as rx.Observable<KeyboardEvent>;
 
-function keyToInput(key: string): state.InputType | null {
+function keyToInput(key: string): input.Button | null {
   switch (key) {
     case 'ArrowLeft':
       return 'LEFT';
@@ -32,35 +33,12 @@ function keyToInput(key: string): state.InputType | null {
   }
 }
 
-const keyPresses = rx.merge(keyUps, keyDowns).pipe(
-  // Ignore repeated keydowns unless separated by a keyup.
-  rxop.groupBy(e => e.key),
-  rxop.map(group => group.pipe(rxop.distinctUntilKeyChanged('type'))),
-  rxop.mergeAll(),
+const rawInputs: rx.Observable<input.RawInput> = rx.merge(keyUps, keyDowns).pipe(
+  rxop.map(e => ({ button: keyToInput(e.key), pressed: e.type == 'keydown' } as input.RawInput)),
+  rxop.filter(i => i.button != null),
+)
 
-  // Convert to a single stream of keys.
-  rxop.scan<KeyboardEvent, state.InputType>((acc, val) => {
-    const input = keyToInput(val.key);
-
-    // Unrecognized keys do nothing.
-    if (input == null) { return acc; }
-
-    // If we released a key...
-    if (val.type == 'keyup') {
-      // Cancel the input if it's the active key. Otherwise, ignore.
-      return input == acc ? 'NONE' : acc;
-    }
-    if (val.type != 'keydown') {
-      throw 'Unexpected key event';
-    }
-    return input;
-  }, 'NONE'),
-  rxop.distinctUntilChanged(),
-);
-
-keyPresses.subscribe(console.log);
-
-const inputActions = keyPresses.pipe(
+const inputActions = input.parseInput(rawInputs).pipe(
   rxop.map(input => ({ kind: 'input', input } as state.Action))
 );
 
