@@ -53,9 +53,10 @@ export const INITIAL: State = {
 export function getShape(s: ActiveShape): shape.Shape {
   let res = SHAPES[s.shapeIdx];
   for (let i = 0; i < s.rotation; i++) {
-    res = res.map(([row, col]) => [col, -row]);
+    res = (res.map(([row, col]) => [col, -row]) as shape.Shape);
   }
-  return res.map(([row, col]) => [row + s.dRow, col + s.dCol]);
+  res = (res.map(([row, col]) => [row + s.dRow, col + s.dCol]) as shape.Shape);
+  return res.filter(([row, _]) => row >= 0);
 }
 
 function activeShapeClips(s: State, a: ActiveShape): boolean {
@@ -111,8 +112,14 @@ function attemptTranslateDirection(s: State, d: input.DirectionButton | 'SPIN'):
 function doTick(s: State): State {
   return produce(s, s => {
     if (s.dropDelay == 0) {
-      s.dropDelay = 60
-      attemptMoveActive(s, 1, 0, 0);
+      s.dropDelay = 60;
+      let clipped = !attemptMoveActive(s, 1, 0, 0);
+      if (clipped) {
+        for (const [rowIdx, colIdx] of getShape(s.activeShape)) {
+          s.board[rowIdx][colIdx] = s.activeShape.shapeIdx;
+        }
+        s.activeShape = { shapeIdx: 10, dRow: 0, dCol: 6, rotation: 0 };
+      }
     } else {
       s.dropDelay--;
     }
