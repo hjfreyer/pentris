@@ -41,14 +41,16 @@ export const INITIAL: State = {
   dasDirection: 'NONE',
   dasDelay: 0,
   dropDelay: 60,
-  board: (() => {
-    const board: number[][] = [];
-    for (let i = 0; i < 24; i++) {
-      board.push(Array(12).fill(0));
-    }
-    return board;
-  })(),
+  board: makeGrid(12, 24),
 };
+
+function makeGrid(width: number, height: number): number[][] {
+  const board: number[][] = [];
+  for (let i = 0; i < height; i++) {
+    board.push(Array(width).fill(0));
+  }
+  return board;
+}
 
 export function getShape(s: ActiveShape): shape.Shape {
   let res = SHAPES[s.shapeIdx];
@@ -109,31 +111,76 @@ function attemptTranslateDirection(s: State, d: input.DirectionButton | 'SPIN'):
   }
 }
 
-function doTick(s: State): State {
-  return produce(s, s => {
-    if (s.dropDelay == 0) {
-      s.dropDelay = 60;
-      let clipped = !attemptMoveActive(s, 1, 0, 0);
-      if (clipped) {
-        for (const [rowIdx, colIdx] of getShape(s.activeShape)) {
-          s.board[rowIdx][colIdx] = s.activeShape.shapeIdx;
+function doDAS(s: State) {
+  if (s.dasDirection == 'NONE') {
+    return;
+  }
+  if (s.dasDelay == 0) {
+    s.dasDelay = DAS_REFRESH_DELAY;
+    attemptTranslateDirection(s, s.dasDirection);
+  } else {
+    s.dasDelay--;
+  }
+}
+
+function doDrop(s: State) {
+  if (s.dropDelay != 0) {
+    s.dropDelay--;
+    return;
+  }
+
+  s.dropDelay = 60 / 6;
+  if (attemptMoveActive(s, 1, 0, 0)) {
+    return;
+  }
+
+  for (const [rowIdx, colIdx] of getShape(s.activeShape)) {
+    s.board[rowIdx][colIdx] = s.activeShape.shapeIdx;
+  }
+
+  s.activeShape = { shapeIdx: 10, dRow: 0, dCol: 6, rotation: 0 };
+}
+
+function doClears(s: State) {
+  const fullRows: number[] = [];
+  for (let row = 0; row < s.height; row++) {
+    let allFull = (() => {
+      for (let col = 0; col < s.width; col++) {
+        if (s.board[row][col] == 0) {
+          return false;
         }
-        s.activeShape = { shapeIdx: 10, dRow: 0, dCol: 6, rotation: 0 };
       }
-    } else {
-      s.dropDelay--;
+      return true;
+    })();
+
+    if (allFull) {
+      fullRows.push(row);
+    }
+  }
+
+  const newBoard = makeGrid(s.width, s.height);
+  let src = s.height - 1;
+  let dest = s.height - 1;
+  while (src >= 0) {
+    if (fullRows.includes(src)) {
+      src--;
+      continue;
     }
 
-    if (s.dasDirection != 'NONE') {
-      if (s.dasDelay == 0) {
-        s.dasDelay = DAS_REFRESH_DELAY;
-        attemptTranslateDirection(s, s.dasDirection);
-      } else {
-        s.dasDelay--;
-      }
+    for (let col = 0; col < s.width; col++) {
+      newBoard[dest][col] = s.board[src][col];
     }
-  });
+    src--;
+    dest--;
+  }
+  s.board = newBoard;
 }
+
+const doTick = produce((s: State) => {
+  doDAS(s);
+  doDrop(s);
+  doClears(s);
+});
 
 function doInput(s: State, a: Input): State {
   return produce(s, s => {
