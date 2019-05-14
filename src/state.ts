@@ -84,7 +84,7 @@ function activeShapeClips(s: State, a: ActiveShape): boolean {
       if (row < 0) {
         return false;
       }
-      return s.board[row][col] != 0;
+      return s.board[row][col] !== 0;
     })();
 
     if (clips) {
@@ -124,10 +124,10 @@ function attemptTranslateDirection(s: State, d: input.DirectionButton | 'SPIN'):
 }
 
 function doDAS(s: State) {
-  if (s.dasDirection == 'NONE') {
+  if (s.dasDirection === 'NONE') {
     return;
   }
-  if (s.dasDelay == 0) {
+  if (s.dasDelay === 0) {
     s.dasDelay = DAS_REFRESH_DELAY;
     attemptTranslateDirection(s, s.dasDirection);
   } else {
@@ -136,7 +136,7 @@ function doDAS(s: State) {
 }
 
 function doDrop(rand: Prando, s: State) {
-  if (s.dropDelay != 0) {
+  if (s.dropDelay !== 0) {
     s.dropDelay--;
     return;
   }
@@ -158,7 +158,7 @@ function doClears(s: State) {
   for (let row = 0; row < s.height; row++) {
     let allFull = (() => {
       for (let col = 0; col < s.width; col++) {
-        if (s.board[row][col] == 0) {
+        if (s.board[row][col] === 0) {
           return false;
         }
       }
@@ -205,7 +205,7 @@ function doInput(s: State, a: Input): State {
       case 'LEFT':
       case 'RIGHT':
       case 'DOWN':
-        if (s.dasDirection == 'NONE') {
+        if (s.dasDirection === 'NONE') {
           s.dasDelay = DAS_INITIAL_DELAY;
           attemptTranslateDirection(s, a.input.direction);
         }

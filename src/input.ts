@@ -29,9 +29,9 @@ export function parseInput(raw: rx.Observable<RawInput>):
 
   const [dir, action] =
     rxop.partition<RawInput>(i =>
-      i.button == 'LEFT'
-      || i.button == 'RIGHT'
-      || i.button == 'DOWN')(deduped);
+      i.button === 'LEFT'
+      || i.button === 'RIGHT'
+      || i.button === 'DOWN')(deduped);
 
   const currentDir: rx.Observable<DirectionValue> = dir.pipe(
     rxop.scan<RawInput, DirectionValue>((acc, val) => {
@@ -39,7 +39,7 @@ export function parseInput(raw: rx.Observable<RawInput>):
       if (val.pressed) {
         // Newly pressed buttons override.
         return newButton;
-      } else if (acc == val.button) {
+      } else if (acc === val.button) {
         // If we released the last key we pressed, change to 'NONE'.
         return 'NONE';
       } else {
@@ -52,16 +52,16 @@ export function parseInput(raw: rx.Observable<RawInput>):
 
   const currentAction: rx.Observable<ActionValue> = action.pipe(
     rxop.filter(i => i.pressed),
-    rxop.map(i=>i.button as ActionButton),
+    rxop.map(i => i.button as ActionButton),
   );
 
-  const currentDirInputs : rx.Observable<ControllerInput> = currentDir.pipe(
-    rxop.map(direction => ({direction, action: 'NONE'})),
+  const currentDirInputs: rx.Observable<ControllerInput> = currentDir.pipe(
+    rxop.map(direction => ({ direction, action: 'NONE' })),
   );
 
-  const currentActionInputs : rx.Observable<ControllerInput> = currentAction.pipe(
+  const currentActionInputs: rx.Observable<ControllerInput> = currentAction.pipe(
     rxop.withLatestFrom(currentDir),
-    rxop.map(([action, direction]) => ({direction, action})),
+    rxop.map(([action, direction]) => ({ direction, action })),
   );
 
   return rx.merge(currentDirInputs, currentActionInputs);

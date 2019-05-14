@@ -8,6 +8,7 @@ import * as input from './input';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import Prando from 'prando';
+import SHAPES from './shapes';
 
 const manualActions = new rx.Subject<state.Action>();
 const ticks = rx.timer(0, 1000 / 60).pipe(
@@ -35,7 +36,7 @@ function keyToInput(key: string): input.Button | null {
 }
 
 const rawInputs: rx.Observable<input.RawInput> = rx.merge(keyUps, keyDowns).pipe(
-  rxop.map(e => ({ button: keyToInput(e.key), pressed: e.type == 'keydown' } as input.RawInput)),
+  rxop.map(e => ({ button: keyToInput(e.key), pressed: e.type === 'keydown' } as input.RawInput)),
   rxop.filter(i => i.button != null),
 )
 
@@ -61,7 +62,6 @@ const root = document.getElementById('root') as HTMLElement;
 doms.subscribe((d) => ReactDOM.render(d, root));
 
 
-import SHAPES from './shapes';
-window['SHAPES'] = SHAPES;
-window['DISPATCH'] = (a: state.Action) => manualActions.next(a);
+(window as any)['SHAPES'] = SHAPES;
+(window as any)['DISPATCH'] = (a: state.Action) => manualActions.next(a);
 registerServiceWorker();
