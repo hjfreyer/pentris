@@ -3,6 +3,7 @@ import produce from 'immer';
 import * as shape from './shape';
 import SHAPES from './shapes';
 import * as input from './input';
+import Prando from 'prando';
 
 const DAS_INITIAL_DELAY = 16;
 const DAS_REFRESH_DELAY = 6;
@@ -34,15 +35,17 @@ export type State = {
   board: number[][]
 };
 
-export const INITIAL: State = {
-  width: 12,
-  height: 24,
-  activeShape: { shapeIdx: 10, dRow: 0, dCol: 6, rotation: 0 },
-  dasDirection: 'NONE',
-  dasDelay: 0,
-  dropDelay: 60,
-  board: makeGrid(12, 24),
-};
+export function newState(rand: Prando): State {
+  return {
+    width: 12,
+    height: 24,
+    activeShape: newActiveShape(rand),
+    dasDirection: 'NONE',
+    dasDelay: 0,
+    dropDelay: 60,
+    board: makeGrid(12, 24),
+  };
+}
 
 function makeGrid(width: number, height: number): number[][] {
   const board: number[][] = [];
@@ -59,6 +62,15 @@ export function getShape(s: ActiveShape): shape.Shape {
   }
   res = (res.map(([row, col]) => [row + s.dRow, col + s.dCol]) as shape.Shape);
   return res.filter(([row, _]) => row >= 0);
+}
+
+function newActiveShape(rand: Prando): ActiveShape {
+  return {
+    shapeIdx: rand.nextInt(0, SHAPES.length - 1),
+    dRow: 0,
+    dCol: 6,
+    rotation: 0,
+  };
 }
 
 function activeShapeClips(s: State, a: ActiveShape): boolean {
@@ -123,22 +135,22 @@ function doDAS(s: State) {
   }
 }
 
-function doDrop(s: State) {
+function doDrop(rand: Prando, s: State) {
   if (s.dropDelay != 0) {
     s.dropDelay--;
     return;
   }
 
-  s.dropDelay = 60 / 6;
+  s.dropDelay = 60 / 3;
   if (attemptMoveActive(s, 1, 0, 0)) {
     return;
   }
 
   for (const [rowIdx, colIdx] of getShape(s.activeShape)) {
-    s.board[rowIdx][colIdx] = s.activeShape.shapeIdx;
+    s.board[rowIdx][colIdx] = s.activeShape.shapeIdx + 1;
   }
 
-  s.activeShape = { shapeIdx: 10, dRow: 0, dCol: 6, rotation: 0 };
+  s.activeShape = newActiveShape(rand);
 }
 
 function doClears(s: State) {
@@ -176,11 +188,13 @@ function doClears(s: State) {
   s.board = newBoard;
 }
 
-const doTick = produce((s: State) => {
-  doDAS(s);
-  doDrop(s);
-  doClears(s);
-});
+function doTick(rand: Prando, s: State) {
+  return produce(s, (s: State) => {
+    doDAS(s);
+    doDrop(rand, s);
+    doClears(s);
+  });
+}
 
 function doInput(s: State, a: Input): State {
   return produce(s, s => {
@@ -208,10 +222,10 @@ function doInput(s: State, a: Input): State {
   });
 }
 
-export function apply(s: State, a: Action): State {
+export function apply(rand: Prando, s: State, a: Action): State {
   switch (a.kind) {
     case 'tick':
-      return doTick(s);
+      return doTick(rand, s);
     case 'input':
       return doInput(s, a);
   }

@@ -7,6 +7,7 @@ import * as state from './state';
 import * as input from './input';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
+import Prando from 'prando';
 
 const manualActions = new rx.Subject<state.Action>();
 const ticks = rx.timer(0, 1000 / 60).pipe(
@@ -44,9 +45,14 @@ const inputActions = input.parseInput(rawInputs).pipe(
 
 const actions = rx.merge(manualActions, inputActions, ticks);
 
-const states = actions.pipe(rxop.scan<state.Action, state.State>(state.apply, state.INITIAL), rxop.startWith(state.INITIAL));
+const rand = new Prando(42);
+const initial = state.newState(rand);
 
-const doms = states.pipe(rxop.map(s => <App key="app" state={s} />));
+const states = actions.pipe(
+  rxop.scan<state.Action, state.State>((s, a) => state.apply(rand, s, a), initial),
+  rxop.startWith(initial));
+
+const doms = states.pipe(rxop.map(s => <App key="app" state = { s } />));
 
 const root = document.getElementById('root') as HTMLElement;
 
