@@ -7,6 +7,7 @@ import Prando from 'prando';
 
 const DAS_INITIAL_DELAY = 16;
 const DAS_REFRESH_DELAY = 6;
+const ENTRY_DELAY = 18;
 
 export type Action = Tick | Input;
 
@@ -31,6 +32,7 @@ export type State = {
   dasDirection: input.DirectionValue
   dasDelay: number
 
+  entryDelay: number
   dropDelay: number
   board: number[][]
 };
@@ -42,6 +44,7 @@ export function newState(rand: Prando): State {
     activeShape: newActiveShape(rand),
     dasDirection: 'NONE',
     dasDelay: 0,
+    entryDelay: ENTRY_DELAY,
     dropDelay: 60,
     board: makeGrid(12, 24),
   };
@@ -123,6 +126,14 @@ function attemptTranslateDirection(s: State, d: input.DirectionButton | 'SPIN'):
   }
 }
 
+function doEntry(s: State): boolean {
+  if (0 < s.entryDelay) {
+    s.entryDelay--;
+    return false;
+  }
+  return true;
+}
+
 function doDAS(s: State) {
   if (s.dasDirection === 'NONE') {
     return;
@@ -150,6 +161,7 @@ function doDrop(rand: Prando, s: State) {
     s.board[rowIdx][colIdx] = s.activeShape.shapeIdx + 1;
   }
 
+  s.entryDelay = ENTRY_DELAY;
   s.activeShape = newActiveShape(rand);
 }
 
@@ -190,6 +202,9 @@ function doClears(s: State) {
 
 function doTick(rand: Prando, s: State) {
   return produce(s, (s: State) => {
+    if (!doEntry(s)) {
+      return;
+    }
     doDAS(s);
     doDrop(rand, s);
     doClears(s);
