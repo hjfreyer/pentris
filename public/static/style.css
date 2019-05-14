@@ -1,0 +1,25 @@
+
+body {
+    text-align: center;
+}
+
+img {
+    border-style: none;
+}
+
+#logo {
+    margin: 20px;
+}
+
+#social {
+    position: absolute;
+    right: 0;
+}
+
+#social div {
+    margin: 5px;
+}
+
+#footer {
+    margin-top: 10px;
+}
