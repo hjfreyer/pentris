@@ -8,6 +8,7 @@ import Prando from 'prando';
 const DAS_INITIAL_DELAY = 16;
 const DAS_REFRESH_DELAY = 6;
 const ENTRY_DELAY = 18;
+const GRAVITY = 60 / 3;
 
 export type Action = Tick | Input;
 
@@ -33,7 +34,7 @@ export type State = {
   dasDelay: number
 
   entryDelay: number
-  dropDelay: number
+  gravity: number
   board: number[][]
 };
 
@@ -45,7 +46,7 @@ export function newState(rand: Prando): State {
     dasDirection: 'NONE',
     dasDelay: 0,
     entryDelay: ENTRY_DELAY,
-    dropDelay: 60,
+    gravity: GRAVITY,
     board: makeGrid(12, 24),
   };
 }
@@ -146,13 +147,13 @@ function doDAS(s: State) {
   }
 }
 
-function doDrop(rand: Prando, s: State) {
-  if (s.dropDelay !== 0) {
-    s.dropDelay--;
+function doGravity(rand: Prando, s: State) {
+  if (s.gravity !== 0) {
+    s.gravity--;
     return;
   }
 
-  s.dropDelay = 60 / 3;
+  s.gravity = GRAVITY;
   if (attemptMoveActive(s, 1, 0, 0)) {
     return;
   }
@@ -206,7 +207,7 @@ function doTick(rand: Prando, s: State) {
       return;
     }
     doDAS(s);
-    doDrop(rand, s);
+    doGravity(rand, s);
     doClears(s);
   });
 }
@@ -233,8 +234,15 @@ function doInput(s: State, a: Input): State {
       case 'SPIN':
         attemptTranslateDirection(s, a.input.action);
         break;
+      case 'DROP':
+        doDrop(s);
+        break;
     }
   });
+}
+
+function doDrop(s: State) {
+  while (attemptMoveActive(s, 1, 0, 0)) { }
 }
 
 export function apply(rand: Prando, s: State, a: Action): State {

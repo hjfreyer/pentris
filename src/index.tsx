@@ -30,6 +30,8 @@ function keyToInput(key: string): input.Button | null {
       return 'DOWN';
     case 'ArrowUp':
       return 'SPIN';
+    case ' ':
+      return 'DROP';
     default:
       return null;
   }
@@ -41,7 +43,7 @@ const rawInputs: rx.Observable<input.RawInput> = rx.merge(keyUps, keyDowns).pipe
 )
 
 const inputActions = input.parseInput(rawInputs).pipe(
-  rxop.map(input => ({ kind: 'input', input } as state.Action))
+  rxop.map(input => ({ kind: 'input', input } as state.Action)),
 );
 
 const actions = rx.merge(manualActions, inputActions, ticks);
