@@ -23,9 +23,13 @@ function renderBoard(s: state.State): number[][] {
 }
 
 function App({ state }: Properties): JSX.Element {
-  return <div className="App">
-    <Board cells={renderBoard(state)} />
-  </div>;
+  return (<div className= "App">
+    <Board cells={ renderBoard(state) } />
+    <aside>
+      <h1>Pentris</h1>
+      It's Delicious. It's Pentris.
+    </aside>
+  </div>);
 }
 
 export default App;
