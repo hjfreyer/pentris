@@ -9,8 +9,9 @@ export type Properties = {
 }
 
 function App(p: Properties): JSX.Element {
+  const s = p.state;
   return (<div className= "App">
-    <Board cells={ state.flattenBoard(p.state) } />
+    <Board cells={ state.flattenBoard(s) } />
     <aside>
       <h1>Pentris</h1>
       <p>
@@ -18,6 +19,8 @@ function App(p: Properties): JSX.Element {
       </p>
       <h2>Preview</h2>
       <PiecePreview shapeIdx={p.state.nextShapeIdx}/>
+      <h2>Score</h2>
+      <p>{s.score}</p>
     </aside>
   </div>);
 }
