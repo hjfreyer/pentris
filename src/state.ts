@@ -34,8 +34,8 @@ export type GridCell = EmptyCell | ShapeCell;
 export type State = {
   width: number
   height: number
-  nextShapeIdx: number,
-  activeShape: ActiveShape,
+  nextShapeIdx: number
+  activeShape: ActiveShape
 
   dasDirection: input.DirectionValue
   dasDelay: number
