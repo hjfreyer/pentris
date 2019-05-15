@@ -1,5 +1,6 @@
 .Board {
   background: black;
+  display: inline-block;
 }
 
 .Board .row {

@@ -34,6 +34,7 @@ export type GridCell = EmptyCell | ShapeCell;
 export type State = {
   width: number
   height: number
+  nextShapeIdx: number,
   activeShape: ActiveShape,
 
   dasDirection: input.DirectionValue
@@ -48,7 +49,13 @@ export function newState(rand: Prando): State {
   return {
     width: 12,
     height: 24,
-    activeShape: newActiveShape(rand),
+    nextShapeIdx: newActiveShapeIdx(rand),
+    activeShape: {
+      shapeIdx: newActiveShapeIdx(rand),
+      dRow: 0,
+      dCol: 6,
+      rotation: 0,
+    },
     dasDirection: 'NONE',
     dasDelay: 0,
     entryDelay: ENTRY_DELAY,
@@ -89,13 +96,8 @@ export function flattenBoard(s: State): GridCell[][] {
   return res;
 }
 
-function newActiveShape(rand: Prando): ActiveShape {
-  return {
-    shapeIdx: rand.nextInt(0, SHAPES.length - 1),
-    dRow: 0,
-    dCol: 6,
-    rotation: 0,
-  };
+function newActiveShapeIdx(rand: Prando): number {
+  return rand.nextInt(0, SHAPES.length - 1);
 }
 
 function activeShapeClips(s: State, a: ActiveShape): boolean {
@@ -181,7 +183,13 @@ function doGravity(rand: Prando, s: State) {
 
   s.board = flattenBoard(s);
   s.entryDelay = ENTRY_DELAY;
-  s.activeShape = newActiveShape(rand);
+  s.activeShape = {
+    shapeIdx: s.nextShapeIdx,
+    dRow: 0,
+    dCol: s.width / 2,
+    rotation: 0,
+  };
+  s.nextShapeIdx = newActiveShapeIdx(rand);
 }
 
 function doClears(s: State) {

@@ -1,10 +1,8 @@
 import * as React from 'react';
-//import * as rx from 'rxjs';
 import './App.css';
 import Board from './Board';
+import PiecePreview from './PiecePreview';
 import * as state from './state';
-//import SHAPES from './shapes';
-export type Input = {};
 
 export type Properties = {
   state: state.State
@@ -15,7 +13,11 @@ function App(p: Properties): JSX.Element {
     <Board cells={ state.flattenBoard(p.state) } />
     <aside>
       <h1>Pentris</h1>
-      It's Delicious. It's Pentris.
+      <p>
+        It's Delicious. It's Pentris.
+      </p>
+      <h2>Preview</h2>
+      <PiecePreview shapeIdx={p.state.nextShapeIdx}/>
     </aside>
   </div>);
 }
