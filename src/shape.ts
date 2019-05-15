@@ -2,7 +2,11 @@
 export type Shape = Array<[number, number]>;
 
 export function mirrored(s: Shape): Shape {
-  return s.map(([x, y]) => [-x, y]);
+  return s.map(([row, col]) => [row, -col]);
+}
+
+export function transpose(s: Shape): Shape {
+  return s.map(([row, col]) => [col, row]);
 }
 
 export function bbox(s: Shape): [number, number, number, number] {

@@ -44,18 +44,18 @@ const pentominoP: shape.Shape = [
 ];
 
 const pentominoT: shape.Shape = [
-  [-1, 0],
-  [1, 0],
-  [0, 0],
+  [0, -1],
   [0, 1],
-  [0, 2],
+  [0, 0],
+  [1, 0],
+  [2, 0],
 ];
 
 const pentominoU: shape.Shape = [
   [0, 0],
-  [-1, 0],
-  [1, 0],
-  [1, -1],
+  [0, -1],
+  [0, 1],
+  [-1, 1],
   [-1, -1],
 ];
 
@@ -82,8 +82,6 @@ const pentominoX: shape.Shape = [
   [0, -1],
   [0, 1],
 ];
-
-
 
 const pentominoY: shape.Shape = [
   [0, 0],
@@ -147,7 +145,7 @@ const tetrominoJ: shape.Shape = [
   [0, 0],
   [0, 1],
   [0, 2],
-  [-1, 2],
+  [1, 2],
 ];
 
 const tetrominoL: shape.Shape = shape.mirrored(tetrominoJ);
@@ -160,10 +158,10 @@ const tetrominoO: shape.Shape = [
 ];
 
 const tetrominoS: shape.Shape = [
-  [0, 1],
-  [1, 1],
   [1, 0],
-  [2, 0],
+  [1, 1],
+  [0, 1],
+  [0, 2],
 ];
 
 const tetrominoZ: shape.Shape = shape.mirrored(tetrominoS);
@@ -208,7 +206,6 @@ const domino: shape.Shape = [
   [0, 0],
   [0, 1],
 ];
-
 
 const monomino: shape.Shape = [
   [0, 0]
