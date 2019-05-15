@@ -2,7 +2,7 @@
   "name": "pentris",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://new.pentris.net",
+  "homepage": "https://www.pentris.net",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "immer": "^2.1.5",
