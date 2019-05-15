@@ -1,13 +1,8 @@
 
-#root {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
 .App {
+  width: 100vmin;
+  height: 100vmin;
   display: flex;
-  justify-content: center;
 }
 
 .App-logo {
@@ -42,5 +37,4 @@
 
 aside {
   flex: 1;
-  max-width: 50vmin;
 }

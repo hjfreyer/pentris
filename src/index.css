@@ -3,7 +3,8 @@
 }
 
 html,
-body {
+body,
+#root {
     height: 100%;
 }
 
@@ -11,4 +12,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
