@@ -12,7 +12,8 @@
   border: 0.1vmin solid black;
 }
 
-.Board .cell.color-0 {  }
+.Board .cell.empty {  }
+.Board .cell.color-0 { background: hsl(calc(0 * 12deg), 100%, 50%); }
 .Board .cell.color-1 { background: hsl(calc(1 * 12deg), 100%, 50%); }
 .Board .cell.color-2 { background: hsl(calc(2 * 12deg), 100%, 50%); }
 .Board .cell.color-3 { background: hsl(calc(3 * 12deg), 100%, 50%); }
@@ -42,4 +43,3 @@
 .Board .cell.color-27 { background: hsl(calc(27 * 12deg), 100%, 50%); }
 .Board .cell.color-28 { background: hsl(calc(28 * 12deg), 100%, 50%); }
 .Board .cell.color-29 { background: hsl(calc(29 * 12deg), 100%, 50%); }
-.Board .cell.color-30 { background: hsl(calc(30 * 12deg), 100%, 50%); }

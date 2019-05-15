@@ -24,6 +24,12 @@ type ActiveShape = {
   dCol: number
   rotation: 0 | 1 | 2 | 3
 }
+type EmptyCell = { kind: 'empty' };
+type ShapeCell = {
+  kind: 'shape'
+  shapeIdx: number
+}
+export type GridCell = EmptyCell | ShapeCell;
 
 export type State = {
   width: number
@@ -35,7 +41,7 @@ export type State = {
 
   entryDelay: number
   gravity: number
-  board: number[][]
+  board: GridCell[][]
 };
 
 export function newState(rand: Prando): State {
@@ -51,10 +57,10 @@ export function newState(rand: Prando): State {
   };
 }
 
-function makeGrid(width: number, height: number): number[][] {
-  const board: number[][] = [];
+function makeGrid(width: number, height: number): GridCell[][] {
+  const board: GridCell[][] = [];
   for (let i = 0; i < height; i++) {
-    board.push(Array(width).fill(0));
+    board.push(Array(width).fill({ kind: 'empty' }));
   }
   return board;
 }
@@ -66,6 +72,21 @@ export function getShape(s: ActiveShape): shape.Shape {
   }
   res = (res.map(([row, col]) => [row + s.dRow, col + s.dCol]) as shape.Shape);
   return res.filter(([row, _]) => row >= 0);
+}
+
+export function flattenBoard(s: State): GridCell[][] {
+  const res = s.board.map(row => row.slice());
+
+  const shape = getShape(s.activeShape);
+
+  for (const [row, col] of shape) {
+    res[row][col] = {
+      kind: 'shape',
+      shapeIdx: s.activeShape.shapeIdx,
+    }
+  }
+
+  return res;
 }
 
 function newActiveShape(rand: Prando): ActiveShape {
@@ -88,7 +109,7 @@ function activeShapeClips(s: State, a: ActiveShape): boolean {
       if (row < 0) {
         return false;
       }
-      return s.board[row][col] !== 0;
+      return s.board[row][col].kind !== 'empty';
     })();
 
     if (clips) {
@@ -158,10 +179,7 @@ function doGravity(rand: Prando, s: State) {
     return;
   }
 
-  for (const [rowIdx, colIdx] of getShape(s.activeShape)) {
-    s.board[rowIdx][colIdx] = s.activeShape.shapeIdx + 1;
-  }
-
+  s.board = flattenBoard(s);
   s.entryDelay = ENTRY_DELAY;
   s.activeShape = newActiveShape(rand);
 }
@@ -171,7 +189,7 @@ function doClears(s: State) {
   for (let row = 0; row < s.height; row++) {
     let allFull = (() => {
       for (let col = 0; col < s.width; col++) {
-        if (s.board[row][col] === 0) {
+        if (s.board[row][col].kind === 'empty') {
           return false;
         }
       }

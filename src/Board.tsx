@@ -1,10 +1,18 @@
 import * as React from 'react';
 
 import './Board.css';
+import * as state from './state';
 
 export type State = {
-  cells : number[][],
+  cells : state.GridCell[][],
 };
+
+function cellClassName(c:state.GridCell):string {
+  switch (c.kind) {
+    case 'empty': return 'cell empty';
+    case 'shape': return `cell color-${c.shapeIdx}`
+  }
+}
 
 function Board(state : State): JSX.Element {
   return (
@@ -13,7 +21,7 @@ function Board(state : State): JSX.Element {
         (row, rowIdx) => <div className="row" key={rowIdx}>
           {
             row.map((cell, cellIdx) =>
-              <div className={`cell color-${cell}`} key={cellIdx}/>
+              <div className={cellClassName(cell)} key={cellIdx}/>
             )
           }
         </div>
