@@ -17,7 +17,11 @@ function PiecePreview({ shapeIdx }: Properties): JSX.Element {
   for (const [row, col] of justified) {
     grid[row][col] = { kind: 'shape', shapeIdx };
   }
-  return <Board cells={ grid } />;
+  return (
+    <div className="PiecePreview">
+      <Board cells={ grid } />
+    </div>
+  );
 }
 
 export default PiecePreview;

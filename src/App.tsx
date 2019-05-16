@@ -15,12 +15,12 @@ function App(p: Properties): JSX.Element {
     <aside>
       <h1>Pentris</h1>
       <p>
-        It's Delicious. It's Pentris.
+        It's Alpha. It's Delicious. It's Pentris.
       </p>
       <h2>Preview</h2>
       <PiecePreview shapeIdx={p.state.nextShapeIdx}/>
       <h2>Score</h2>
-      <p>{s.score}</p>
+      <p className="score">{s.score}</p>
     </aside>
   </div>);
 }
