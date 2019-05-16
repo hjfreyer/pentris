@@ -18,14 +18,16 @@
     "postbuild": "cp -r v2site build2 && mv build build2/v3 && mv build2 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy-dev": "gh-pages -d build",
-    "deploy-prod": "echo 'www.pentris.net' > build/CNAME && gh-pages -d build -o prod -b master"
+    "deploy-dev": "gh-pages -d build -o origin",
+    "deploy-prod": "echo 'www.pentris.net' > build/CNAME && gh-pages -d build -o prod -b master",
+    "local": "serve build/"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
     "@types/node": "^11.13.10",
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
+    "serve": "^11.0.0",
     "typescript": "^3.4.5"
   },
   "browserslist": {
