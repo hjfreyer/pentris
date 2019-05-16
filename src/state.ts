@@ -8,7 +8,7 @@ import Prando from 'prando';
 const DAS_INITIAL_DELAY = 16;
 const DAS_REFRESH_DELAY = 6;
 const ENTRY_DELAY = 18;
-const GRAVITY = 60 / 3;
+const GRAVITY = 60 / 2;
 
 export type Action = Tick | Input;
 
