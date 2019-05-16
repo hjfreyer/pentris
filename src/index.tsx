@@ -48,7 +48,7 @@ const inputActions = input.parseInput(rawInputs).pipe(
 
 const actions = rx.merge(manualActions, inputActions, ticks);
 
-const rand = new Prando(42);
+const rand = new Prando();
 const initial = state.newState(rand);
 
 const states = actions.pipe(
