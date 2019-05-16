@@ -14,9 +14,12 @@ img {
 #social {
     position: absolute;
     right: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
 }
 
-#social div {
+#social iframe {
     margin: 5px;
 }
 
