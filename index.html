@@ -4,22 +4,14 @@
     <title>Pentris</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css" />
     <META NAME="Description" CONTENT="Like Tetris, but moreso.">
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-519586-10']);
-      _gaq.push(['_trackPageview']);
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-519586-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-      (function() {
-      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-      po.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-      })();
+      gtag('config', 'UA-519586-10');
     </script>
   </head>
   <body>
@@ -30,27 +22,22 @@
     </div>
     <div id="content">
       <div id="social">
-        <div>
-          <g:plusone href="http://www.pentris.net"></g:plusone>
-        </div>
         <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.pentris.net" data-via="hjfreyer">Tweet</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        <div>
-          <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.pentris.net&amp;send=false&amp;layout=button_count&amp;width=106&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:106px; height:21px;" allowTransparency="true"></iframe>
-        </div>
+        <iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fpentris.net&width=117&layout=button_count&action=like&size=small&show_faces=false&share=true&height=46&appId" width="117" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
       </div>
       <iframe frameBorder="0" width="100%" height="600px" src="/static/pentris_v2/PentrisApp.html"></iframe>
-      <a href="/v1">Looking for Version 1?</a>
+      Want to test an <a href="/v3">all-new Pentris?</a> (Alpha)
     </div>
     <div id="footer">
       <small><i>
-          Lovingly created by <a href="http://hjfreyer.com">Hunter Freyer</a>.
+          Lovingly created by <a href="https://hjfreyer.com">Hunter Freyer</a>.
           Released under the Apache 2.0 License. Source available on
-          <a href="http://pentris.googlecode.com">Google Code</a>.
+          <a href="https://github.com/hjfreyer/pentris">GitHub</a>.
         </i>
         <br/>
         <br/>
-        <a href="http://code.google.com/p/pentris/issues/list">Report a bug</a> | <a href="mailto:yt@hjfreyer.com">Contact</a>
+        <a href="https://github.com/hjfreyer/pentris/issues">Report a bug</a> | <a href="mailto:yt@hjfreyer.com">Contact</a>
       </small>
     </div>
   </body>
