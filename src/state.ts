@@ -45,6 +45,7 @@ export type State = {
   board: GridCell[][]
 
   score: number
+  lines: number
 };
 
 export function newState(rand: Prando): State {
@@ -64,6 +65,7 @@ export function newState(rand: Prando): State {
     gravity: GRAVITY,
     board: makeGrid(12, 24),
     score: 0,
+    lines: 0,
   };
 }
 
@@ -229,6 +231,7 @@ function doClears(s: State) {
   }
   s.board = newBoard;
   s.score += Math.pow(2, fullRows.length) - 1;
+  s.lines += fullRows.length;
 }
 
 function doTick(rand: Prando, s: State) {

@@ -21,6 +21,8 @@ function App(p: Properties): JSX.Element {
       <PiecePreview shapeIdx={p.state.nextShapeIdx}/>
       <h2>Score</h2>
       <p className="score">{s.score}</p>
+      <h2>Lines Cleared</h2>
+      <p className="score">{s.lines}</p>
     </aside>
   </div>);
 }
