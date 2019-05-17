@@ -121,10 +121,10 @@ export class Integrator {
 
   private doTick(s: State) {
     return produce(s, (s: State) => {
+      this.doDAS(s);
       if (!this.doEntry(s)) {
         return;
       }
-      this.doDAS(s);
       if (!this.doGravity(s)) {
         this.doLockDown(s);
       }
