@@ -48,25 +48,169 @@ export type State = {
   lines: number
 };
 
-export function newState(rand: Prando): State {
-  return {
-    width: 12,
-    height: 24,
-    nextShapeIdx: newActiveShapeIdx(rand),
-    activeShape: {
-      shapeIdx: newActiveShapeIdx(rand),
+export class Integrator {
+  rand: Prando
+
+  constructor(rand: Prando) {
+    this.rand = rand;
+  }
+
+  newState(): State {
+    return {
+      width: 12,
+      height: 24,
+      nextShapeIdx: this.newActiveShapeIdx(),
+      activeShape: {
+        shapeIdx: this.newActiveShapeIdx(),
+        dRow: 0,
+        dCol: 6,
+        rotation: 0,
+      },
+      dasDirection: 'NONE',
+      dasDelay: 0,
+      entryDelay: ENTRY_DELAY,
+      gravity: GRAVITY,
+      board: makeGrid(12, 24),
+      score: 0,
+      lines: 0,
+    };
+  }
+
+  apply(s: State, a: Action): State {
+    switch (a.kind) {
+      case 'tick':
+        return this.doTick(s);
+      case 'input':
+        return this.doInput(s, a);
+    }
+  }
+
+  private newActiveShapeIdx(): number {
+    return this.rand.nextInt(0, SHAPES.length - 1);
+  }
+
+  private doEntry(s: State): boolean {
+    if (0 < s.entryDelay) {
+      s.entryDelay--;
+      return false;
+    }
+    return true;
+  }
+
+  private doDAS(s: State) {
+    if (s.dasDirection === 'NONE') {
+      return;
+    }
+    if (s.dasDelay === 0) {
+      s.dasDelay = DAS_REFRESH_DELAY;
+      attemptTranslateDirection(s, s.dasDirection);
+    } else {
+      s.dasDelay--;
+    }
+  }
+
+  private doGravity(s: State) {
+    if (s.gravity !== 0) {
+      s.gravity--;
+      return;
+    }
+
+    s.gravity = GRAVITY;
+    if (attemptMoveActive(s, 1, 0, 0)) {
+      return;
+    }
+
+    s.board = flattenBoard(s);
+    s.entryDelay = ENTRY_DELAY;
+    s.activeShape = {
+      shapeIdx: s.nextShapeIdx,
       dRow: 0,
-      dCol: 6,
+      dCol: s.width / 2,
       rotation: 0,
-    },
-    dasDirection: 'NONE',
-    dasDelay: 0,
-    entryDelay: ENTRY_DELAY,
-    gravity: GRAVITY,
-    board: makeGrid(12, 24),
-    score: 0,
-    lines: 0,
-  };
+    };
+    s.nextShapeIdx = this.newActiveShapeIdx();
+  }
+
+  private doClears(s: State) {
+    const fullRows: number[] = [];
+    for (let row = 0; row < s.height; row++) {
+      let allFull = (() => {
+        for (let col = 0; col < s.width; col++) {
+          if (s.board[row][col].kind === 'empty') {
+            return false;
+          }
+        }
+        return true;
+      })();
+
+      if (allFull) {
+        fullRows.push(row);
+      }
+    }
+
+    const newBoard = makeGrid(s.width, s.height);
+    let src = s.height - 1;
+    let dest = s.height - 1;
+    while (src >= 0) {
+      if (fullRows.includes(src)) {
+        src--;
+        continue;
+      }
+
+      for (let col = 0; col < s.width; col++) {
+        newBoard[dest][col] = s.board[src][col];
+      }
+      src--;
+      dest--;
+    }
+    s.board = newBoard;
+    s.score += Math.pow(2, fullRows.length) - 1;
+    s.lines += fullRows.length;
+  }
+
+  private doTick(s: State) {
+    return produce(s, (s: State) => {
+      if (!this.doEntry(s)) {
+        return;
+      }
+      this.doDAS(s);
+      this.doGravity(s);
+      this.doClears(s);
+    });
+  }
+
+  private doInput(s: State, a: Input): State {
+    return produce(s, s => {
+      switch (a.input.direction) {
+        case 'NONE':
+          s.dasDirection = 'NONE';
+          break;
+        case 'LEFT':
+        case 'RIGHT':
+        case 'DOWN':
+          if (s.dasDirection === 'NONE') {
+            s.dasDelay = DAS_INITIAL_DELAY;
+            attemptTranslateDirection(s, a.input.direction);
+          }
+          s.dasDirection = a.input.direction;
+          break;
+      }
+      switch (a.input.action) {
+        case 'NONE':
+          break;
+        case 'SPIN':
+          attemptTranslateDirection(s, a.input.action);
+          break;
+        case 'DROP':
+          this.doDrop(s);
+          break;
+      }
+    });
+  }
+
+  private doDrop(s: State) {
+    while (attemptMoveActive(s, 1, 0, 0)) { }
+  }
 }
 
 function makeGrid(width: number, height: number): GridCell[][] {
@@ -101,9 +245,6 @@ export function flattenBoard(s: State): GridCell[][] {
   return res;
 }
 
-function newActiveShapeIdx(rand: Prando): number {
-  return rand.nextInt(0, SHAPES.length - 1);
-}
 
 function activeShapeClips(s: State, a: ActiveShape): boolean {
   const shp = getShape(a);
@@ -152,137 +293,5 @@ function attemptTranslateDirection(s: State, d: input.DirectionButton | 'SPIN'):
       return attemptMoveActive(s, 0, 1, 0);
     case 'SPIN':
       return attemptMoveActive(s, 0, 0, 1);
-  }
-}
-
-function doEntry(s: State): boolean {
-  if (0 < s.entryDelay) {
-    s.entryDelay--;
-    return false;
-  }
-  return true;
-}
-
-function doDAS(s: State) {
-  if (s.dasDirection === 'NONE') {
-    return;
-  }
-  if (s.dasDelay === 0) {
-    s.dasDelay = DAS_REFRESH_DELAY;
-    attemptTranslateDirection(s, s.dasDirection);
-  } else {
-    s.dasDelay--;
-  }
-}
-
-function doGravity(rand: Prando, s: State) {
-  if (s.gravity !== 0) {
-    s.gravity--;
-    return;
-  }
-
-  s.gravity = GRAVITY;
-  if (attemptMoveActive(s, 1, 0, 0)) {
-    return;
-  }
-
-  s.board = flattenBoard(s);
-  s.entryDelay = ENTRY_DELAY;
-  s.activeShape = {
-    shapeIdx: s.nextShapeIdx,
-    dRow: 0,
-    dCol: s.width / 2,
-    rotation: 0,
-  };
-  s.nextShapeIdx = newActiveShapeIdx(rand);
-}
-
-function doClears(s: State) {
-  const fullRows: number[] = [];
-  for (let row = 0; row < s.height; row++) {
-    let allFull = (() => {
-      for (let col = 0; col < s.width; col++) {
-        if (s.board[row][col].kind === 'empty') {
-          return false;
-        }
-      }
-      return true;
-    })();
-
-    if (allFull) {
-      fullRows.push(row);
-    }
-  }
-
-  const newBoard = makeGrid(s.width, s.height);
-  let src = s.height - 1;
-  let dest = s.height - 1;
-  while (src >= 0) {
-    if (fullRows.includes(src)) {
-      src--;
-      continue;
-    }
-
-    for (let col = 0; col < s.width; col++) {
-      newBoard[dest][col] = s.board[src][col];
-    }
-    src--;
-    dest--;
-  }
-  s.board = newBoard;
-  s.score += Math.pow(2, fullRows.length) - 1;
-  s.lines += fullRows.length;
-}
-
-function doTick(rand: Prando, s: State) {
-  return produce(s, (s: State) => {
-    if (!doEntry(s)) {
-      return;
-    }
-    doDAS(s);
-    doGravity(rand, s);
-    doClears(s);
-  });
-}
-
-function doInput(s: State, a: Input): State {
-  return produce(s, s => {
-    switch (a.input.direction) {
-      case 'NONE':
-        s.dasDirection = 'NONE';
-        break;
-      case 'LEFT':
-      case 'RIGHT':
-      case 'DOWN':
-        if (s.dasDirection === 'NONE') {
-          s.dasDelay = DAS_INITIAL_DELAY;
-          attemptTranslateDirection(s, a.input.direction);
-        }
-        s.dasDirection = a.input.direction;
-        break;
-    }
-    switch (a.input.action) {
-      case 'NONE':
-        break;
-      case 'SPIN':
-        attemptTranslateDirection(s, a.input.action);
-        break;
-      case 'DROP':
-        doDrop(s);
-        break;
-    }
-  });
-}
-
-function doDrop(s: State) {
-  while (attemptMoveActive(s, 1, 0, 0)) { }
-}
-
-export function apply(rand: Prando, s: State, a: Action): State {
-  switch (a.kind) {
-    case 'tick':
-      return doTick(rand, s);
-    case 'input':
-      return doInput(s, a);
   }
 }
