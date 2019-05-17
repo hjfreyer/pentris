@@ -109,63 +109,14 @@ export class Integrator {
     }
   }
 
-  private doGravity(s: State) {
+  private doGravity(s: State): boolean {
     if (s.gravity !== 0) {
       s.gravity--;
-      return;
+      return true;
     }
 
     s.gravity = GRAVITY;
-    if (attemptMoveActive(s, 1, 0, 0)) {
-      return;
-    }
-
-    s.board = flattenBoard(s);
-    s.entryDelay = ENTRY_DELAY;
-    s.activeShape = {
-      shapeIdx: s.nextShapeIdx,
-      dRow: 0,
-      dCol: s.width / 2,
-      rotation: 0,
-    };
-    s.nextShapeIdx = this.newActiveShapeIdx();
-  }
-
-  private doClears(s: State) {
-    const fullRows: number[] = [];
-    for (let row = 0; row < s.height; row++) {
-      let allFull = (() => {
-        for (let col = 0; col < s.width; col++) {
-          if (s.board[row][col].kind === 'empty') {
-            return false;
-          }
-        }
-        return true;
-      })();
-
-      if (allFull) {
-        fullRows.push(row);
-      }
-    }
-
-    const newBoard = makeGrid(s.width, s.height);
-    let src = s.height - 1;
-    let dest = s.height - 1;
-    while (src >= 0) {
-      if (fullRows.includes(src)) {
-        src--;
-        continue;
-      }
-
-      for (let col = 0; col < s.width; col++) {
-        newBoard[dest][col] = s.board[src][col];
-      }
-      src--;
-      dest--;
-    }
-    s.board = newBoard;
-    s.score += Math.pow(2, fullRows.length) - 1;
-    s.lines += fullRows.length;
+    return attemptMoveActive(s, 1, 0, 0);
   }
 
   private doTick(s: State) {
@@ -174,8 +125,9 @@ export class Integrator {
         return;
       }
       this.doDAS(s);
-      this.doGravity(s);
-      this.doClears(s);
+      if (!this.doGravity(s)) {
+        this.doLockDown(s);
+      }
     });
   }
 
@@ -210,6 +162,54 @@ export class Integrator {
 
   private doDrop(s: State) {
     while (attemptMoveActive(s, 1, 0, 0)) { }
+    this.doLockDown(s);
+  }
+
+  private doLockDown(s: State) {
+    s.board = flattenBoard(s);
+    s.entryDelay = ENTRY_DELAY;
+    s.activeShape = {
+      shapeIdx: s.nextShapeIdx,
+      dRow: 0,
+      dCol: s.width / 2,
+      rotation: 0,
+    };
+    s.nextShapeIdx = this.newActiveShapeIdx();
+
+    const fullRows: number[] = [];
+    for (let row = 0; row < s.height; row++) {
+      let allFull = (() => {
+        for (let col = 0; col < s.width; col++) {
+          if (s.board[row][col].kind === 'empty') {
+            return false;
+          }
+        }
+        return true;
+      })();
+
+      if (allFull) {
+        fullRows.push(row);
+      }
+    }
+
+    const newBoard = makeGrid(s.width, s.height);
+    let src = s.height - 1;
+    let dest = s.height - 1;
+    while (src >= 0) {
+      if (fullRows.includes(src)) {
+        src--;
+        continue;
+      }
+
+      for (let col = 0; col < s.width; col++) {
+        newBoard[dest][col] = s.board[src][col];
+      }
+      src--;
+      dest--;
+    }
+    s.board = newBoard;
+    s.score += Math.pow(2, fullRows.length) - 1;
+    s.lines += fullRows.length;
   }
 }
 
