@@ -3,7 +3,7 @@ import produce from 'immer';
 import * as shape from './shape';
 import SHAPES from './shapes';
 import * as input from './input';
-import Prando from 'prando';
+import * as randomizer from './randomizer';
 
 const DAS_INITIAL_DELAY = 16;
 const DAS_REFRESH_DELAY = 6;
@@ -49,9 +49,9 @@ export type State = {
 };
 
 export class Integrator {
-  rand: Prando
+  rand: randomizer.Randomizer
 
-  constructor(rand: Prando) {
+  constructor(rand: randomizer.Randomizer) {
     this.rand = rand;
   }
 
@@ -59,9 +59,9 @@ export class Integrator {
     return {
       width: 12,
       height: 24,
-      nextShapeIdx: this.newActiveShapeIdx(),
+      nextShapeIdx: this.rand.nextShape(),
       activeShape: {
-        shapeIdx: this.newActiveShapeIdx(),
+        shapeIdx: this.rand.nextShape(),
         dRow: 0,
         dCol: 6,
         rotation: 0,
@@ -83,10 +83,6 @@ export class Integrator {
       case 'input':
         return this.doInput(s, a);
     }
-  }
-
-  private newActiveShapeIdx(): number {
-    return this.rand.nextInt(0, SHAPES.length - 1);
   }
 
   private doEntry(s: State): boolean {
@@ -174,7 +170,7 @@ export class Integrator {
       dCol: s.width / 2,
       rotation: 0,
     };
-    s.nextShapeIdx = this.newActiveShapeIdx();
+    s.nextShapeIdx = this.rand.nextShape();
 
     const fullRows: number[] = [];
     for (let row = 0; row < s.height; row++) {

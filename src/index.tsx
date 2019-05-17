@@ -4,6 +4,7 @@ import * as rx from 'rxjs';
 import * as rxop from 'rxjs/operators';
 import App from './App';
 import * as state from './state';
+import * as randomizer from './randomizer';
 import * as input from './input';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
@@ -47,7 +48,8 @@ const inputActions = input.parseInput(rawInputs).pipe(
 
 const actions = rx.merge(manualActions, inputActions, ticks);
 
-const integ = new state.Integrator(new Prando());
+const integ = new state.Integrator(
+  new randomizer.TrueRandomizer(new Prando()));
 const initial = integ.newState();
 
 const states = actions.pipe(
