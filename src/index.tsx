@@ -8,7 +8,6 @@ import * as input from './input';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import Prando from 'prando';
-import SHAPES from './shapes';
 
 const manualActions = new rx.Subject<state.Action>();
 const ticks = rx.timer(0, 1000 / 60).pipe(
@@ -48,22 +47,17 @@ const inputActions = input.parseInput(rawInputs).pipe(
 
 const actions = rx.merge(manualActions, inputActions, ticks);
 
-const rand = new Prando();
-const initial = state.newState(rand);
+const integ = new state.Integrator(new Prando());
+const initial = integ.newState();
 
 const states = actions.pipe(
-  rxop.scan<state.Action, state.State>((s, a) => state.apply(rand, s, a), initial),
+  rxop.scan<state.Action, state.State>((s, a) => integ.apply(s, a), initial),
   rxop.startWith(initial));
 
 const doms = states.pipe(rxop.map(s => <App key="app" state = { s } />));
 
 const root = document.getElementById('root') as HTMLElement;
 
-//const dom = App(inputs);
-
 doms.subscribe((d) => ReactDOM.render(d, root));
 
-
-(window as any)['SHAPES'] = SHAPES;
-(window as any)['DISPATCH'] = (a: state.Action) => manualActions.next(a);
 registerServiceWorker();
