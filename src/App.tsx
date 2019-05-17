@@ -11,7 +11,9 @@ export type Properties = {
 function App(p: Properties): JSX.Element {
   const s = p.state;
   return (<div className= "App">
-    <Board cells={ state.flattenBoard(s) } />
+    <main>
+      <Board cells={ state.flattenBoard(s) } />
+    </main>
     <aside>
       <h1>Pentris</h1>
       <p>

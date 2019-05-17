@@ -11,11 +11,13 @@ body,
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }
 
 #root {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font-family: sans-serif;
+  background: hsl(120deg, 15%, 40%);
 }

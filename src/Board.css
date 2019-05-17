@@ -1,6 +1,5 @@
 .Board {
   background: black;
-  display: inline-block;
 }
 
 .Board .row {
@@ -8,8 +7,8 @@
 }
 
 .Board .cell {
-  width: calc(100vmin/24);
-  height: calc(100vmin/24);
+  width: calc((100vmin - 2px)/24);
+  height: calc((100vmin - 2px)/24);
   border: 0.1vmin solid black;
 }
 
