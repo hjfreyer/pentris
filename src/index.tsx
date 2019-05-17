@@ -49,7 +49,7 @@ const inputActions = input.parseInput(rawInputs).pipe(
 const actions = rx.merge(manualActions, inputActions, ticks);
 
 const integ = new state.Integrator(
-  new randomizer.TrueRandomizer(new Prando()));
+  new randomizer.NBagRandomizer(new Prando(), 2));
 const initial = integ.newState();
 
 const states = actions.pipe(

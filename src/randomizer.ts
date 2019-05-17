@@ -18,3 +18,32 @@ export class TrueRandomizer implements Randomizer {
     return this.rand.nextInt(0, SHAPES.length - 1);
   }
 }
+
+export class NBagRandomizer implements Randomizer {
+  rand: Prando
+  n: number
+  bag: number[]
+
+  constructor(rand: Prando, n: number) {
+    this.rand = rand;
+    this.n = n;
+    this.bag = [];
+  }
+
+  nextShape(): number {
+    if (this.bag.length === 0) {
+      this.bag = Array.from({ length: this.n * SHAPES.length },
+        (_, k) => k % SHAPES.length
+      )
+      shuffle(this.bag, this.rand);
+    }
+    return this.bag.pop() as number;
+  }
+}
+
+function shuffle<T>(array: T[], rand: Prando) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(rand.next() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
