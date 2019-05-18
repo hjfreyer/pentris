@@ -113,23 +113,23 @@ const pentominoS: shape.Shape = shape.mirrored(pentominoZ);
 
 const PENTOMINOES: shape.Shape[] = [
   pentominoF,
-  pentominoI,
+  pentominoF2,
+  pentominoL,
+  pentominoJ,
   pentominoN,
+  pentominoN2,
   pentominoP,
+  pentominoQ,
+  pentominoY,
+  pentominoY2,
+  pentominoZ,
+  pentominoS,
   pentominoT,
   pentominoU,
   pentominoV,
   pentominoW,
   pentominoX,
-  pentominoY,
-  pentominoZ,
-  pentominoF2,
-  pentominoJ,
-  pentominoN2,
-  pentominoQ,
-  pentominoY2,
-  pentominoS,
-  pentominoL,
+  pentominoI,
 ];
 
 // Tetrominos
