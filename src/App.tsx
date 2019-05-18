@@ -1,19 +1,21 @@
 import * as React from 'react';
-import './App.css';
+
 import Board from './Board';
+import * as game from './game';
 import PiecePreview from './PiecePreview';
-import * as state from './state';
+
+import './App.css';
 
 export type Properties = {
-  state: state.State
-  integ: state.Integrator
+  state: game.State
+  integ: game.Integrator
 }
 
 function App(p: Properties): JSX.Element {
   const s = p.state;
   return (<div className= "App">
     <main>
-      <Board cells={ state.flattenBoard(s) } />
+      <Board cells={ game.flattenBoard(s) } />
     </main>
     <aside>
       <h1>Pentris</h1>

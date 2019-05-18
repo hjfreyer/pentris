@@ -1,13 +1,14 @@
 import * as React from 'react';
 
+import * as game from './game';
+
 import './Board.css';
-import * as state from './state';
 
 export type State = {
-  cells : state.GridCell[][],
+  cells : game.GridCell[][],
 };
 
-function cellClassName(c:state.GridCell):string {
+function cellClassName(c: game.GridCell): string {
   switch (c.kind) {
     case 'empty': return 'cell empty';
     case 'shape': return `cell color-${c.shapeIdx}`

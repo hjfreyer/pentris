@@ -1,9 +1,10 @@
 
 import produce from 'immer';
-import * as shape from './shape';
-import SHAPES from './shapes';
+
 import * as input from './input';
 import * as randomizer from './randomizer';
+import * as shape from './shape';
+import shapes from './shapes';
 
 const DAS_INITIAL_DELAY = 16;
 const DAS_REFRESH_DELAY = 6;
@@ -233,7 +234,7 @@ function makeGrid(width: number, height: number): GridCell[][] {
 }
 
 export function getShape(s: ActiveShape): shape.Shape {
-  let res = SHAPES[s.shapeIdx];
+  let res = shapes[s.shapeIdx];
   for (let i = 0; i < s.rotation; i++) {
     res = (res.map(([row, col]) => [col, -row]) as shape.Shape);
   }

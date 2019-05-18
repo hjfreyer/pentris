@@ -1,7 +1,7 @@
 
 import Prando from 'prando';
 
-import SHAPES from './shapes';
+import shapes from './shapes';
 
 export interface Randomizer {
   nextShape(): number
@@ -15,7 +15,7 @@ export class TrueRandomizer implements Randomizer {
   }
 
   nextShape(): number {
-    return this.rand.nextInt(0, SHAPES.length - 1);
+    return this.rand.nextInt(0, shapes.length - 1);
   }
 }
 
@@ -32,8 +32,8 @@ export class NBagRandomizer implements Randomizer {
 
   nextShape(): number {
     if (this.bag.length === 0) {
-      this.bag = Array.from({ length: this.n * SHAPES.length },
-        (_, k) => k % SHAPES.length
+      this.bag = Array.from({ length: this.n * shapes.length },
+        (_, k) => k % shapes.length
       )
       shuffle(this.bag, this.rand);
     }

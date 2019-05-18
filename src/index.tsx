@@ -1,18 +1,20 @@
+import Prando from 'prando';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as rx from 'rxjs';
 import * as rxop from 'rxjs/operators';
-import App from './App';
-import * as state from './state';
-import * as randomizer from './randomizer';
-import * as input from './input';
-import './index.css';
-import registerServiceWorker from './registerServiceWorker';
-import Prando from 'prando';
 
-const manualActions = new rx.Subject<state.Action>();
+import App from './App';
+import * as game from './game';
+import * as input from './input';
+import * as randomizer from './randomizer';
+import registerServiceWorker from './registerServiceWorker';
+
+import './index.css';
+
+const manualActions = new rx.Subject<game.Action>();
 const ticks = rx.timer(0, 1000 / 60).pipe(
-  rxop.map(_ => ({ kind: 'tick' } as state.Action))
+  rxop.map(_ => ({ kind: 'tick' } as game.Action))
 )
 
 const keyDowns =
@@ -52,25 +54,25 @@ const rawInputs: rx.Observable<input.RawInput> = rx.merge(keyUps, keyDowns).pipe
 )
 
 const inputActions = input.parseInput(rawInputs).pipe(
-  rxop.map(input => ({ kind: 'input', input } as state.Action)),
+  rxop.map(input => ({ kind: 'input', input } as game.Action)),
 );
 
 const actions = rx.merge(manualActions, inputActions, ticks);
 
-const levelTable = Array.from({ length: 37 }, (_, idx): state.LevelInfo => ({
+const levelTable = Array.from({ length: 37 }, (_, idx): game.LevelInfo => ({
   number: idx + 1,
   gravity: levelToGravity(idx),
   multiplier: gravityToLevel(levelToGravity(idx)) + 1
 }));
 console.log(levelTable);
 
-const integ = new state.Integrator(
+const integ = new game.Integrator(
   new randomizer.NBagRandomizer(new Prando(), 2),
   levelTable);
 const initial = integ.newState();
 
 const states = actions.pipe(
-  rxop.scan<state.Action, state.State>((s, a) => integ.apply(s, a), initial),
+  rxop.scan<game.Action, game.State>((s, a) => integ.apply(s, a), initial),
   rxop.startWith(initial));
 
 const doms = states.pipe(rxop.map(s =>

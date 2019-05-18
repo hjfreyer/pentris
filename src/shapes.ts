@@ -211,7 +211,7 @@ const monomino: shape.Shape = [
   [0, 0]
 ];
 
-const SHAPES: shape.Shape[] = [
+const shapes: shape.Shape[] = [
   monomino,
   domino,
   ...TROMINOES,
@@ -219,4 +219,4 @@ const SHAPES: shape.Shape[] = [
   ...PENTOMINOES
 ].map(shape.centered);
 
-export default SHAPES;
+export default shapes;
