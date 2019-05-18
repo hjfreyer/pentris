@@ -8,7 +8,7 @@ import * as randomizer from './randomizer';
 const DAS_INITIAL_DELAY = 16;
 const DAS_REFRESH_DELAY = 6;
 const ENTRY_DELAY = 18;
-const GRAVITY = 60 / 2;
+const LINES_PER_LEVEL = 10;
 
 export type Action = Tick | Input;
 
@@ -31,6 +31,12 @@ type ShapeCell = {
 }
 export type GridCell = EmptyCell | ShapeCell;
 
+export type LevelInfo = {
+  number: number
+  gravity: number
+  multiplier: number
+};
+
 export type State = {
   width: number
   height: number
@@ -50,9 +56,11 @@ export type State = {
 
 export class Integrator {
   rand: randomizer.Randomizer
+  levelTable: LevelInfo[]
 
-  constructor(rand: randomizer.Randomizer) {
+  constructor(rand: randomizer.Randomizer, levelTable: LevelInfo[]) {
     this.rand = rand;
+    this.levelTable = levelTable;
   }
 
   newState(): State {
@@ -69,7 +77,7 @@ export class Integrator {
       dasDirection: 'NONE',
       dasDelay: 0,
       entryDelay: ENTRY_DELAY,
-      gravity: GRAVITY,
+      gravity: this.levelTable[0].gravity,
       board: makeGrid(12, 24),
       score: 0,
       lines: 0,
@@ -83,6 +91,12 @@ export class Integrator {
       case 'input':
         return this.doInput(s, a);
     }
+  }
+
+  getLevelInfo(s: State): LevelInfo {
+    const l = Math.floor(s.lines / LINES_PER_LEVEL);
+    return this.levelTable[
+      l < this.levelTable.length ? l : this.levelTable.length - 1];
   }
 
   private doEntry(s: State): boolean {
@@ -111,7 +125,7 @@ export class Integrator {
       return true;
     }
 
-    s.gravity = GRAVITY;
+    s.gravity = this.getLevelInfo(s).gravity;
     return attemptMoveActive(s, 1, 0, 0);
   }
 
@@ -240,7 +254,6 @@ export function flattenBoard(s: State): GridCell[][] {
 
   return res;
 }
-
 
 function activeShapeClips(s: State, a: ActiveShape): boolean {
   const shp = getShape(a);

@@ -16,12 +16,17 @@ h1 {
 }
 
 aside {
+  display: grid;
   flex: 1;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+  align-content: flex-start;
 
   background: white;
+}
+
+aside h1, aside p.copy, aside h2, aside .PiecePreview {
+  grid-column: span 2;
 }
 
 aside .score {

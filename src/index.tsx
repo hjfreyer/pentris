@@ -37,6 +37,15 @@ function keyToInput(key: string): input.Button | null {
   }
 }
 
+function levelToGravity(l: number): number {
+  return Math.floor(48 * Math.pow(0.9, l));
+}
+
+function gravityToLevel(g: number): number {
+  // Math.abs fixes a weird issue involving -0.
+  return Math.abs(Math.floor(Math.log(g / 48) / Math.log(0.9)));
+}
+
 const rawInputs: rx.Observable<input.RawInput> = rx.merge(keyUps, keyDowns).pipe(
   rxop.map(e => ({ button: keyToInput(e.key), pressed: e.type === 'keydown' } as input.RawInput)),
   rxop.filter(i => i.button != null),
@@ -48,15 +57,23 @@ const inputActions = input.parseInput(rawInputs).pipe(
 
 const actions = rx.merge(manualActions, inputActions, ticks);
 
+const levelTable = Array.from({ length: 37 }, (_, idx): state.LevelInfo => ({
+  number: idx,
+  gravity: levelToGravity(idx),
+  multiplier: gravityToLevel(levelToGravity(idx))
+}));
+
 const integ = new state.Integrator(
-  new randomizer.NBagRandomizer(new Prando(), 2));
+  new randomizer.NBagRandomizer(new Prando(), 2),
+  levelTable);
 const initial = integ.newState();
 
 const states = actions.pipe(
   rxop.scan<state.Action, state.State>((s, a) => integ.apply(s, a), initial),
   rxop.startWith(initial));
 
-const doms = states.pipe(rxop.map(s => <App key="app" state = { s } />));
+const doms = states.pipe(rxop.map(s =>
+  <App key="app" state = { s } integ = { integ } />));
 
 const root = document.getElementById('root') as HTMLElement;
 
