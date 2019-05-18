@@ -218,7 +218,8 @@ export class Integrator {
       dest--;
     }
     s.board = newBoard;
-    s.score += Math.pow(2, fullRows.length) - 1;
+    s.score += (this.getLevelInfo(s).multiplier *
+      (Math.pow(2, fullRows.length) - 1));
     s.lines += fullRows.length;
   }
 }
