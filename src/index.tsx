@@ -58,10 +58,11 @@ const inputActions = input.parseInput(rawInputs).pipe(
 const actions = rx.merge(manualActions, inputActions, ticks);
 
 const levelTable = Array.from({ length: 37 }, (_, idx): state.LevelInfo => ({
-  number: idx,
+  number: idx + 1,
   gravity: levelToGravity(idx),
-  multiplier: gravityToLevel(levelToGravity(idx))
+  multiplier: gravityToLevel(levelToGravity(idx)) + 1
 }));
+console.log(levelTable);
 
 const integ = new state.Integrator(
   new randomizer.NBagRandomizer(new Prando(), 2),
