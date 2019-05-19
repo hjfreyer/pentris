@@ -11,14 +11,6 @@ const DAS_REFRESH_DELAY = 6;
 const ENTRY_DELAY = 18;
 const LINES_PER_LEVEL = 10;
 
-export type Action = Tick | Input;
-
-type Tick = { kind: 'tick' };
-type Input = {
-  kind: 'input'
-  input: input.ControllerInput
-}
-
 type ActiveShape = {
   shapeIdx: number
   dRow: number
@@ -55,13 +47,31 @@ export type State = {
   lines: number
 };
 
-export class Integrator {
-  rand: randomizer.Randomizer
+export class View {
   levelTable: LevelInfo[]
 
-  constructor(rand: randomizer.Randomizer, levelTable: LevelInfo[]) {
-    this.rand = rand;
+  constructor(levelTable: LevelInfo[]) {
     this.levelTable = levelTable;
+  }
+
+  startingLevel(): LevelInfo {
+    return this.levelTable[0];
+  }
+
+  getLevelInfo(s: State): LevelInfo {
+    const l = Math.floor(s.lines / LINES_PER_LEVEL);
+    return this.levelTable[
+      l < this.levelTable.length ? l : this.levelTable.length - 1];
+  }
+}
+
+export class Controller {
+  rand: randomizer.Randomizer
+  view: View
+
+  constructor(rand: randomizer.Randomizer, view: View) {
+    this.rand = rand;
+    this.view = view;
   }
 
   newState(): State {
@@ -78,26 +88,52 @@ export class Integrator {
       dasDirection: 'NONE',
       dasDelay: 0,
       entryDelay: ENTRY_DELAY,
-      gravity: this.levelTable[0].gravity,
+      gravity: this.view.startingLevel().gravity,
       board: makeGrid(12, 24),
       score: 0,
       lines: 0,
     };
   }
 
-  apply(s: State, a: Action): State {
-    switch (a.kind) {
-      case 'tick':
-        return this.doTick(s);
-      case 'input':
-        return this.doInput(s, a);
-    }
+  tick(s: State): State {
+    return produce(s, (s: State) => {
+      this.doDAS(s);
+      if (!this.doEntry(s)) {
+        return;
+      }
+      if (!this.doGravity(s)) {
+        this.doLockDown(s);
+      }
+    });
   }
 
-  getLevelInfo(s: State): LevelInfo {
-    const l = Math.floor(s.lines / LINES_PER_LEVEL);
-    return this.levelTable[
-      l < this.levelTable.length ? l : this.levelTable.length - 1];
+  input(s: State, i: input.ControllerInput): State {
+    return produce(s, s => {
+      switch (i.direction) {
+        case 'NONE':
+          s.dasDirection = 'NONE';
+          break;
+        case 'LEFT':
+        case 'RIGHT':
+        case 'DOWN':
+          if (s.dasDirection === 'NONE') {
+            s.dasDelay = DAS_INITIAL_DELAY;
+            attemptTranslateDirection(s, i.direction);
+          }
+          s.dasDirection = i.direction;
+          break;
+      }
+      switch (i.action) {
+        case 'NONE':
+          break;
+        case 'SPIN':
+          attemptTranslateDirection(s, i.action);
+          break;
+        case 'DROP':
+          this.doDrop(s);
+          break;
+      }
+    });
   }
 
   private doEntry(s: State): boolean {
@@ -126,50 +162,10 @@ export class Integrator {
       return true;
     }
 
-    s.gravity = this.getLevelInfo(s).gravity;
+    s.gravity = this.view.getLevelInfo(s).gravity;
     return attemptMoveActive(s, 1, 0, 0);
   }
 
-  private doTick(s: State) {
-    return produce(s, (s: State) => {
-      this.doDAS(s);
-      if (!this.doEntry(s)) {
-        return;
-      }
-      if (!this.doGravity(s)) {
-        this.doLockDown(s);
-      }
-    });
-  }
-
-  private doInput(s: State, a: Input): State {
-    return produce(s, s => {
-      switch (a.input.direction) {
-        case 'NONE':
-          s.dasDirection = 'NONE';
-          break;
-        case 'LEFT':
-        case 'RIGHT':
-        case 'DOWN':
-          if (s.dasDirection === 'NONE') {
-            s.dasDelay = DAS_INITIAL_DELAY;
-            attemptTranslateDirection(s, a.input.direction);
-          }
-          s.dasDirection = a.input.direction;
-          break;
-      }
-      switch (a.input.action) {
-        case 'NONE':
-          break;
-        case 'SPIN':
-          attemptTranslateDirection(s, a.input.action);
-          break;
-        case 'DROP':
-          this.doDrop(s);
-          break;
-      }
-    });
-  }
 
   private doDrop(s: State) {
     while (attemptMoveActive(s, 1, 0, 0)) { }
@@ -219,7 +215,7 @@ export class Integrator {
       dest--;
     }
     s.board = newBoard;
-    s.score += (this.getLevelInfo(s).multiplier *
+    s.score += (this.view.getLevelInfo(s).multiplier *
       (Math.pow(2, fullRows.length) - 1));
     s.lines += fullRows.length;
   }

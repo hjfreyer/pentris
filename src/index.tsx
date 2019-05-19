@@ -12,9 +12,9 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
-const manualActions = new rx.Subject<game.Action>();
+const manualActions = new rx.Subject<Action>();
 const ticks = rx.timer(0, 1000 / 60).pipe(
-  rxop.map(_ => ({ kind: 'tick' } as game.Action))
+  rxop.map((_):Action =>  ({ kind: 'tick' }))
 )
 
 const keyDowns =
@@ -48,13 +48,21 @@ function gravityToLevel(g: number): number {
   return Math.abs(Math.floor(Math.log(g / 48) / Math.log(0.9)));
 }
 
+export type Action = Tick | Input;
+
+type Tick = { kind: 'tick' };
+type Input = {
+  kind: 'input'
+  input: input.ControllerInput
+}
+
 const rawInputs: rx.Observable<input.RawInput> = rx.merge(keyUps, keyDowns).pipe(
   rxop.map(e => ({ button: keyToInput(e.key), pressed: e.type === 'keydown' } as input.RawInput)),
   rxop.filter(i => i.button != null),
 )
 
 const inputActions = input.parseInput(rawInputs).pipe(
-  rxop.map(input => ({ kind: 'input', input } as game.Action)),
+  rxop.map(input => ({ kind: 'input', input } as Action)),
 );
 
 const actions = rx.merge(manualActions, inputActions, ticks);
@@ -64,19 +72,26 @@ const levelTable = Array.from({ length: 37 }, (_, idx): game.LevelInfo => ({
   gravity: levelToGravity(idx),
   multiplier: gravityToLevel(levelToGravity(idx)) + 1
 }));
-console.log(levelTable);
 
-const integ = new game.Integrator(
+const gameView = new game.View(levelTable)
+const controller = new game.Controller(
   new randomizer.NBagRandomizer(new Prando(), 2),
-  levelTable);
-const initial = integ.newState();
+  gameView);
+const initial = controller.newState();
 
 const states = actions.pipe(
-  rxop.scan<game.Action, game.State>((s, a) => integ.apply(s, a), initial),
+  rxop.scan<Action, game.State>((s, a) => {
+    switch (a.kind) {
+    case "tick":
+      return controller.tick(s);
+    case "input":
+      return controller.input(s, a.input)
+    }
+  }, initial),
   rxop.startWith(initial));
 
 const doms = states.pipe(rxop.map(s =>
-  <App key="app" state = { s } integ = { integ } />));
+  <App key="app" state = { s } view = { gameView } />));
 
 const root = document.getElementById('root') as HTMLElement;
 

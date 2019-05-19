@@ -8,7 +8,7 @@ import './App.css';
 
 export type Properties = {
   state: game.State
-  integ: game.Integrator
+  view: game.View
 }
 
 function App(p: Properties): JSX.Element {
@@ -30,8 +30,8 @@ function App(p: Properties): JSX.Element {
       <p className="score">{s.lines}</p>
       <h3>Level</h3>
       <h3>Speed</h3>
-      <p className="score">{p.integ.getLevelInfo(s).number}</p>
-      <p className="score">{p.integ.getLevelInfo(s).multiplier}</p>
+      <p className="score">{p.view.getLevelInfo(s).number}</p>
+      <p className="score">{p.view.getLevelInfo(s).multiplier}</p>
     </aside>
   </div>);
 }
