@@ -1,39 +1,69 @@
 import * as React from 'react';
 
+import * as actions from './actions';
 import Board from './Board';
 import * as game from './game';
 import PiecePreview from './PiecePreview';
+import * as ui from './ui';
 
 import './App.css';
 
 export type Properties = {
-  state: game.State
+  state: ui.State
   view: game.View
+  dispatch: (a:actions.Action) => void
 }
 
-function App(p: Properties): JSX.Element {
-  const s = p.state;
-  return (<div className= "App">
-    <main>
-      <Board cells={ game.flattenBoard(s) } />
-    </main>
-    <aside>
-      <h1>Pentris</h1>
-      <p className="copy">
-        It's Alpha. It's Delicious. It's Pentris.
-      </p>
-      <h2>Preview</h2>
-      <PiecePreview shapeIdx={p.state.nextShapeIdx}/>
-      <h3>Score</h3>
-      <h3>Lines Cleared</h3>
-      <p className="score">{s.score}</p>
-      <p className="score">{s.lines}</p>
-      <h3>Level</h3>
-      <h3>Speed</h3>
-      <p className="score">{p.view.getLevelInfo(s).number}</p>
-      <p className="score">{p.view.getLevelInfo(s).multiplier}</p>
-    </aside>
-  </div>);
+function App({state, view, dispatch}: Properties): JSX.Element {
+  switch (state.kind) {
+  case 'new_game':
+    return (
+      <div className= "App">
+        <div className="new-game">
+          <h1>Pentris!</h1>
+          <p>v3alpha: Now with Levels!!</p>
+
+
+          <button className="btn btn-primary" autoFocus onClick={()=> dispatch({kind: 'ui', action: 'START'})}>
+            New Game
+          </button>
+        </div>
+      </div>
+    )
+  case 'in_game':
+    const s = state.game;
+    return (<div className= "App">
+      <main>
+        <Board cells={ game.flattenBoard(s) } />
+      </main>
+      <aside>
+        <h1>Pentris</h1>
+        <p className="copy">
+          It's Alpha. It's Delicious. It's Pentris.
+        </p>
+        <h2>Preview</h2>
+        <PiecePreview shapeIdx={s.nextShapeIdx}/>
+        <h3>Score</h3>
+        <h3>Lines Cleared</h3>
+        <p className="score">{s.score}</p>
+        <p className="score">{s.lines}</p>
+        <h3>Level</h3>
+        <h3>Speed</h3>
+        <p className="score">{view.getLevelInfo(s).number}</p>
+        <p className="score">{view.getLevelInfo(s).multiplier}</p>
+      </aside>
+      <div className="game-over" hidden={!s.toppedOut}>
+        <div className="card">
+          <h1>OWNED!</h1>
+          <p>Score: {s.score}</p>
+          <button className="btn btn-primary"
+            onClick={()=> dispatch({kind: 'ui', action: 'START'})}>
+            New Game
+          </button>
+        </div>
+      </div>
+    </div>);
+  }
 }
 
 export default App;

@@ -45,6 +45,7 @@ export type State = {
 
   score: number
   lines: number
+  toppedOut: boolean
 };
 
 export class View {
@@ -92,10 +93,13 @@ export class Controller {
       board: makeGrid(12, 24),
       score: 0,
       lines: 0,
+      toppedOut: false,
     };
   }
 
   tick(s: State): State {
+    if (s.toppedOut) { return s; }
+
     return produce(s, (s: State) => {
       this.doDAS(s);
       if (!this.doEntry(s)) {
@@ -108,6 +112,8 @@ export class Controller {
   }
 
   input(s: State, i: input.ControllerInput): State {
+    if (s.toppedOut) { return s; }
+
     return produce(s, s => {
       switch (i.direction) {
         case 'NONE':
@@ -218,6 +224,7 @@ export class Controller {
     s.score += (this.view.getLevelInfo(s).multiplier *
       (Math.pow(2, fullRows.length) - 1));
     s.lines += fullRows.length;
+    s.toppedOut = activeShapeClips(s, s.activeShape);
   }
 }
 
