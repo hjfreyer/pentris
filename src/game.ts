@@ -10,6 +10,7 @@ const DAS_INITIAL_DELAY = 16;
 const DAS_REFRESH_DELAY = 6;
 const ENTRY_DELAY = 18;
 const LINES_PER_LEVEL = 10;
+const SOFT_DROP_MULTIPLIER = 5;
 
 type ActiveShape = {
   shapeIdx: number
@@ -36,8 +37,10 @@ export type State = {
   nextShapeIdx: number
   activeShape: ActiveShape
 
-  dasDirection: input.DirectionValue
+  dasDirection: 'NONE' | 'LEFT' | 'RIGHT'
   dasDelay: number
+
+  softDrop: boolean,
 
   entryDelay: number
   gravity: number
@@ -88,6 +91,7 @@ export class Controller {
       },
       dasDirection: 'NONE',
       dasDelay: 0,
+      softDrop: false,
       entryDelay: ENTRY_DELAY,
       gravity: this.view.startingLevel().gravity,
       board: makeGrid(12, 24),
@@ -115,20 +119,24 @@ export class Controller {
     if (s.toppedOut) { return s; }
 
     return produce(s, s => {
-      switch (i.direction) {
-        case 'NONE':
-          s.dasDirection = 'NONE';
-          break;
-        case 'LEFT':
-        case 'RIGHT':
-        case 'DOWN':
-          if (s.dasDirection === 'NONE') {
-            s.dasDelay = DAS_INITIAL_DELAY;
-            attemptTranslateDirection(s, i.direction);
-          }
-          s.dasDirection = i.direction;
-          break;
+      if (i.left) {
+        if (s.dasDirection === 'NONE') {
+          attemptMoveActive(s, 0, -1, 0);
+          s.dasDelay = DAS_INITIAL_DELAY;
+        }
+        s.dasDirection = 'LEFT';
+      } else if (i.right) {
+        if (s.dasDirection === 'NONE') {
+          attemptMoveActive(s, 0, 1, 0);
+          s.dasDelay = DAS_INITIAL_DELAY;
+        }
+        s.dasDirection = 'RIGHT';
+      } else {
+        s.dasDirection = 'NONE';
       }
+
+      s.softDrop = i.down;
+
       switch (i.action) {
         case 'NONE':
           break;
@@ -163,8 +171,8 @@ export class Controller {
   }
 
   private doGravity(s: State): boolean {
-    if (s.gravity !== 0) {
-      s.gravity--;
+    if (0 < s.gravity) {
+      s.gravity -= s.softDrop ? SOFT_DROP_MULTIPLIER : 1;
       return true;
     }
 

@@ -3,9 +3,8 @@ import * as rx from 'rxjs';
 import * as rxop from 'rxjs/operators';
 
 export type DirectionButton = 'LEFT' | 'RIGHT' | 'DOWN'
-export type DirectionValue = 'NONE' | DirectionButton
 export type ActionButton = 'SPIN' | 'DROP'
-export type ActionValue = 'NONE' | ActionButton
+
 export type Button = DirectionButton | ActionButton
 export type RawInput = {
   button: Button
@@ -13,8 +12,10 @@ export type RawInput = {
 }
 
 export type ControllerInput = {
-  direction: DirectionValue
-  action: ActionValue
+  left: boolean
+  right: boolean
+  down: boolean
+  action: 'NONE' | ActionButton
 }
 
 export function parseInput(raw: rx.Observable<RawInput>):
@@ -33,35 +34,68 @@ export function parseInput(raw: rx.Observable<RawInput>):
       || i.button === 'RIGHT'
       || i.button === 'DOWN')(deduped);
 
-  const currentDir: rx.Observable<DirectionValue> = dir.pipe(
-    rxop.scan<RawInput, DirectionValue>((acc, val) => {
-      const newButton = val.button as DirectionButton;
-      if (val.pressed) {
-        // Newly pressed buttons override.
-        return newButton;
-      } else if (acc === val.button) {
-        // If we released the last key we pressed, change to 'NONE'.
-        return 'NONE';
-      } else {
-        // Otherwise, ignore.
-        return acc;
+  const init: ControllerInput = {
+    left: false,
+    right: false,
+    down: false,
+    action: 'NONE',
+  };
+
+  const currentDir: rx.Observable<ControllerInput> = dir.pipe(
+    rxop.scan<RawInput, ControllerInput>((acc, val) => {
+      if (val.button === 'DOWN') {
+        return {
+          ...acc,
+          down: val.pressed,
+        };
       }
-    }, 'NONE'),
-    rxop.startWith('NONE'),
+
+      if (val.button === 'LEFT') {
+        if (val.pressed) {
+          return {
+            ...acc,
+            left: true,
+            right: false,
+          };
+        } else {
+          return {
+            ...acc,
+            left: false,
+          }
+        }
+      }
+
+      if (val.button === 'RIGHT') {
+        if (val.pressed) {
+          return {
+            ...acc,
+            left: false,
+            right: true,
+          };
+        } else {
+          return {
+            ...acc,
+            right: false,
+          }
+        }
+      }
+      return acc;
+    }, init),
+    rxop.startWith(init),
   );
 
-  const currentAction: rx.Observable<ActionValue> = action.pipe(
+  const currentAction: rx.Observable<ActionButton | 'NONE'> = action.pipe(
     rxop.filter(i => i.pressed),
     rxop.map(i => i.button as ActionButton),
   );
 
   const currentDirInputs: rx.Observable<ControllerInput> = currentDir.pipe(
-    rxop.map(direction => ({ direction, action: 'NONE' })),
+    rxop.map(direction => ({ ...direction, action: 'NONE' })),
   );
 
   const currentActionInputs: rx.Observable<ControllerInput> = currentAction.pipe(
     rxop.withLatestFrom(currentDir),
-    rxop.map(([action, direction]) => ({ direction, action })),
+    rxop.map(([action, direction]) => ({ ...direction, action })),
   );
 
   return rx.merge(currentDirInputs, currentActionInputs);
