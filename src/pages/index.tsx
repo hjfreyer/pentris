@@ -4,12 +4,12 @@ import * as ReactDOM from 'react-dom';
 import * as rx from 'rxjs';
 import * as rxop from 'rxjs/operators';
 
-import * as actions from './actions';
-import App from './App';
-import * as game from './game';
-import * as input from './input';
-import * as randomizer from './randomizer';
-import * as ui from './ui';
+import * as actions from '../actions';
+import App from '../App';
+import * as game from '../game';
+import * as input from '../input';
+import * as randomizer from '../randomizer';
+import * as ui from '../ui';
 
 function keyToInput(key: string): input.Button | null {
   switch (key) {
@@ -37,7 +37,7 @@ function gravityToLevel(g: number): number {
   return Math.abs(Math.floor(Math.log(g / 48) / Math.log(0.9)));
 }
 
-function main() {
+export default function index() {
   const manualActions = new rx.Subject<actions.Action>();
   const ticks = rx.timer(0, 1000 / 60).pipe(
     rxop.map((_): actions.Action => ({ kind: 'tick' }))
@@ -96,5 +96,3 @@ function main() {
 
   doms.subscribe((d) => ReactDOM.render(d, root));
 }
-
-export default main;

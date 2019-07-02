@@ -1,8 +1,13 @@
 
 import registerServiceWorker from './registerServiceWorker';
-import main from './main';
+import index from './pages/index';
+import shapeTest from './pages/shape-test';
 
 import './index.css';
 
-main();
+if (window.location.pathname === '/shape-test') {
+  shapeTest();
+} else {
+  index();
+}
 registerServiceWorker();
