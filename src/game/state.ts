@@ -31,6 +31,10 @@ export type LevelInfo = {
   multiplier: number
 };
 
+export type Parameters = {
+  minLevel: number
+};
+
 export type State = {
   width: number
   height: number
@@ -48,6 +52,7 @@ export type State = {
 
   score: number
   lines: number
+  minLevel: number
   toppedOut: boolean
 };
 
@@ -58,27 +63,39 @@ export class View {
     this.levelTable = levelTable;
   }
 
-  startingLevel(): LevelInfo {
-    return this.levelTable[0];
+  getLevel(s: State): number {
+    return Math.min(Math.floor(s.lines / LINES_PER_LEVEL),
+      this.levelTable.length - 1);
   }
 
-  getLevelInfo(s: State): LevelInfo {
-    const l = Math.floor(s.lines / LINES_PER_LEVEL);
-    return this.levelTable[
-      l < this.levelTable.length ? l : this.levelTable.length - 1];
+  getSpeed(s: State): number {
+    return Math.min(Math.max(s.minLevel, this.getLevel(s)),
+      this.levelTable.length - 1);
+  }
+
+  getGravity(s: State): number {
+    return this.levelTable[this.getSpeed(s)].gravity;
+  }
+
+  getMultiplier(s: State): number {
+    return this.levelTable[this.getSpeed(s)].multiplier;
   }
 }
 
 export class Controller {
   rand: randomizer.Randomizer
-  view: View
+  levelTable: LevelInfo[]
 
-  constructor(rand: randomizer.Randomizer, view: View) {
+  constructor(rand: randomizer.Randomizer, levelTable: LevelInfo[]) {
     this.rand = rand;
-    this.view = view;
+    this.levelTable = levelTable;
   }
 
-  newState(): State {
+  view(): View {
+    return new View(this.levelTable);
+  }
+
+  newState(p: Parameters): State {
     return {
       width: 12,
       height: 24,
@@ -88,10 +105,11 @@ export class Controller {
       dasDelay: 0,
       softDrop: false,
       entryDelay: ENTRY_DELAY,
-      gravity: this.view.startingLevel().gravity,
+      gravity: this.levelTable[p.minLevel].gravity,
       board: makeGrid(12, 24),
       score: 0,
       lines: 0,
+      minLevel: p.minLevel,
       toppedOut: false,
     };
   }
@@ -171,7 +189,7 @@ export class Controller {
       return true;
     }
 
-    s.gravity = this.view.getLevelInfo(s).gravity;
+    s.gravity = this.view().getGravity(s);
     return attemptMoveActive(s, 1, 0, 0);
   }
 
@@ -218,7 +236,7 @@ export class Controller {
       dest--;
     }
     s.board = newBoard;
-    s.score += (this.view.getLevelInfo(s).multiplier *
+    s.score += (this.view().getMultiplier(s) *
       (Math.pow(2, fullRows.length) - 1));
     s.lines += fullRows.length;
     s.toppedOut = shapeClips(s, s.activeShape);

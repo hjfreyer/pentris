@@ -14,6 +14,15 @@ export type Properties = {
 }
 
 function App({state, view, dispatch}: Properties): JSX.Element {
+  const updateStartingSpeed = (
+    (e : React.ChangeEvent<HTMLInputElement>) => dispatch({
+    kind: 'update-prefs',
+    update: (p : ui.Preferences) => ({
+      ...p,
+      startingSpeed: e.target.valueAsNumber - 1,
+    })
+  }));
+
   switch (state.kind) {
   case 'new_game':
     return (
@@ -22,6 +31,15 @@ function App({state, view, dispatch}: Properties): JSX.Element {
           <h1>Pentris!</h1>
           <p>v3beta: Now with Levels!!</p>
 
+          <div className="form-row">
+            <label>Starting Speed</label>
+            <input type="range" min="1" max="30"
+              value={state.prefs.startingSpeed}
+              onChange={updateStartingSpeed}/>
+            <input type="number" min="1" max="30"
+              value={state.prefs.startingSpeed}
+              onChange={updateStartingSpeed}/>
+          </div>
 
           <button className="btn btn-primary" autoFocus onClick={()=> dispatch({kind: 'ui', action: 'START'})}>
             New Game
@@ -48,8 +66,8 @@ function App({state, view, dispatch}: Properties): JSX.Element {
         <p className="score">{s.lines}</p>
         <h3>Level</h3>
         <h3>Speed</h3>
-        <p className="score">{view.getLevelInfo(s).number}</p>
-        <p className="score">{view.getLevelInfo(s).multiplier}</p>
+        <p className="score">{view.getLevel(s) + 1}</p>
+        <p className="score">{view.getSpeed(s) + 1}</p>
       </aside>
       <div className="game-over" hidden={!s.toppedOut}>
         <div className="card">

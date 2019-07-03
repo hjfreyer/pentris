@@ -47,28 +47,19 @@ export default function index() {
 
   const allActions = rx.merge(manualActions, inputActions, ticks);
 
-  const [gameView, gameController] = factory.newProdViewAndController();
+  const gameController = factory.newProdController();
 
-  const uiController = new ui.Controller(gameView, gameController);
+  const uiController = new ui.Controller(gameController);
   const initial = uiController.initialState();
 
   const states = allActions.pipe(
-    rxop.scan<ui.Action, ui.State>((s, a) => {
-      switch (a.kind) {
-        case "tick":
-          return uiController.tick(s);
-        case "input":
-          return uiController.input(s, a.input);
-        case "ui":
-          return uiController.start(s);
-      }
-    }, initial),
+    rxop.scan<ui.Action, ui.State>((s, a) => uiController.apply(s, a), initial),
     rxop.startWith(initial));
 
   const doms = states.pipe(rxop.map(s =>
     <App key="app"
       state = { s }
-      view = { gameView }
+      view = { gameController.view() }
       dispatch = { a => manualActions.next(a) } />));
 
   const root = document.getElementById('root') as HTMLElement;
