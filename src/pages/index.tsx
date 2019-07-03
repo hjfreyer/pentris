@@ -6,9 +6,9 @@ import * as rxop from 'rxjs/operators';
 
 import * as actions from '../actions';
 import App from '../App';
-import * as game from '../game';
+import * as gs from '../game/state';
 import * as input from '../input';
-import * as randomizer from '../randomizer';
+import * as randomizer from '../game/randomizer';
 import * as ui from '../ui';
 
 function keyToInput(key: string): input.Button | null {
@@ -59,14 +59,14 @@ export default function index() {
 
   const allActions = rx.merge(manualActions, inputActions, ticks);
 
-  const levelTable = Array.from({ length: 37 }, (_, idx): game.LevelInfo => ({
+  const levelTable = Array.from({ length: 37 }, (_, idx): gs.LevelInfo => ({
     number: idx + 1,
     gravity: levelToGravity(idx),
     multiplier: gravityToLevel(levelToGravity(idx)) + 1
   }));
 
-  const gameView = new game.View(levelTable)
-  const gameController = new game.Controller(
+  const gameView = new gs.View(levelTable)
+  const gameController = new gs.Controller(
     new randomizer.NBagRandomizer(new Prando(), 2),
     gameView);
 

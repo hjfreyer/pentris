@@ -2,14 +2,14 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import shapes from '../shapes';
+import * as shape from '../game/shape';
 import PiecePreview from '../PiecePreview';
 
 function App(): JSX.Element {
   return <div id="shape-tests">
     <h1>Shape Tests</h1>
     {
-      shapes.map((_, sIdx) => (
+      Array.from({length: shape.NUM_SHAPES}, (_, sIdx) => (
         <div className="shape">
           <PiecePreview shapeIdx={sIdx} />
         </div>

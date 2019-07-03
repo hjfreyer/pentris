@@ -1,7 +1,6 @@
 
 import produce from 'immer';
 
-import * as input from './input';
 import * as randomizer from './randomizer';
 import * as shape from './shape';
 
@@ -10,6 +9,14 @@ const DAS_REFRESH_DELAY = 6;
 const ENTRY_DELAY = 18;
 const LINES_PER_LEVEL = 10;
 const SOFT_DROP_MULTIPLIER = 5;
+
+export type ActionButton = 'SPIN' | 'DROP'
+export type ControllerInput = {
+  left: boolean
+  right: boolean
+  down: boolean
+  action: 'NONE' | ActionButton
+}
 
 type EmptyCell = { kind: 'empty' };
 type ShapeCell = {
@@ -103,7 +110,7 @@ export class Controller {
     });
   }
 
-  input(s: State, i: input.ControllerInput): State {
+  input(s: State, i: ControllerInput): State {
     if (s.toppedOut) { return s; }
 
     return produce(s, s => {
@@ -152,7 +159,7 @@ export class Controller {
     }
     if (s.dasDelay === 0) {
       s.dasDelay = DAS_REFRESH_DELAY;
-      attemptMoveActive(s, 0, s.dasDirection == 'LEFT' ? -1 : 1, 0);
+      attemptMoveActive(s, 0, s.dasDirection === 'LEFT' ? -1 : 1, 0);
     } else {
       s.dasDelay--;
     }

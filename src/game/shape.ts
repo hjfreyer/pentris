@@ -1,5 +1,5 @@
 
-import shapes from './shapes';
+import shapes from './shape-data';
 
 export const NUM_SHAPES = shapes.length;
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import * as game from './game';
-import * as shape from './shape';
+import * as gs from './game/state';
+import * as shape from './game/shape';
 import Board from './Board';
 
 export type Properties = {
@@ -11,7 +11,7 @@ export type Properties = {
 function PiecePreview({ shapeIdx }: Properties): JSX.Element {
   const [justified, rows, cols] = shape.justifiedTiles(shapeIdx);
   const grid = Array.from({ length: rows },
-    () => Array(cols).fill({ kind: 'empty' } as game.GridCell));
+    () => Array(cols).fill({ kind: 'empty' } as gs.GridCell));
 
   for (const [row, col] of justified) {
     grid[row][col] = { kind: 'shape', shapeIdx };

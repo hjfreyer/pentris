@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import * as actions from './actions';
 import Board from './Board';
-import * as game from './game';
+import * as gs from './game/state';
 import PiecePreview from './PiecePreview';
 import * as ui from './ui';
 
@@ -10,7 +10,7 @@ import './App.css';
 
 export type Properties = {
   state: ui.State
-  view: game.View
+  view: gs.View
   dispatch: (a:actions.Action) => void
 }
 
@@ -34,7 +34,7 @@ function App({state, view, dispatch}: Properties): JSX.Element {
     const s = state.game;
     return (<div className= "App">
       <main>
-        <Board cells={ game.flattenBoard(s) } />
+        <Board cells={ gs.flattenBoard(s) } />
       </main>
       <aside>
         <h1>Pentris</h1>

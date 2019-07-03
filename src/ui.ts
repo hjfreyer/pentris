@@ -1,7 +1,7 @@
 
 import produce from 'immer';
 
-import * as game from './game';
+import * as gs from './game/state';
 import * as input from './input';
 
 type NewGameState = {
@@ -10,7 +10,7 @@ type NewGameState = {
 
 type InGameState = {
   kind: "in_game"
-  game: game.State
+  game: gs.State
 }
 
 export type State = NewGameState | InGameState;
@@ -28,10 +28,10 @@ type Input = {
 }
 
 export class Controller {
-  gameView: game.View
-  gameController: game.Controller
+  gameView: gs.View
+  gameController: gs.Controller
 
-  constructor(gameView: game.View, gameController: game.Controller) {
+  constructor(gameView: gs.View, gameController: gs.Controller) {
     this.gameView = gameView;
     this.gameController = gameController;
   }
