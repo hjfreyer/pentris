@@ -19,7 +19,7 @@ function App({state, view, dispatch}: Properties): JSX.Element {
     kind: 'update-prefs',
     update: (p : ui.Preferences) => ({
       ...p,
-      startingSpeed: e.target.valueAsNumber - 1,
+      startingSpeed: e.target.valueAsNumber,
     })
   }));
 

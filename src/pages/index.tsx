@@ -8,6 +8,8 @@ import * as input from '../ui/input';
 import * as factory from '../game/factory';
 import * as ui from '../ui/state';
 
+const LOCAL_STORAGE_PREFS_KEY = 'prefs';
+
 function keyToInput(key: string): input.Button | null {
   switch (key) {
     case 'ArrowLeft':
@@ -23,6 +25,13 @@ function keyToInput(key: string): input.Button | null {
     default:
       return null;
   }
+}
+
+function saveLocalStorage(s: ui.State, a: ui.Action) {
+  if (a.kind !== 'update-prefs') {
+    return;
+  }
+  localStorage[LOCAL_STORAGE_PREFS_KEY] = JSON.stringify(s.prefs);
 }
 
 export default function index() {
@@ -50,10 +59,22 @@ export default function index() {
   const gameController = factory.newProdController();
 
   const uiController = new ui.Controller(gameController);
-  const initial = uiController.initialState();
+
+  let preferences: ui.Preferences = {
+    startingSpeed: 1,
+  };
+  if (LOCAL_STORAGE_PREFS_KEY in localStorage) {
+    preferences = JSON.parse(localStorage[LOCAL_STORAGE_PREFS_KEY]);
+  }
+
+  const initial = uiController.initialState(preferences);
 
   const states = allActions.pipe(
-    rxop.scan<ui.Action, ui.State>((s, a) => uiController.apply(s, a), initial),
+    rxop.scan<ui.Action, ui.State>((s, a) => {
+      const after = uiController.apply(s, a);
+      saveLocalStorage(after, a);
+      return after;
+    }, initial),
     rxop.startWith(initial));
 
   const doms = states.pipe(rxop.map(s =>
