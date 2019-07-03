@@ -4,7 +4,6 @@ import produce from 'immer';
 import * as input from './input';
 import * as randomizer from './randomizer';
 import * as shape from './shape';
-import shapes from './shapes';
 
 const DAS_INITIAL_DELAY = 16;
 const DAS_REFRESH_DELAY = 6;
@@ -12,12 +11,6 @@ const ENTRY_DELAY = 18;
 const LINES_PER_LEVEL = 10;
 const SOFT_DROP_MULTIPLIER = 5;
 
-type ActiveShape = {
-  shapeIdx: number
-  dRow: number
-  dCol: number
-  rotation: 0 | 1 | 2 | 3
-}
 type EmptyCell = { kind: 'empty' };
 type ShapeCell = {
   kind: 'shape'
@@ -35,7 +28,7 @@ export type State = {
   width: number
   height: number
   nextShapeIdx: number
-  activeShape: ActiveShape
+  activeShape: shape.Shape
 
   dasDirection: 'NONE' | 'LEFT' | 'RIGHT'
   dasDelay: number
@@ -79,20 +72,11 @@ export class Controller {
   }
 
   newState(): State {
-    const firstShapeIdx = this.rand.nextShape();
-    const [firstDRow, firstDCol] =
-      shape.introOffsets(shapes[firstShapeIdx], 12);
-
     return {
       width: 12,
       height: 24,
       nextShapeIdx: this.rand.nextShape(),
-      activeShape: {
-        shapeIdx: firstShapeIdx,
-        dRow: firstDRow,
-        dCol: firstDCol,
-        rotation: 0,
-      },
+      activeShape: shape.introduceShape(this.rand.nextShape(), 12),
       dasDirection: 'NONE',
       dasDelay: 0,
       softDrop: false,
@@ -193,13 +177,7 @@ export class Controller {
   private doLockDown(s: State) {
     s.board = flattenBoard(s);
     s.entryDelay = ENTRY_DELAY;
-    const [dRow, dCol] = shape.introOffsets(shapes[s.nextShapeIdx], s.width);
-    s.activeShape = {
-      shapeIdx: s.nextShapeIdx,
-      dRow,
-      dCol,
-      rotation: 0,
-    };
+    s.activeShape = shape.introduceShape(s.nextShapeIdx, s.width)
     s.nextShapeIdx = this.rand.nextShape();
 
     const fullRows: number[] = [];
@@ -237,7 +215,7 @@ export class Controller {
     s.score += (this.view.getLevelInfo(s).multiplier *
       (Math.pow(2, fullRows.length) - 1));
     s.lines += fullRows.length;
-    s.toppedOut = activeShapeClips(s, s.activeShape);
+    s.toppedOut = shapeClips(s, s.activeShape);
   }
 }
 
@@ -249,32 +227,24 @@ function makeGrid(width: number, height: number): GridCell[][] {
   return board;
 }
 
-export function getShape(s: ActiveShape): shape.Shape {
-  let res = shapes[s.shapeIdx];
-  res = shape.rotate(res, s.rotation);
-  res = (res.map(([row, col]) => [row + s.dRow, col + s.dCol]) as shape.Shape);
-  return res.filter(([row, _]) => row >= 0);
-}
-
 export function flattenBoard(s: State): GridCell[][] {
   const res = s.board.map(row => row.slice());
 
-  const shape = getShape(s.activeShape);
-
-  for (const [row, col] of shape) {
+  for (const [row, col] of shape.getTiles(s.activeShape)) {
+    if (row < 0) {
+      continue;
+    }
     res[row][col] = {
       kind: 'shape',
-      shapeIdx: s.activeShape.shapeIdx,
+      shapeIdx: s.activeShape.idx,
     }
   }
 
   return res;
 }
 
-function activeShapeClips(s: State, a: ActiveShape): boolean {
-  const shp = getShape(a);
-
-  for (let [row, col] of shp) {
+function shapeClips(s: State, shp: shape.Shape): boolean {
+  for (let [row, col] of shape.getTiles(shp)) {
     const clips = (function() {
       if (s.height <= row || col < 0 || s.width <= col) {
         return true;
@@ -293,14 +263,14 @@ function activeShapeClips(s: State, a: ActiveShape): boolean {
 }
 
 function attemptMoveActive(s: State, dRow: number, dCol: number, dRot: number): boolean {
-  const newActive: ActiveShape = {
-    shapeIdx: s.activeShape.shapeIdx,
-    dRow: s.activeShape.dRow + dRow,
-    dCol: s.activeShape.dCol + dCol,
-    rotation: (s.activeShape.rotation + dRot) % 4 as 0 | 1 | 2 | 3,
+  const newActive: shape.Shape = {
+    idx: s.activeShape.idx,
+    row: s.activeShape.row + dRow,
+    col: s.activeShape.col + dCol,
+    rot: (s.activeShape.rot + dRot) % 4,
   }
 
-  if (activeShapeClips(s, newActive)) {
+  if (shapeClips(s, newActive)) {
     return false;
   }
 

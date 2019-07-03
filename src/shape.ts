@@ -1,39 +1,53 @@
 
-export type Shape = Array<[number, number]>;
+import shapes from './shapes';
 
-export function mirrored(s: Shape): Shape {
-  return s.map(([row, col]) => [row, -col]);
+export const NUM_SHAPES = shapes.length;
+
+export type Tiles = Array<[number, number]>;
+export type Shape = {
+  idx: number
+  row: number
+  col: number
+  rot: number
+};
+
+export function getTiles(s: Shape): Tiles {
+  let res = shapes[s.idx];
+  res = rotate(res, s.rot);
+  res = translate(res, s.row, s.col);
+  return res;
 }
 
-export function transpose(s: Shape): Shape {
-  return s.map(([row, col]) => [col, row]);
+export function introduceShape(idx: number, width: number): Shape {
+  const [, minCol, maxRow, maxCol] = boundingBox(shapes[idx]);
+  const row = -maxRow;
+  const col = Math.floor((width - maxCol + minCol) / 2) - minCol;
+  return { idx, row, col, rot: 0 };
 }
 
-export function bbox(s: Shape): [number, number, number, number] {
-  const rows = s.map(([row, _]) => row);
-  const cols = s.map(([_, col]) => col);
-  return [Math.min(...rows), Math.min(...cols),
-  Math.max(...rows), Math.max(...cols)];
-}
-
-export function introOffsets(s: Shape, width: number): [number, number] {
-  const [, minCol, maxRow, maxCol] = bbox(s);
-  const dRow = -maxRow;
-  const dCol = Math.floor((width - maxCol + minCol) / 2) - minCol;
-  return [dRow, dCol];
-}
-
-export function justified(s: Shape): [Shape, number, number] {
-  const [minRow, minCol, maxRow, maxCol] = bbox(s);
+export function justifiedTiles(idx: number): [Tiles, number, number] {
+  const t = shapes[idx];
+  const [minRow, minCol, maxRow, maxCol] = boundingBox(t);
   return [
-    s.map(([row, col]) => [row - minRow, col - minCol]),
+    translate(t, -minRow, -minCol),
     maxRow - minRow + 1,
     maxCol - minCol + 1,
   ];
 }
 
-function center(s: Shape): [number, number] {
-  const [minRow, minCol, maxRow, maxCol] = bbox(s);
+function translate(t: Tiles, dRow: number, dCol: number): Tiles {
+  return t.map(([row, col]) => [row + dRow, col + dCol]);
+}
+
+function boundingBox(t: Tiles): [number, number, number, number] {
+  const rows = t.map(([row, _]) => row);
+  const cols = t.map(([_, col]) => col);
+  return [Math.min(...rows), Math.min(...cols),
+  Math.max(...rows), Math.max(...cols)];
+}
+
+function center(t: Tiles): [number, number] {
+  const [minRow, minCol, maxRow, maxCol] = boundingBox(t);
 
   // The side length of a square surrounding the shape. Assumes shapes are
   // always oriented horizontally.
@@ -46,12 +60,13 @@ function center(s: Shape): [number, number] {
   return [centerRow, centerCol];
 }
 
-export function rotate(s: Shape, count: number) {
-  const [centerRow, centerCol] = center(s);
+function rotate(t: Tiles, count: number) {
+  const [centerRow, centerCol] = center(t);
 
-  let res = s.map(([r, c]) => ([r - centerRow, c - centerCol])) as Shape;
+  let res = t;
+  res = translate(res, -centerRow, -centerCol);
   for (let i = 0; i < count; i++) {
-    res = (res.map(([row, col]) => [col, -row]) as Shape);
+    res = res.map(([row, col]) => [col, -row]);
   }
-  return res.map(([r, c]) => ([r + centerRow, c + centerCol])) as Shape;
+  return translate(res, centerRow, centerCol);
 }

@@ -1,9 +1,13 @@
 
-import * as shape from './shape';
+type Tiles = Array<[number, number]>;
+
+export function mirrorY(t: Tiles): Tiles {
+  return t.map(([row, col]) => [row, -col]);
+}
 
 // Pentominos.
 
-const pentominoF: shape.Shape = [
+const pentominoF: Tiles = [
   [0, 0],
   [1, 0],
   [0, 1],
@@ -11,7 +15,7 @@ const pentominoF: shape.Shape = [
   [-1, 1],
 ];
 
-const pentominoI: shape.Shape = [
+const pentominoI: Tiles = [
   [0, 0],
   [0, 1],
   [0, 2],
@@ -19,7 +23,7 @@ const pentominoI: shape.Shape = [
   [0, 4],
 ];
 
-const pentominoL: shape.Shape = [
+const pentominoL: Tiles = [
   [0, 0],
   [0, 1],
   [0, 2],
@@ -27,7 +31,7 @@ const pentominoL: shape.Shape = [
   [1, 3],
 ];
 
-const pentominoN: shape.Shape = [
+const pentominoN: Tiles = [
   [1, 0],
   [1, 1],
   [0, 1],
@@ -35,7 +39,7 @@ const pentominoN: shape.Shape = [
   [0, 3],
 ];
 
-const pentominoP: shape.Shape = [
+const pentominoP: Tiles = [
   [0, 0],
   [1, 0],
   [0, 1],
@@ -43,7 +47,7 @@ const pentominoP: shape.Shape = [
   [1, -1],
 ];
 
-const pentominoT: shape.Shape = [
+const pentominoT: Tiles = [
   [0, -1],
   [0, 1],
   [0, 0],
@@ -51,7 +55,7 @@ const pentominoT: shape.Shape = [
   [2, 0],
 ];
 
-const pentominoU: shape.Shape = [
+const pentominoU: Tiles = [
   [0, 0],
   [0, -1],
   [0, 1],
@@ -59,7 +63,7 @@ const pentominoU: shape.Shape = [
   [-1, -1],
 ];
 
-const pentominoV: shape.Shape = [
+const pentominoV: Tiles = [
   [0, -2],
   [0, -1],
   [0, 0],
@@ -67,7 +71,7 @@ const pentominoV: shape.Shape = [
   [2, 0],
 ];
 
-const pentominoW: shape.Shape = [
+const pentominoW: Tiles = [
   [0, 0],
   [0, 1],
   [1, 1],
@@ -75,7 +79,7 @@ const pentominoW: shape.Shape = [
   [2, 2],
 ];
 
-const pentominoX: shape.Shape = [
+const pentominoX: Tiles = [
   [0, 0],
   [-1, 0],
   [1, 0],
@@ -83,7 +87,7 @@ const pentominoX: shape.Shape = [
   [0, 1],
 ];
 
-const pentominoY: shape.Shape = [
+const pentominoY: Tiles = [
   [0, 0],
   [0, 1],
   [0, 2],
@@ -91,7 +95,7 @@ const pentominoY: shape.Shape = [
   [-1, 1],
 ];
 
-const pentominoZ: shape.Shape = [
+const pentominoZ: Tiles = [
   [0, 0],
   [0, 1],
   [0, 2],
@@ -99,19 +103,19 @@ const pentominoZ: shape.Shape = [
   [1, 2],
 ];
 
-const pentominoF2: shape.Shape = shape.mirrored(pentominoF);
+const pentominoF2: Tiles = mirrorY(pentominoF);
 
-const pentominoJ: shape.Shape = shape.mirrored(pentominoL);
+const pentominoJ: Tiles = mirrorY(pentominoL);
 
-const pentominoN2: shape.Shape = shape.mirrored(pentominoN);
+const pentominoN2: Tiles = mirrorY(pentominoN);
 
-const pentominoQ: shape.Shape = shape.mirrored(pentominoP);
+const pentominoQ: Tiles = mirrorY(pentominoP);
 
-const pentominoY2: shape.Shape = shape.mirrored(pentominoY);
+const pentominoY2: Tiles = mirrorY(pentominoY);
 
-const pentominoS: shape.Shape = shape.mirrored(pentominoZ);
+const pentominoS: Tiles = mirrorY(pentominoZ);
 
-const PENTOMINOES: shape.Shape[] = [
+const PENTOMINOES: Tiles[] = [
   pentominoF,
   pentominoF2,
   pentominoL,
@@ -134,46 +138,46 @@ const PENTOMINOES: shape.Shape[] = [
 
 // Tetrominos
 
-const tetrominoI: shape.Shape = [
+const tetrominoI: Tiles = [
   [0, 0],
   [0, 1],
   [0, 2],
   [0, 3],
 ];
 
-const tetrominoJ: shape.Shape = [
+const tetrominoJ: Tiles = [
   [0, 0],
   [0, 1],
   [0, 2],
   [1, 2],
 ];
 
-const tetrominoL: shape.Shape = shape.mirrored(tetrominoJ);
+const tetrominoL: Tiles = mirrorY(tetrominoJ);
 
-const tetrominoO: shape.Shape = [
+const tetrominoO: Tiles = [
   [0, 0],
   [0, 1],
   [1, 0],
   [1, 1],
 ];
 
-const tetrominoS: shape.Shape = [
+const tetrominoS: Tiles = [
   [1, 0],
   [1, 1],
   [0, 1],
   [0, 2],
 ];
 
-const tetrominoZ: shape.Shape = shape.mirrored(tetrominoS);
+const tetrominoZ: Tiles = mirrorY(tetrominoS);
 
-const tetrominoT: shape.Shape = [
+const tetrominoT: Tiles = [
   [0, 0],
   [0, 1],
   [0, 2],
   [1, 1],
 ];
 
-const TETROMINOES: shape.Shape[] = [
+const TETROMINOES: Tiles[] = [
   tetrominoI,
   tetrominoJ,
   tetrominoL,
@@ -185,33 +189,33 @@ const TETROMINOES: shape.Shape[] = [
 
 // Trominoes
 
-const trominoI: shape.Shape = [
+const trominoI: Tiles = [
   [0, 0],
   [0, 1],
   [0, 2],
 ];
 
-const trominoL: shape.Shape = [
+const trominoL: Tiles = [
   [0, 0],
   [0, 1],
   [1, 1],
 ];
 
-const TROMINOES: shape.Shape[] = [
+const TROMINOES: Tiles[] = [
   trominoI,
   trominoL,
 ];
 
-const domino: shape.Shape = [
+const domino: Tiles = [
   [0, 0],
   [0, 1],
 ];
 
-const monomino: shape.Shape = [
+const monomino: Tiles = [
   [0, 0]
 ];
 
-const shapes: shape.Shape[] = [
+const shapes: Tiles[] = [
   monomino,
   domino,
   ...TROMINOES,
