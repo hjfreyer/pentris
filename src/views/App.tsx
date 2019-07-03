@@ -67,7 +67,7 @@ function App({state, view, dispatch}: Properties): JSX.Element {
         <h3>Level</h3>
         <h3>Speed</h3>
         <p className="score">{view.getLevel(s) + 1}</p>
-        <p className="score">{view.getSpeed(s) + 1}</p>
+        <p className="score">{view.getMultiplier(s)}</p>
       </aside>
       <div className="game-over" hidden={!s.toppedOut}>
         <div className="card">

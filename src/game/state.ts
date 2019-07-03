@@ -68,7 +68,7 @@ export class View {
       this.levelTable.length - 1);
   }
 
-  getSpeed(s: State): number {
+  private getSpeed(s: State): number {
     return Math.min(Math.max(s.minLevel, this.getLevel(s)),
       this.levelTable.length - 1);
   }
