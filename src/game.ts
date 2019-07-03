@@ -129,7 +129,7 @@ export class Controller {
         case 'NONE':
           break;
         case 'SPIN':
-          attemptTranslateDirection(s, i.action);
+          attemptMoveActive(s, 0, 0, 1);
           break;
         case 'DROP':
           this.doDrop(s);
@@ -152,7 +152,7 @@ export class Controller {
     }
     if (s.dasDelay === 0) {
       s.dasDelay = DAS_REFRESH_DELAY;
-      attemptTranslateDirection(s, s.dasDirection);
+      attemptMoveActive(s, 0, s.dasDirection == 'LEFT' ? -1 : 1, 0);
     } else {
       s.dasDelay--;
     }
@@ -167,7 +167,6 @@ export class Controller {
     s.gravity = this.view.getLevelInfo(s).gravity;
     return attemptMoveActive(s, 1, 0, 0);
   }
-
 
   private doDrop(s: State) {
     while (attemptMoveActive(s, 1, 0, 0)) { }
@@ -276,17 +275,4 @@ function attemptMoveActive(s: State, dRow: number, dCol: number, dRot: number): 
 
   s.activeShape = newActive;
   return true;
-}
-
-function attemptTranslateDirection(s: State, d: input.DirectionButton | 'SPIN'): boolean {
-  switch (d) {
-    case 'LEFT':
-      return attemptMoveActive(s, 0, -1, 0);
-    case 'DOWN':
-      return attemptMoveActive(s, 1, 0, 0);
-    case 'RIGHT':
-      return attemptMoveActive(s, 0, 1, 0);
-    case 'SPIN':
-      return attemptMoveActive(s, 0, 0, 1);
-  }
 }
