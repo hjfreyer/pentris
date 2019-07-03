@@ -79,14 +79,18 @@ export class Controller {
   }
 
   newState(): State {
+    const firstShapeIdx = this.rand.nextShape();
+    const [firstDRow, firstDCol] =
+      shape.introOffsets(shapes[firstShapeIdx], 12);
+
     return {
       width: 12,
       height: 24,
       nextShapeIdx: this.rand.nextShape(),
       activeShape: {
-        shapeIdx: this.rand.nextShape(),
-        dRow: 0,
-        dCol: 6,
+        shapeIdx: firstShapeIdx,
+        dRow: firstDRow,
+        dCol: firstDCol,
         rotation: 0,
       },
       dasDirection: 'NONE',
@@ -189,10 +193,11 @@ export class Controller {
   private doLockDown(s: State) {
     s.board = flattenBoard(s);
     s.entryDelay = ENTRY_DELAY;
+    const [dRow, dCol] = shape.introOffsets(shapes[s.nextShapeIdx], s.width);
     s.activeShape = {
       shapeIdx: s.nextShapeIdx,
-      dRow: 0,
-      dCol: s.width / 2,
+      dRow,
+      dCol,
       rotation: 0,
     };
     s.nextShapeIdx = this.rand.nextShape();
@@ -246,9 +251,7 @@ function makeGrid(width: number, height: number): GridCell[][] {
 
 export function getShape(s: ActiveShape): shape.Shape {
   let res = shapes[s.shapeIdx];
-  for (let i = 0; i < s.rotation; i++) {
-    res = (res.map(([row, col]) => [col, -row]) as shape.Shape);
-  }
+  res = shape.rotate(res, s.rotation);
   res = (res.map(([row, col]) => [row + s.dRow, col + s.dCol]) as shape.Shape);
   return res.filter(([row, _]) => row >= 0);
 }

@@ -217,6 +217,6 @@ const shapes: shape.Shape[] = [
   ...TROMINOES,
   ...TETROMINOES,
   ...PENTOMINOES
-].map(shape.centered);
+];
 
 export default shapes;
