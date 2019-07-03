@@ -1,7 +1,7 @@
 
 import produce from 'immer';
 
-import * as gs from './game/state';
+import * as gs from '../game/state';
 import * as input from './input';
 
 type NewGameState = {

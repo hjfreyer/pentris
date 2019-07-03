@@ -1,17 +1,16 @@
 import * as React from 'react';
 
-import * as actions from './actions';
+import * as ui from '../ui/state';
 import Board from './Board';
-import * as gs from './game/state';
+import * as gs from '../game/state';
 import PiecePreview from './PiecePreview';
-import * as ui from './ui';
 
 import './App.css';
 
 export type Properties = {
   state: ui.State
   view: gs.View
-  dispatch: (a:actions.Action) => void
+  dispatch: (a: ui.Action) => void
 }
 
 function App({state, view, dispatch}: Properties): JSX.Element {

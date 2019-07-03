@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import * as shape from '../game/shape';
-import PiecePreview from '../PiecePreview';
+import PiecePreview from '../views/PiecePreview';
 
 function App(): JSX.Element {
   return <div id="shape-tests">

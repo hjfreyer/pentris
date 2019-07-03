@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import * as gs from './game/state';
+import * as gs from '../game/state';
 
 import './Board.css';
 

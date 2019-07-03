@@ -3,11 +3,10 @@ import * as ReactDOM from 'react-dom';
 import * as rx from 'rxjs';
 import * as rxop from 'rxjs/operators';
 
-import * as actions from '../actions';
-import App from '../App';
-import * as input from '../input';
+import App from '../views/App';
+import * as input from '../ui/input';
 import * as factory from '../game/factory';
-import * as ui from '../ui';
+import * as ui from '../ui/state';
 
 function keyToInput(key: string): input.Button | null {
   switch (key) {
@@ -27,9 +26,9 @@ function keyToInput(key: string): input.Button | null {
 }
 
 export default function index() {
-  const manualActions = new rx.Subject<actions.Action>();
+  const manualActions = new rx.Subject<ui.Action>();
   const ticks = rx.timer(0, 1000 / 60).pipe(
-    rxop.map((_): actions.Action => ({ kind: 'tick' }))
+    rxop.map((_): ui.Action => ({ kind: 'tick' }))
   )
 
   const keyDowns =
@@ -43,7 +42,7 @@ export default function index() {
   )
 
   const inputActions = input.parseInput(rawInputs).pipe(
-    rxop.map((input): actions.Action => ({ kind: 'input', input }))
+    rxop.map((input): ui.Action => ({ kind: 'input', input }))
   );
 
   const allActions = rx.merge(manualActions, inputActions, ticks);
@@ -54,7 +53,7 @@ export default function index() {
   const initial = uiController.initialState();
 
   const states = allActions.pipe(
-    rxop.scan<actions.Action, ui.State>((s, a) => {
+    rxop.scan<ui.Action, ui.State>((s, a) => {
       switch (a.kind) {
         case "tick":
           return uiController.tick(s);

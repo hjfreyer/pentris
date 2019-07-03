@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import * as gs from './game/state';
-import * as shape from './game/shape';
+import * as gs from '../game/state';
+import * as shape from '../game/shape';
 import Board from './Board';
 
 export type Properties = {
