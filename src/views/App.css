@@ -65,11 +65,6 @@ aside .score {
   justify-content: space-evenly;
 }
 
-button {
-  font-family: 'Press Start 2P', sans-serif;
-  padding: 0.5em;
-}
-
 .new-game button {
   font-size: 4em;
 }
@@ -102,4 +97,8 @@ button {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.game-over button {
+  font-size: 2em;
 }
