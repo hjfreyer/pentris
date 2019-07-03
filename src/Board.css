@@ -7,39 +7,48 @@
 }
 
 .Board .cell {
-  width: calc((100vmin - 2px)/24);
-  height: calc((100vmin - 2px)/24);
-  border: 0.1vmin solid black;
+  --side: calc((100vmin - 2px)/24);
+  --border: calc(var(--side) / 10);
+  --hue: calc(19 * var(--idx) * 12deg);
+
+  width: var(--side);
+  height: var(--side);
+
+  border-left: var(--border) solid hsl(var(--hue), 100%, 70%);
+  border-top: var(--border) solid hsl(var(--hue), 100%, 70%);
+  border-bottom: var(--border) solid hsl(var(--hue), 100%, 30%);
+  border-right: var(--border) solid hsl(var(--hue), 100%, 30%);
+  background: hsl(var(--hue), 100%, 50%);
 }
 
 .Board .cell.empty {  }
-.Board .cell.color-0  { background: hsl(calc(19 *  0 * 12deg), 100%, 50%); }
-.Board .cell.color-1  { background: hsl(calc(19 *  1 * 12deg), 100%, 50%); }
-.Board .cell.color-2  { background: hsl(calc(19 *  2 * 12deg), 100%, 50%); }
-.Board .cell.color-3  { background: hsl(calc(19 *  3 * 12deg), 100%, 50%); }
-.Board .cell.color-4  { background: hsl(calc(19 *  4 * 12deg), 100%, 50%); }
-.Board .cell.color-5  { background: hsl(calc(19 *  5 * 12deg), 100%, 50%); }
-.Board .cell.color-6  { background: hsl(calc(19 *  6 * 12deg), 100%, 50%); }
-.Board .cell.color-7  { background: hsl(calc(19 *  7 * 12deg), 100%, 50%); }
-.Board .cell.color-8  { background: hsl(calc(19 *  8 * 12deg), 100%, 50%); }
-.Board .cell.color-9  { background: hsl(calc(19 *  9 * 12deg), 100%, 50%); }
-.Board .cell.color-10 { background: hsl(calc(19 * 10 * 12deg), 100%, 50%); }
-.Board .cell.color-11 { background: hsl(calc(19 * 11 * 12deg), 100%, 50%); }
-.Board .cell.color-12 { background: hsl(calc(19 * 12 * 12deg), 100%, 50%); }
-.Board .cell.color-13 { background: hsl(calc(19 * 13 * 12deg), 100%, 50%); }
-.Board .cell.color-14 { background: hsl(calc(19 * 14 * 12deg), 100%, 50%); }
-.Board .cell.color-15 { background: hsl(calc(19 * 15 * 12deg), 100%, 50%); }
-.Board .cell.color-16 { background: hsl(calc(19 * 16 * 12deg), 100%, 50%); }
-.Board .cell.color-17 { background: hsl(calc(19 * 17 * 12deg), 100%, 50%); }
-.Board .cell.color-18 { background: hsl(calc(19 * 18 * 12deg), 100%, 50%); }
-.Board .cell.color-19 { background: hsl(calc(19 * 19 * 12deg), 100%, 50%); }
-.Board .cell.color-20 { background: hsl(calc(19 * 20 * 12deg), 100%, 50%); }
-.Board .cell.color-21 { background: hsl(calc(19 * 21 * 12deg), 100%, 50%); }
-.Board .cell.color-22 { background: hsl(calc(19 * 22 * 12deg), 100%, 50%); }
-.Board .cell.color-23 { background: hsl(calc(19 * 23 * 12deg), 100%, 50%); }
-.Board .cell.color-24 { background: hsl(calc(19 * 24 * 12deg), 100%, 50%); }
-.Board .cell.color-25 { background: hsl(calc(19 * 25 * 12deg), 100%, 50%); }
-.Board .cell.color-26 { background: hsl(calc(19 * 26 * 12deg), 100%, 50%); }
-.Board .cell.color-27 { background: hsl(calc(19 * 27 * 12deg), 100%, 50%); }
-.Board .cell.color-28 { background: hsl(calc(19 * 28 * 12deg), 100%, 50%); }
-.Board .cell.color-29 { background: hsl(calc(19 * 29 * 12deg), 100%, 50%); }
+.Board .cell.color-0  { --idx: 0; }
+.Board .cell.color-1  { --idx: 1; }
+.Board .cell.color-2  { --idx: 2; }
+.Board .cell.color-3  { --idx: 3; }
+.Board .cell.color-4  { --idx: 4; }
+.Board .cell.color-5  { --idx: 5; }
+.Board .cell.color-6  { --idx: 6; }
+.Board .cell.color-7  { --idx: 7; }
+.Board .cell.color-8  { --idx: 8; }
+.Board .cell.color-9  { --idx: 9; }
+.Board .cell.color-10 { --idx: 10; }
+.Board .cell.color-11 { --idx: 11; }
+.Board .cell.color-12 { --idx: 12; }
+.Board .cell.color-13 { --idx: 13; }
+.Board .cell.color-14 { --idx: 14; }
+.Board .cell.color-15 { --idx: 15; }
+.Board .cell.color-16 { --idx: 16; }
+.Board .cell.color-17 { --idx: 17; }
+.Board .cell.color-18 { --idx: 18; }
+.Board .cell.color-19 { --idx: 19; }
+.Board .cell.color-20 { --idx: 20; }
+.Board .cell.color-21 { --idx: 21; }
+.Board .cell.color-22 { --idx: 22; }
+.Board .cell.color-23 { --idx: 23; }
+.Board .cell.color-24 { --idx: 24; }
+.Board .cell.color-25 { --idx: 25; }
+.Board .cell.color-26 { --idx: 26; }
+.Board .cell.color-27 { --idx: 27; }
+.Board .cell.color-28 { --idx: 28; }
+.Board .cell.color-29 { --idx: 29; }

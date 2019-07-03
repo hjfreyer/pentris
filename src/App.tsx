@@ -21,7 +21,7 @@ function App({state, view, dispatch}: Properties): JSX.Element {
       <div className= "App">
         <div className="new-game">
           <h1>Pentris!</h1>
-          <p>v3alpha: Now with Levels!!</p>
+          <p>v3beta: Now with Levels!!</p>
 
 
           <button className="btn btn-primary" autoFocus onClick={()=> dispatch({kind: 'ui', action: 'START'})}>
@@ -39,7 +39,7 @@ function App({state, view, dispatch}: Properties): JSX.Element {
       <aside>
         <h1>Pentris</h1>
         <p className="copy">
-          It's Alpha.<br/>It's Delicious.<br/>It's Pentris.
+          It's Beta.<br/>It's Delicious.<br/>It's Pentris.
         </p>
         <h2>Preview</h2>
         <PiecePreview shapeIdx={s.nextShapeIdx}/>
