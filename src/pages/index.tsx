@@ -1,4 +1,3 @@
-import Prando from 'prando';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as rx from 'rxjs';
@@ -6,9 +5,8 @@ import * as rxop from 'rxjs/operators';
 
 import * as actions from '../actions';
 import App from '../App';
-import * as gs from '../game/state';
 import * as input from '../input';
-import * as randomizer from '../game/randomizer';
+import * as factory from '../game/factory';
 import * as ui from '../ui';
 
 function keyToInput(key: string): input.Button | null {
@@ -26,15 +24,6 @@ function keyToInput(key: string): input.Button | null {
     default:
       return null;
   }
-}
-
-function levelToGravity(l: number): number {
-  return Math.floor(48 * Math.pow(0.9, l));
-}
-
-function gravityToLevel(g: number): number {
-  // Math.abs fixes a weird issue involving -0.
-  return Math.abs(Math.floor(Math.log(g / 48) / Math.log(0.9)));
 }
 
 export default function index() {
@@ -59,16 +48,7 @@ export default function index() {
 
   const allActions = rx.merge(manualActions, inputActions, ticks);
 
-  const levelTable = Array.from({ length: 37 }, (_, idx): gs.LevelInfo => ({
-    number: idx + 1,
-    gravity: levelToGravity(idx),
-    multiplier: gravityToLevel(levelToGravity(idx)) + 1
-  }));
-
-  const gameView = new gs.View(levelTable)
-  const gameController = new gs.Controller(
-    new randomizer.NBagRandomizer(new Prando(), 2),
-    gameView);
+  const [gameView, gameController] = factory.newProdViewAndController();
 
   const uiController = new ui.Controller(gameView, gameController);
   const initial = uiController.initialState();
