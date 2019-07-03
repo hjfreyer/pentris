@@ -39,7 +39,7 @@ function App({state, view, dispatch}: Properties): JSX.Element {
       <aside>
         <h1>Pentris</h1>
         <p className="copy">
-          It's Alpha. It's Delicious. It's Pentris.
+          It's Alpha.<br/>It's Delicious.<br/>It's Pentris.
         </p>
         <h2>Preview</h2>
         <PiecePreview shapeIdx={s.nextShapeIdx}/>

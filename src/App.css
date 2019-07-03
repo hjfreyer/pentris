@@ -5,14 +5,17 @@
   display: flex;
   position: relative;
 
+  font-family: 'Press Start 2P', sans-serif;
   font-size: 2vmin;
+
+  text-align: center;
 
   border: 1px solid black;
 }
 
 h1 {
-  font-size: 5em;
-  line-height: 1.5;
+  font-size: 3em;
+  line-height: 2em;
   margin: 0;
 }
 
@@ -22,12 +25,17 @@ aside {
   grid-template-columns: 50% 50%;
   justify-items: center;
   align-content: flex-start;
+  padding: 1vmin;
 
   background: white;
 }
 
 aside h1, aside p.copy, aside h2, aside .PiecePreview {
   grid-column: span 2;
+}
+
+aside .copy {
+  line-height: 2em;
 }
 
 aside .score {
@@ -55,6 +63,11 @@ aside .score {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-evenly;
+}
+
+button {
+  font-family: 'Press Start 2P', sans-serif;
+  padding: 0.5em;
 }
 
 .new-game button {

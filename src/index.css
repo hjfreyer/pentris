@@ -17,8 +17,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  font-family: sans-serif;
   background: hsl(120deg, 15%, 40%);
 }
 
