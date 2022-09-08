@@ -47,12 +47,19 @@ jobs:
         npm install
         npm run build --if-present
         echo 'www.pentris.net' > build/CNAME 
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v3
-      with:
-        name: node-app
-        path: build/
+    # - name: Upload artifact for deployment job
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: node-app
+    #     path: build/
 
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: 'build/'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v1
   #deploy:
   #  permissions:
   #    contents: none
