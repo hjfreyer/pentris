@@ -27,8 +27,12 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '14.x'                # set this to the node version to use
 
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
