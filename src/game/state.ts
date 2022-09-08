@@ -41,7 +41,7 @@ export type State = {
   nextShapeIdx: number
   activeShape: shape.Shape
 
-  dasDirection: 'NONE' | 'LEFT' | 'RIGHT'
+  dasDirection: 'NONE' | 'LEFT' | 'RIGHT' | 'DOWN'
   dasDelay: number
 
   softDrop: boolean,
@@ -144,6 +144,12 @@ export class Controller {
           s.dasDelay = DAS_INITIAL_DELAY;
         }
         s.dasDirection = 'RIGHT';
+      } else if (i.down) {
+        if (s.dasDirection === 'NONE') {
+          attemptMoveActive(s, 1, 0, 0);
+          s.dasDelay = DAS_INITIAL_DELAY;
+        }
+        s.dasDirection = 'DOWN';
       } else {
         s.dasDirection = 'NONE';
       }
@@ -177,7 +183,17 @@ export class Controller {
     }
     if (s.dasDelay === 0) {
       s.dasDelay = DAS_REFRESH_DELAY;
-      attemptMoveActive(s, 0, s.dasDirection === 'LEFT' ? -1 : 1, 0);
+      switch (s.dasDirection) {
+        case 'LEFT':
+          attemptMoveActive(s, 0, -1, 0); 
+          break;
+        case 'RIGHT':
+          attemptMoveActive(s, 0, 1, 0);
+          break;
+        case 'DOWN':
+          attemptMoveActive(s, 1, 0, 0);
+          break;
+        }
     } else {
       s.dasDelay--;
     }
