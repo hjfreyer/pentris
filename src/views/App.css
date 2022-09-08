@@ -65,6 +65,25 @@ aside .score {
   justify-content: space-evenly;
 }
 
+.new-game .settings {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.new-game .form-row {
+  margin: 0.5em;
+
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.new-game .level-text {
+  width: 3.2em;
+  font-size: 1em;
+}
+
 .new-game button {
   font-size: 4em;
 }

@@ -62,6 +62,7 @@ export default function index() {
 
   let preferences: ui.Preferences = {
     startingSpeed: 1,
+    zeroG: false,
   };
   if (LOCAL_STORAGE_PREFS_KEY in localStorage) {
     preferences = JSON.parse(localStorage[LOCAL_STORAGE_PREFS_KEY]);

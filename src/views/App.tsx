@@ -23,6 +23,15 @@ function App({state, view, dispatch}: Properties): JSX.Element {
     })
   }));
 
+  const updateZeroG = (
+    (e : React.ChangeEvent<HTMLInputElement>) => dispatch({
+    kind: 'update-prefs',
+    update: (p : ui.Preferences) => ({
+      ...p,
+      zeroG: e.target.checked,
+    })
+  }));
+
   switch (state.kind) {
   case 'new_game':
     return (
@@ -31,14 +40,24 @@ function App({state, view, dispatch}: Properties): JSX.Element {
           <h1>Pentris!</h1>
           <p>v3beta: Now with Levels!!</p>
 
-          <div className="form-row">
-            <label>Starting Speed</label>
-            <input type="range" min="1" max="30"
-              value={state.prefs.startingSpeed}
-              onChange={updateStartingSpeed}/>
-            <input type="number" min="1" max="30"
-              value={state.prefs.startingSpeed}
-              onChange={updateStartingSpeed}/>
+          <div className="settings">
+            <div className="form-row">
+              <label>Starting Speed</label>
+              <input type="range" min="1" max="30"
+                value={state.prefs.startingSpeed}
+                onChange={updateStartingSpeed}/>
+              <input className="level-text" 
+                type="number" min="1" max="30"
+                value={state.prefs.startingSpeed}
+                onChange={updateStartingSpeed}/>
+            </div>
+            <div className="form-row">
+              <label htmlFor="zero-g-checkbox">Zero-G</label>
+              <input id="zero-g-checkbox"
+                type="checkbox" 
+                checked={state.prefs.zeroG}
+                onChange={updateZeroG}/>
+            </div>
           </div>
 
           <button className="btn btn-primary" autoFocus onClick={()=> dispatch({kind: 'ui', action: 'START'})}>

@@ -25,6 +25,13 @@ type ShapeCell = {
 }
 export type GridCell = EmptyCell | ShapeCell;
 
+export type GravityState = {
+  kind: 'enabled',
+  countDown: number
+} | {
+  kind: 'disabled'
+};
+
 export type LevelInfo = {
   number: number
   gravity: number
@@ -33,6 +40,7 @@ export type LevelInfo = {
 
 export type Parameters = {
   minLevel: number
+  zeroG: boolean
 };
 
 export type State = {
@@ -47,7 +55,7 @@ export type State = {
   softDrop: boolean,
 
   entryDelay: number
-  gravity: number
+  gravity: GravityState
   board: GridCell[][]
 
   score: number
@@ -96,6 +104,11 @@ export class Controller {
   }
 
   newState(p: Parameters): State {
+    const gravity : GravityState = p.zeroG ? {kind: "disabled"} : {
+      kind: "enabled",
+      countDown: this.levelTable[p.minLevel].gravity
+    };
+
     return {
       width: 12,
       height: 24,
@@ -105,7 +118,7 @@ export class Controller {
       dasDelay: 0,
       softDrop: false,
       entryDelay: ENTRY_DELAY,
-      gravity: this.levelTable[p.minLevel].gravity,
+      gravity,
       board: makeGrid(12, 24),
       score: 0,
       lines: 0,
@@ -200,12 +213,17 @@ export class Controller {
   }
 
   private doGravity(s: State): boolean {
-    if (0 < s.gravity) {
-      s.gravity -= s.softDrop ? SOFT_DROP_MULTIPLIER : 1;
+    if (s.gravity.kind === 'disabled') {
       return true;
     }
 
-    s.gravity = this.view().getGravity(s);
+    if (0 < s.gravity.countDown) {
+      s.gravity.countDown -= s.softDrop ? SOFT_DROP_MULTIPLIER : 1;
+      return true;
+    }
+
+    
+    s.gravity.countDown = this.view().getGravity(s);
     return attemptMoveActive(s, 1, 0, 0);
   }
 

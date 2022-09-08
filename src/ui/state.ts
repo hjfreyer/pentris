@@ -6,6 +6,7 @@ import * as input from './input';
 
 export type Preferences = {
   startingSpeed: number
+  zeroG: boolean
 }
 
 type NewGameState = {
@@ -48,6 +49,7 @@ export class Controller {
     if (prefs === undefined) {
       prefs = {
         startingSpeed: 1,
+        zeroG: false,
       }
     }
     return { kind: "new_game", prefs };
@@ -72,6 +74,7 @@ export class Controller {
       prefs: s.prefs,
       game: this.gameController.newState({
         minLevel: s.prefs.startingSpeed - 1,
+        zeroG: s.prefs.zeroG,
       }),
     }
   }
