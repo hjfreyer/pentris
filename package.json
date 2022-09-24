@@ -2,7 +2,7 @@
   "name": "pentris",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://www.pentris.net/v3",
+  "homepage": "https://www.pentris.net/",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "immer": "^2.1.5",
@@ -15,7 +15,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "cp -r v2site build2 && mv build build2/v3 && mv build2 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy-dev": "gh-pages -d build -o origin && echo 'www.pentris.net' > build/CNAME && gh-pages -d build -o prod -b master",
