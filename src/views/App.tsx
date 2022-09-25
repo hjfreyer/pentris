@@ -6,6 +6,7 @@ import * as gs from '../game/state';
 import PiecePreview from './PiecePreview';
 
 import './App.css';
+import Logo from './Logo';
 
 export type Properties = {
   state: ui.State
@@ -37,8 +38,7 @@ function App({state, view, dispatch}: Properties): JSX.Element {
     return (
       <div className= "App">
         <div className="new-game">
-          <h1>Pentris!</h1>
-          <p>v3beta: Now with Levels!!</p>
+          <Logo/>
 
           <div className="settings">
             <div className="form-row">

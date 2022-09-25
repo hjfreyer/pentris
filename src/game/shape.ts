@@ -26,7 +26,10 @@ export function introduceShape(idx: number, width: number): Shape {
 }
 
 export function justifiedTiles(idx: number): [Tiles, number, number] {
-  const t = shapes[idx];
+  return justify(shapes[idx]);
+}
+
+export function justify(t: Tiles): [Tiles, number, number] {
   const [minRow, minCol, maxRow, maxCol] = boundingBox(t);
   return [
     translate(t, -minRow, -minCol),

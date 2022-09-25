@@ -121,3 +121,13 @@ aside .score {
 .game-over button {
   font-size: 2em;
 }
+
+.Logo {
+  display: flex;
+  align-items: flex-end;
+}
+
+.Logo .Board {
+  margin: 3px;
+  background: none;
+}

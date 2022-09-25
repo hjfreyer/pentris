@@ -11,14 +11,16 @@
   --border: calc(var(--side) / 10);
   --hue: calc(19 * var(--idx) * 12deg);
 
+  --sat: 100%;
+
   width: var(--side);
   height: var(--side);
 
-  border-left: var(--border) solid hsl(var(--hue), 100%, 70%);
-  border-top: var(--border) solid hsl(var(--hue), 100%, 70%);
-  border-bottom: var(--border) solid hsl(var(--hue), 100%, 30%);
-  border-right: var(--border) solid hsl(var(--hue), 100%, 30%);
-  background: hsl(var(--hue), 100%, 50%);
+  border-left: var(--border) solid hsl(var(--hue), var(--sat), 70%);
+  border-top: var(--border) solid hsl(var(--hue), var(--sat), 70%);
+  border-bottom: var(--border) solid hsl(var(--hue), var(--sat), 30%);
+  border-right: var(--border) solid hsl(var(--hue), var(--sat), 30%);
+  background: hsl(var(--hue), var(--sat), 50%);
 }
 
 .Board .cell.empty {  }
