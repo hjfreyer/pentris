@@ -22,6 +22,9 @@ function keyToInput(key: string): input.Button | null {
       return 'SPIN';
     case ' ':
       return 'DROP';
+    case 'p':
+    case 'P':
+      return 'PAUSE';
     default:
       return null;
   }
@@ -80,9 +83,9 @@ export default function index() {
 
   const doms = states.pipe(rxop.map(s =>
     <App key="app"
-      state = { s }
-      view = { gameController.view() }
-      dispatch = { a => manualActions.next(a) } />));
+      state={s}
+      view={gameController.view()}
+      dispatch={a => manualActions.next(a)} />));
 
   const root = document.getElementById('root') as HTMLElement;
 

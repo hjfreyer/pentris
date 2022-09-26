@@ -20,7 +20,13 @@ type InGameState = {
   game: gs.State
 }
 
-export type State = NewGameState | InGameState;
+type PausedState = {
+  kind: "paused"
+  prefs: Preferences
+  game: gs.State
+}
+
+export type State = NewGameState | InGameState | PausedState;
 
 export type Action = Tick | Input | UIAction | UpdatePrefs;
 
@@ -88,8 +94,27 @@ export class Controller {
 
   private input(s: State, i: input.ControllerInput): State {
     return produce(s, (s: State) => {
-      if (s.kind !== 'in_game') { return; }
-      s.game = this.gameController.input(s.game, i);
+      if (i.action === 'PAUSE') {
+        switch (s.kind) {
+          case 'in_game':
+            return {
+              kind: 'paused',
+              prefs: s.prefs,
+              game: s.game,
+            };
+          case 'paused':
+            return {
+              kind: 'in_game',
+              prefs: s.prefs,
+              game: s.game,
+            };
+          case 'new_game':
+            return;
+        }
+      } else {
+        if (s.kind !== 'in_game') { return; }
+        s.game = this.gameController.input(s.game, { ...i, action: i.action });
+      }
     });
   }
 

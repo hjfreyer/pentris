@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import * as ui from '../ui/state';
-import Board from './Board';
 import * as gs from '../game/state';
-import PiecePreview from './PiecePreview';
+
+import NewGame from './NewGame';
+import InGame from './InGame';
 
 import './App.css';
-import Logo from './Logo';
 
 export type Properties = {
   state: ui.State
@@ -14,91 +14,37 @@ export type Properties = {
   dispatch: (a: ui.Action) => void
 }
 
-function App({state, view, dispatch}: Properties): JSX.Element {
-  const updateStartingSpeed = (
-    (e : React.ChangeEvent<HTMLInputElement>) => dispatch({
-    kind: 'update-prefs',
-    update: (p : ui.Preferences) => ({
-      ...p,
-      startingSpeed: e.target.valueAsNumber,
-    })
-  }));
+function App({ state, view, dispatch }: Properties): JSX.Element {
+  const setPrefs = (
+    (prefs: ui.Preferences) => dispatch({
+      kind: 'update-prefs',
+      update: (p: ui.Preferences) => ({
+        ...p,
+        ...prefs,
+      })
+    }));
 
-  const updateZeroG = (
-    (e : React.ChangeEvent<HTMLInputElement>) => dispatch({
-    kind: 'update-prefs',
-    update: (p : ui.Preferences) => ({
-      ...p,
-      zeroG: e.target.checked,
-    })
-  }));
+  const startGame = () => dispatch({ kind: 'ui', action: 'START' });
 
   switch (state.kind) {
-  case 'new_game':
-    return (
-      <div className= "App">
-        <div className="new-game">
-          <Logo/>
-
-          <div className="settings">
-            <div className="form-row">
-              <label>Starting Speed</label>
-              <input type="range" min="1" max="30"
-                value={state.prefs.startingSpeed}
-                onChange={updateStartingSpeed}/>
-              <input className="level-text" 
-                type="number" min="1" max="30"
-                value={state.prefs.startingSpeed}
-                onChange={updateStartingSpeed}/>
-            </div>
-            <div className="form-row">
-              <label htmlFor="zero-g-checkbox">Zero-G</label>
-              <input id="zero-g-checkbox"
-                type="checkbox" 
-                checked={state.prefs.zeroG}
-                onChange={updateZeroG}/>
-            </div>
-          </div>
-
-          <button className="btn btn-primary" autoFocus onClick={()=> dispatch({kind: 'ui', action: 'START'})}>
-            New Game
-          </button>
+    case 'new_game':
+      return (
+        <div className="App">
+          <NewGame
+            prefs={state.prefs}
+            setPrefs={setPrefs}
+            startGame={startGame}
+          />
         </div>
-      </div>
-    )
-  case 'in_game':
-    const s = state.game;
-    return (<div className= "App">
-      <main>
-        <Board cells={ gs.flattenBoard(s) } />
-      </main>
-      <aside>
-        <h1>Pentris</h1>
-        <p className="copy">
-          It's Beta.<br/>It's Delicious.<br/>It's Pentris.
-        </p>
-        <h2>Preview</h2>
-        <PiecePreview shapeIdx={s.nextShapeIdx}/>
-        <h3>Score</h3>
-        <h3>Lines Cleared</h3>
-        <p className="score">{s.score}</p>
-        <p className="score">{s.lines}</p>
-        <h3>Level</h3>
-        <h3>Speed</h3>
-        <p className="score">{view.getLevel(s) + 1}</p>
-        <p className="score">{view.getMultiplier(s)}</p>
-      </aside>
-      <div className="game-over" hidden={!s.toppedOut}>
-        <div className="card">
-          <h1>OWNED!</h1>
-          <p>Score: {s.score}</p>
-          <button className="btn btn-primary"
-            onClick={()=> dispatch({kind: 'ui', action: 'START'})}>
-            New Game
-          </button>
+      );
+
+    case 'in_game':
+    case 'paused':
+      return (
+        <div className="App">
+          <InGame game={state.game} view={view} startGame={startGame} paused={state.kind === 'paused'} />
         </div>
-      </div>
-    </div>);
+      );
   }
 }
 
