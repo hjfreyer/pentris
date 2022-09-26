@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: hsl(120deg, 15%, 40%);
+}
+
+#shape-tests {
+  background: white;
+
+  width: 100%;
+  height: 100%;
+}
+
+#shape-tests .shape {
+  margin: 10px;
+}
+
+button {
+  --border-width: 0.07em;
+  --shadow-color: #4AA52E;
+
+  background: #92CD41;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  padding: 0.5em;
+  font-family: 'Press Start 2P', sans-serif;
+  color: white;
+  box-shadow: inset calc(-1*var(--border-width)) calc(-1*var(--border-width)) 0px 0px var(--shadow-color);
+  border: var(--border-width) solid black;
+}
+
+button:hover {
+  filter: saturate(200%) brightness(90%);
+}

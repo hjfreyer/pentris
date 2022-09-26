@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import * as rx from 'rxjs';
 import * as rxop from 'rxjs/operators';
 
@@ -37,7 +37,7 @@ function saveLocalStorage(s: ui.State, a: ui.Action) {
   localStorage[LOCAL_STORAGE_PREFS_KEY] = JSON.stringify(s.prefs);
 }
 
-export default function index() {
+export default function index(root: ReactDOM.Root) {
   const manualActions = new rx.Subject<ui.Action>();
   const ticks = rx.timer(0, 1000 / 60).pipe(
     rxop.map((_): ui.Action => ({ kind: 'tick' }))
@@ -87,7 +87,7 @@ export default function index() {
       view={gameController.view()}
       dispatch={a => manualActions.next(a)} />));
 
-  const root = document.getElementById('root') as HTMLElement;
+  // const root = document.getElementById('root') as HTMLElement;
 
-  doms.subscribe((d) => ReactDOM.render(d, root));
+  doms.subscribe((d) => root.render(d));
 }
