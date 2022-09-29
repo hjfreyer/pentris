@@ -1,0 +1,141 @@
+.in-game {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 2vmin;
+
+}
+
+aside {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* 
+    grid-template-columns: 50% 50%;
+    align-content: flex-start;
+    padding: 1vmin; */
+
+    background: white;
+    text-align: center;
+}
+
+/* 
+aside h1,
+aside p.copy,
+aside h2,
+aside .PiecePreview,
+aside footer {
+    grid-column: span 2;
+}
+
+aside .copy {
+    line-height: 2em;
+} */
+
+
+aside .copy {
+    font-size: 0.8em;
+}
+
+aside .stats {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+aside .stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 2.5em;
+    line-height: 1.5em;
+    margin: 0;
+}
+
+aside .stat:before {
+    font-size: 0.468em;
+    line-height: 1.5em;
+}
+
+aside .score:before {
+    content: 'Score';
+}
+
+aside .lines:before {
+    content: 'Lines Cleared';
+}
+
+aside .level:before {
+    content: 'Level';
+}
+
+aside .speed:before {
+    content: 'Speed';
+}
+
+aside .controls::before {
+    content: 'Controls';
+    line-height: 2em;
+    font-size: 1em;
+}
+
+aside .controls {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: auto;
+}
+
+aside .controls li {
+    margin: 0.3em;
+}
+
+aside footer {
+    margin: 1em;
+}
+
+.PiecePreview {
+    background: black;
+    width: calc(600vmin/24);
+    height: calc(400vmin/24);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal .card {
+    background: white;
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 2px;
+
+    min-width: 66%;
+    min-height: 50%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.modal button {
+    font-size: 2em;
+}

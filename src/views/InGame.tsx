@@ -3,8 +3,9 @@ import * as React from 'react';
 import Board from './Board';
 import * as gs from '../game/state';
 import PiecePreview from './PiecePreview';
+import Footer from './Footer';
 
-import './App.css';
+import './InGame.css';
 
 export type InGameProps = {
     game: gs.State
@@ -14,25 +15,29 @@ export type InGameProps = {
 };
 
 export default function InGame({ game, view, startGame, paused }: InGameProps): JSX.Element {
-    return <div className="App">
+    return <div className="in-game container">
         <main>
             <Board cells={gs.flattenBoard(game)} />
         </main>
         <aside>
             <h1>Pentris</h1>
             <p className="copy">
-                It's Beta.<br />It's Delicious.<br />It's Pentris.
+                Like Tetris, but more so.
             </p>
             <h2>Preview</h2>
             <PiecePreview shapeIdx={game.nextShapeIdx} />
-            <h3>Score</h3>
-            <h3>Lines Cleared</h3>
-            <p className="score">{game.score}</p>
-            <p className="score">{game.lines}</p>
-            <h3>Level</h3>
-            <h3>Speed</h3>
-            <p className="score">{view.getLevel(game) + 1}</p>
-            <p className="score">{view.getMultiplier(game)}</p>
+            <div className="stats">
+                <p className="stat score">{game.score}</p>
+                <p className="stat lines">{game.lines}</p>
+                <p className="stat level">{view.getLevel(game) + 1}</p>
+                <p className="stat speed">{view.getMultiplier(game)}</p>
+            </div>
+            <div className="controls">
+                <li><b>Up</b>: Rotate</li>
+                <li><b>Space</b>: Drop</li>
+                <li><b>P</b>: Pause</li>
+                </div>
+            <Footer />
         </aside>
         <div className="modal" hidden={!game.toppedOut}>
             <div className="card">

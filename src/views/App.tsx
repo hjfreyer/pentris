@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import * as ui from '../ui/state';
 import * as gs from '../game/state';
 
@@ -29,21 +27,17 @@ function App({ state, view, dispatch }: Properties): JSX.Element {
   switch (state.kind) {
     case 'new_game':
       return (
-        <div className="App">
           <NewGame
             prefs={state.prefs}
             setPrefs={setPrefs}
             startGame={startGame}
           />
-        </div>
       );
 
     case 'in_game':
     case 'paused':
       return (
-        <div className="App">
           <InGame game={state.game} view={view} startGame={startGame} paused={state.kind === 'paused'} />
-        </div>
       );
   }
 }

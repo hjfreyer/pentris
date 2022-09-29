@@ -1,0 +1,43 @@
+.new-game {
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 2vmin;
+
+    background-color: white;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.new-game .Logo {
+    padding: 10vmin;
+}
+
+.new-game .settings {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.new-game .form-row {
+    margin: 0.5em;
+
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.new-game .level-text {
+    width: 3.2em;
+    font-size: 1em;
+}
+
+.new-game button {
+    font-size: 4em;
+}
+
+.new-game footer {
+    display: flex;
+    align-items: center;
+}

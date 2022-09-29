@@ -1,0 +1,9 @@
+.Logo {
+    display: flex;
+    align-items: flex-end;
+}
+
+.Logo .Board {
+    margin: 3px;
+    background: none;
+}

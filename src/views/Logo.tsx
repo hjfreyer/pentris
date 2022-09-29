@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as gs from '../game/state';
 import * as shape from '../game/shape';
 import Board from './Board';
+import './Logo.css';
 
 function Logo(): JSX.Element {
     const shapeP: shape.Shape = { idx: 18, col: 0, row: 0, rot: 1 };

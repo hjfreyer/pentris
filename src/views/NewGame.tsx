@@ -2,8 +2,9 @@ import * as React from 'react';
 
 import * as ui from '../ui/state';
 
-import './App.css';
+import './NewGame.css';
 import Logo from './Logo';
+import Footer from './Footer';
 
 export type NewGameProps = {
     prefs: ui.Preferences,
@@ -25,7 +26,7 @@ export default function NewGame({ prefs, setPrefs, startGame }: NewGameProps): J
             zeroG: e.target.checked,
         }));
 
-    return <div className="new-game">
+    return <div className="new-game container">
         <Logo />
 
         <div className="settings">
@@ -51,5 +52,7 @@ export default function NewGame({ prefs, setPrefs, startGame }: NewGameProps): J
         <button className="btn btn-primary" autoFocus onClick={startGame}>
             New Game
         </button>
+
+        <Footer/>
     </div>;
 }
