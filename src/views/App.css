@@ -2,8 +2,7 @@
 .container {
   width: 100vmin;
   height: 100vmin;
-  /* display: flex; */
-  /* position: relative; */
+  position: relative;
   border: 1px solid black;
 }
 
