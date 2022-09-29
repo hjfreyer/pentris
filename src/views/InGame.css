@@ -13,28 +13,9 @@ aside {
     flex-direction: column;
     align-items: center;
 
-    /* 
-    grid-template-columns: 50% 50%;
-    align-content: flex-start;
-    padding: 1vmin; */
-
     background: white;
     text-align: center;
 }
-
-/* 
-aside h1,
-aside p.copy,
-aside h2,
-aside .PiecePreview,
-aside footer {
-    grid-column: span 2;
-}
-
-aside .copy {
-    line-height: 2em;
-} */
-
 
 aside .copy {
     font-size: 0.8em;
@@ -89,7 +70,26 @@ aside .controls {
     margin: auto;
 }
 
-aside .controls li {
+aside .controls .control {
+    margin: 0.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+aside .controls .key {
+    background-color: lightgray;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 1.5em;
+}
+
+aside .controls .key:not(.material-icons) {
+    font-size: 0.8em;
+    padding: 0.5em;
+}
+
+aside .controls .action {
     margin: 0.3em;
 }
 

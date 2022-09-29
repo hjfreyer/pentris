@@ -1,19 +1,20 @@
-
 footer nav a {
-    --border-width: 0.07em;
-    --shadow-color: #4AA52E;
-  
-    padding: 0.3em;
-    text-decoration: none;
-    margin: 5px;
-    background: #92CD41;
-    color: white;
-    box-shadow: inset calc(-1*var(--border-width)) calc(-1*var(--border-width)) 0px 0px var(--shadow-color);
-    border: var(--border-width) solid black;
-  }
-  
- 
+  --border-width: 0.07em;
+  --shadow-color: #4AA52E;
+
+  padding: 0.3em;
+  text-decoration: none;
+  margin: 5px;
+  background: #92CD41;
+  color: white;
+  box-shadow: inset calc(-1*var(--border-width)) calc(-1*var(--border-width)) 0px 0px var(--shadow-color);
+  border: var(--border-width) solid black;
+}
+
+footer nav .material-icons {
+  font-size: 1.75em;
+}
+
 footer nav a:hover {
-    filter: saturate(200%) brightness(90%);
-  }
-  
+  filter: saturate(200%) brightness(90%);
+}

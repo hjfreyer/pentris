@@ -33,10 +33,25 @@ export default function InGame({ game, view, startGame, paused }: InGameProps): 
                 <p className="stat speed">{view.getMultiplier(game)}</p>
             </div>
             <div className="controls">
-                <li><b>Up</b>: Rotate</li>
-                <li><b>Space</b>: Drop</li>
-                <li><b>P</b>: Pause</li>
-                </div>
+                <span className="control">
+                    <span className='key material-icons'>keyboard_arrow_up</span>
+                    <span className='action'>Rotate</span>
+                </span>
+                <span className="control">
+                    <span className='key material-icons'>keyboard_arrow_left</span>
+                    <span className='key material-icons'>keyboard_arrow_down</span>
+                    <span className='key material-icons'>keyboard_arrow_right</span>
+                    <span className='action'>Move</span>
+                </span>
+                <span className="control">
+                    <span className='key'>SPACE</span>
+                    <span className='action'>Drop</span>
+                </span>
+                <span className="control">
+                    <span className='key'>P</span>
+                    <span className='action'>Pause</span>
+                </span>
+            </div>
             <Footer />
         </aside>
         <div className="modal" hidden={!game.toppedOut}>
