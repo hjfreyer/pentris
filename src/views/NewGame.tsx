@@ -52,7 +52,7 @@ export default function NewGame({ prefs, setPrefs, startGame }: NewGameProps): J
         <button className="btn btn-primary" autoFocus onClick={startGame}>
             New Game
         </button>
-
         <Footer/>
+        <div className="v2-notice">Looking for <a href="https://v2.pentris.net">Version 2</a>?</div>
     </div>;
 }
