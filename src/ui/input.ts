@@ -3,7 +3,7 @@ import * as rx from 'rxjs';
 import * as rxop from 'rxjs/operators';
 
 export type DirectionButton = 'LEFT' | 'RIGHT' | 'DOWN'
-export type ActionButton = 'SPIN' | 'DROP' | 'PAUSE'
+export type ActionButton = 'SPIN' | 'COUNTER_SPIN' | 'DROP' | 'PAUSE'
 
 export type Button = DirectionButton | ActionButton
 export type RawInput = {

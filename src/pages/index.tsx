@@ -10,21 +10,26 @@ import * as ui from '../ui/state';
 
 const LOCAL_STORAGE_PREFS_KEY = 'prefs';
 
-function keyToInput(key: string): input.Button | null {
-  switch (key) {
+function keyToInput(key: KeyboardEvent): input.RawInput | null {
+  const pressed = key.type === 'keydown';
+  switch (key.key) {
     case 'ArrowLeft':
-      return 'LEFT';
+      return {button: 'LEFT', pressed};
     case 'ArrowRight':
-      return 'RIGHT';
+      return {button: 'RIGHT', pressed};
     case 'ArrowDown':
-      return 'DOWN';
+      return {button: 'DOWN', pressed};
     case 'ArrowUp':
-      return 'SPIN';
+      if (key.shiftKey){
+        return {button: 'COUNTER_SPIN', pressed};
+      } else {
+        return {button: 'SPIN', pressed};
+      }
     case ' ':
-      return 'DROP';
+      return {button: 'DROP', pressed};
     case 'p':
     case 'P':
-      return 'PAUSE';
+      return {button:'PAUSE', pressed};
     default:
       return null;
   }
@@ -49,9 +54,10 @@ export default function index(root: ReactDOM.Root) {
     rx.fromEvent(document, "keyup") as rx.Observable<KeyboardEvent>;
 
   const rawInputs: rx.Observable<input.RawInput> = rx.merge(keyUps, keyDowns).pipe(
-    rxop.map(e => ({ button: keyToInput(e.key), pressed: e.type === 'keydown' } as input.RawInput)),
-    rxop.filter(i => i.button != null),
-  )
+    rxop.map((e:KeyboardEvent) => keyToInput(e)),
+    rxop.filter(i => i != null),
+    rxop.map((r:input.RawInput | null) => r!),
+  );
 
   const inputActions = input.parseInput(rawInputs).pipe(
     rxop.map((input): ui.Action => ({ kind: 'input', input }))

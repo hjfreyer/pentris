@@ -10,7 +10,7 @@ const ENTRY_DELAY = 18;
 const LINES_PER_LEVEL = 10;
 const SOFT_DROP_MULTIPLIER = 5;
 
-export type ActionButton = 'SPIN' | 'DROP'
+export type ActionButton = 'SPIN' | 'COUNTER_SPIN' | 'DROP'
 export type ControllerInput = {
   left: boolean
   right: boolean
@@ -104,7 +104,7 @@ export class Controller {
   }
 
   newState(p: Parameters): State {
-    const gravity : GravityState = p.zeroG ? {kind: "disabled"} : {
+    const gravity: GravityState = p.zeroG ? { kind: "disabled" } : {
       kind: "enabled",
       countDown: this.levelTable[p.minLevel].gravity
     };
@@ -175,6 +175,9 @@ export class Controller {
         case 'SPIN':
           attemptMoveActive(s, 0, 0, 1);
           break;
+        case 'COUNTER_SPIN':
+          attemptMoveActive(s, 0, 0, 3);
+          break;
         case 'DROP':
           this.doDrop(s);
           break;
@@ -198,7 +201,7 @@ export class Controller {
       s.dasDelay = DAS_REFRESH_DELAY;
       switch (s.dasDirection) {
         case 'LEFT':
-          attemptMoveActive(s, 0, -1, 0); 
+          attemptMoveActive(s, 0, -1, 0);
           break;
         case 'RIGHT':
           attemptMoveActive(s, 0, 1, 0);
@@ -206,7 +209,7 @@ export class Controller {
         case 'DOWN':
           attemptMoveActive(s, 1, 0, 0);
           break;
-        }
+      }
     } else {
       s.dasDelay--;
     }
@@ -222,7 +225,7 @@ export class Controller {
       return true;
     }
 
-    
+
     s.gravity.countDown = this.view().getGravity(s);
     return attemptMoveActive(s, 1, 0, 0);
   }
@@ -303,7 +306,7 @@ export function flattenBoard(s: State): GridCell[][] {
 
 function shapeClips(s: State, shp: shape.Shape): boolean {
   for (let [row, col] of shape.getTiles(shp)) {
-    const clips = (function() {
+    const clips = (function () {
       if (s.height <= row || col < 0 || s.width <= col) {
         return true;
       }
