@@ -19,21 +19,19 @@
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: your-app-name    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '14.x'                # set this to the node version to use
-
+  AZURE_WEBAPP_NAME: your-app-name # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: "." # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: "14.x" # set this to the node version to use
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
-
 
 # Allow one concurrent deployment
 concurrency:
@@ -44,29 +42,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
 
-    - name: npm install, build, and test
-      run: |
-        npm install
-        npm run build --if-present
-        echo 'www.pentris.net' > build/CNAME 
-    # - name: Upload artifact for deployment job
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: node-app
-    #     path: build/
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+          echo 'www.pentris.net' > build/CNAME
+      # - name: Upload artifact for deployment job
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: node-app
+      #     path: build/
 
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v1
-      with:
-        path: 'build/'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "build/"
   deploy:
     environment:
       name: github-pages
@@ -85,17 +83,16 @@ jobs:
   #  environment:
   #    name: 'Development'
   #    url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
 #    steps:
 #    - name: Download artifact from build job
 ##      uses: actions/download-artifact@v3
- #     with:
- #       name: node-app
+#     with:
+#       name: node-app
 
-  #  - name: 'Deploy to Azure WebApp'
-  #    id: deploy-to-webapp 
-  #    uses: azure/webapps-deploy@v2
-  #    with:
-  #      app-name: ${{ env.AZURE_WEBAPP_NAME }}
-  #      publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-  #      package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }
+#  - name: 'Deploy to Azure WebApp'
+#    id: deploy-to-webapp
+#    uses: azure/webapps-deploy@v2
+#    with:
+#      app-name: ${{ env.AZURE_WEBAPP_NAME }}
+#      publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+#      package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }

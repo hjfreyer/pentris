@@ -1,51 +1,50 @@
+import produce from "immer";
 
-import produce from 'immer';
-
-import * as gs from '../game/state';
-import * as input from './input';
+import * as gs from "../game/state";
+import * as input from "./input";
 
 export type Preferences = {
-  startingSpeed: number
-  zeroG: boolean
-}
+  startingSpeed: number;
+  zeroG: boolean;
+};
 
 type NewGameState = {
-  kind: "new_game"
-  prefs: Preferences
-}
+  kind: "new_game";
+  prefs: Preferences;
+};
 
 type InGameState = {
-  kind: "in_game"
-  prefs: Preferences
-  game: gs.State
-}
+  kind: "in_game";
+  prefs: Preferences;
+  game: gs.State;
+};
 
 type PausedState = {
-  kind: "paused"
-  prefs: Preferences
-  game: gs.State
-}
+  kind: "paused";
+  prefs: Preferences;
+  game: gs.State;
+};
 
 export type State = NewGameState | InGameState | PausedState;
 
 export type Action = Tick | Input | UIAction | UpdatePrefs;
 
 type UIAction = {
-  kind: 'ui'
-  action: 'START'
-}
-type Tick = { kind: 'tick' };
+  kind: "ui";
+  action: "START";
+};
+type Tick = { kind: "tick" };
 type Input = {
-  kind: 'input'
-  input: input.ControllerInput
-}
+  kind: "input";
+  input: input.ControllerInput;
+};
 type UpdatePrefs = {
-  kind: 'update-prefs'
-  update: (p: Preferences) => Preferences
-}
+  kind: "update-prefs";
+  update: (p: Preferences) => Preferences;
+};
 
 export class Controller {
-  gameController: gs.Controller
+  gameController: gs.Controller;
 
   constructor(gameController: gs.Controller) {
     this.gameController = gameController;
@@ -56,7 +55,7 @@ export class Controller {
       prefs = {
         startingSpeed: 1,
         zeroG: false,
-      }
+      };
     }
     return { kind: "new_game", prefs };
   }
@@ -76,48 +75,51 @@ export class Controller {
 
   private start(s: State): State {
     return {
-      kind: 'in_game',
+      kind: "in_game",
       prefs: s.prefs,
       game: this.gameController.newState({
         minLevel: s.prefs.startingSpeed - 1,
         zeroG: s.prefs.zeroG,
       }),
-    }
+    };
   }
 
   private tick(s: State): State {
     return produce(s, (s: State) => {
-      if (s.kind !== 'in_game') { return; }
+      if (s.kind !== "in_game") {
+        return;
+      }
       s.game = this.gameController.tick(s.game);
     });
   }
 
   private input(s: State, i: input.ControllerInput): State {
-    if (i.action === 'PAUSE') {
+    if (i.action === "PAUSE") {
       switch (s.kind) {
-        case 'in_game':
+        case "in_game":
           return {
-            kind: 'paused',
+            kind: "paused",
             prefs: s.prefs,
             game: s.game,
           };
-        case 'paused':
+        case "paused":
           return {
-            kind: 'in_game',
+            kind: "in_game",
             prefs: s.prefs,
             game: s.game,
           };
-        case 'new_game':
+        case "new_game":
           return s;
       }
     } else {
-      if (s.kind !== 'in_game') { return s; }
+      if (s.kind !== "in_game") {
+        return s;
+      }
       return {
         ...s,
-        game: this.gameController.input(s.game, { ...i, action: i.action })
-      }
+        game: this.gameController.input(s.game, { ...i, action: i.action }),
+      };
     }
-
   }
 
   private updatePrefs(s: State, up: UpdatePrefs): State {

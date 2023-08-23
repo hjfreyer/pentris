@@ -1,13 +1,14 @@
 footer nav a {
   --border-width: 0.07em;
-  --shadow-color: #4AA52E;
+  --shadow-color: #4aa52e;
 
   padding: 0.3em;
   text-decoration: none;
   margin: 5px;
-  background: #92CD41;
+  background: #92cd41;
   color: white;
-  box-shadow: inset calc(-1*var(--border-width)) calc(-1*var(--border-width)) 0px 0px var(--shadow-color);
+  box-shadow: inset calc(-1 * var(--border-width))
+    calc(-1 * var(--border-width)) 0px 0px var(--shadow-color);
   border: var(--border-width) solid black;
 }
 

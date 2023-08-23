@@ -1,4 +1,3 @@
-
 type Tiles = Array<[number, number]>;
 
 export function mirrorY(t: Tiles): Tiles {
@@ -201,26 +200,21 @@ const trominoL: Tiles = [
   [1, 1],
 ];
 
-const TROMINOES: Tiles[] = [
-  trominoI,
-  trominoL,
-];
+const TROMINOES: Tiles[] = [trominoI, trominoL];
 
 const domino: Tiles = [
   [0, 0],
   [0, 1],
 ];
 
-const monomino: Tiles = [
-  [0, 0]
-];
+const monomino: Tiles = [[0, 0]];
 
 const shapes: Tiles[] = [
   monomino,
   domino,
   ...TROMINOES,
   ...TETROMINOES,
-  ...PENTOMINOES
+  ...PENTOMINOES,
 ];
 
 export default shapes;

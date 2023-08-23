@@ -1,141 +1,142 @@
 .in-game {
-    display: flex;
-    flex-direction: row;
-    font-family: 'Press Start 2P', sans-serif;
-    font-size: 2vmin;
-
+  display: flex;
+  flex-direction: row;
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 2vmin;
 }
 
 aside {
-    flex: 1;
+  flex: 1;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    background: white;
-    text-align: center;
+  background: white;
+  text-align: center;
 }
 
 aside .copy {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 aside .stats {
-    display: grid;
-    grid-template-columns: 50% 50%;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
 aside .stat {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    font-size: 2.5em;
-    line-height: 1.5em;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 2.5em;
+  line-height: 1.5em;
+  margin: 0;
 }
 
 aside .stat:before {
-    font-size: 0.468em;
-    line-height: 1.5em;
+  font-size: 0.468em;
+  line-height: 1.5em;
 }
 
 aside .score:before {
-    content: 'Score';
+  content: "Score";
 }
 
 aside .lines:before {
-    content: 'Lines Cleared';
+  content: "Lines Cleared";
 }
 
 aside .level:before {
-    content: 'Level';
+  content: "Level";
 }
 
 aside .speed:before {
-    content: 'Speed';
+  content: "Speed";
 }
 
 aside .controls::before {
-    content: 'Controls';
-    line-height: 2em;
-    font-size: 1em;
+  content: "Controls";
+  line-height: 2em;
+  font-size: 1em;
 }
 
 aside .controls {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: auto;
 }
 
 aside .controls .control {
-    margin: 0.2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 aside .controls .key {
-    background-color: lightgray;
-    border: 1px solid black;
-    border-radius: 3px;
-    font-size: 1.5em;
+  background-color: lightgray;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 1.5em;
 }
 
 aside .controls .key:not(.material-icons) {
-    font-size: 0.8em;
-    padding: 0.5em;
+  font-size: 0.8em;
+  padding: 0.5em;
 }
 
 aside .controls .action {
-    margin: 0.3em;
+  margin: 0.3em;
 }
 
 aside footer {
-    margin: 1em;
+  margin: 1em;
 }
 
 .PiecePreview {
-    background: black;
-    width: calc(600vmin/24);
-    height: calc(400vmin/24);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background: black;
+  width: calc(600vmin / 24);
+  height: calc(400vmin / 24);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal[hidden] {
-    display: none;
+  display: none;
 }
 
 .modal .card {
-    background: white;
+  background: white;
 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    border-radius: 2px;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 2px;
 
-    min-width: 66%;
-    min-height: 50%;
+  min-width: 66%;
+  min-height: 50%;
 
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: space-evenly;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .modal button {
-    font-size: 2em;
+  font-size: 2em;
 }

@@ -1,24 +1,25 @@
-import * as React from 'react';
+import * as React from "react";
 
-import * as gs from '../game/state';
-import * as shape from '../game/shape';
-import Board from './Board';
+import * as gs from "../game/state";
+import * as shape from "../game/shape";
+import Board from "./Board";
 
 export type Properties = {
-  shapeIdx: number,
+  shapeIdx: number;
 };
 
 function PiecePreview({ shapeIdx }: Properties): JSX.Element {
   const [justified, rows, cols] = shape.justifiedTiles(shapeIdx);
-  const grid = Array.from({ length: rows },
-    () => Array(cols).fill({ kind: 'empty' } as gs.GridCell));
+  const grid = Array.from({ length: rows }, () =>
+    Array(cols).fill({ kind: "empty" } as gs.GridCell),
+  );
 
   for (const [row, col] of justified) {
-    grid[row][col] = { kind: 'shape', shapeIdx };
+    grid[row][col] = { kind: "shape", shapeIdx };
   }
   return (
     <div className="PiecePreview">
-      <Board cells={ grid } />
+      <Board cells={grid} />
     </div>
   );
 }

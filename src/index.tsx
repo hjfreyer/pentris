@@ -1,17 +1,17 @@
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 
-import index from './pages/index';
-import shapeTest from './pages/shape-test';
+import index from "./pages/index";
+import shapeTest from "./pages/shape-test";
 
-import './index.css';
+import "./index.css";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 
-if (window.location.pathname === '/shape-test') {
+if (window.location.pathname === "/shape-test") {
   shapeTest();
 } else {
   index(root);

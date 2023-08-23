@@ -1,14 +1,13 @@
+import Prando from "prando";
 
-import Prando from 'prando';
-
-import * as shape from './shape';
+import * as shape from "./shape";
 
 export interface Randomizer {
-  nextShape(): number
+  nextShape(): number;
 }
 
 export class TrueRandomizer implements Randomizer {
-  rand: Prando
+  rand: Prando;
 
   constructor(rand: Prando) {
     this.rand = rand;
@@ -20,9 +19,9 @@ export class TrueRandomizer implements Randomizer {
 }
 
 export class NBagRandomizer implements Randomizer {
-  rand: Prando
-  n: number
-  bag: number[]
+  rand: Prando;
+  n: number;
+  bag: number[];
 
   constructor(rand: Prando, n: number) {
     this.rand = rand;
@@ -32,9 +31,10 @@ export class NBagRandomizer implements Randomizer {
 
   nextShape(): number {
     if (this.bag.length === 0) {
-      this.bag = Array.from({ length: this.n * shape.NUM_SHAPES },
-        (_, k) => k % shape.NUM_SHAPES
-      )
+      this.bag = Array.from(
+        { length: this.n * shape.NUM_SHAPES },
+        (_, k) => k % shape.NUM_SHAPES,
+      );
       shuffle(this.bag, this.rand);
     }
     return this.bag.pop() as number;

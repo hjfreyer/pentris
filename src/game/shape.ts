@@ -1,14 +1,13 @@
-
-import shapes from './shape-data';
+import shapes from "./shape-data";
 
 export const NUM_SHAPES = shapes.length;
 
 export type Tiles = Array<[number, number]>;
 export type Shape = {
-  idx: number
-  row: number
-  col: number
-  rot: number
+  idx: number;
+  row: number;
+  col: number;
+  rot: number;
 };
 
 export function getTiles(s: Shape): Tiles {
@@ -45,8 +44,12 @@ function translate(t: Tiles, dRow: number, dCol: number): Tiles {
 function boundingBox(t: Tiles): [number, number, number, number] {
   const rows = t.map(([row, _]) => row);
   const cols = t.map(([_, col]) => col);
-  return [Math.min(...rows), Math.min(...cols),
-  Math.max(...rows), Math.max(...cols)];
+  return [
+    Math.min(...rows),
+    Math.min(...cols),
+    Math.max(...rows),
+    Math.max(...cols),
+  ];
 }
 
 function center(t: Tiles): [number, number] {
