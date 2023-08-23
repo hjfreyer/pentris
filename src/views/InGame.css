@@ -140,3 +140,20 @@ aside footer {
 .modal button {
   font-size: 2em;
 }
+
+.gameover .stats {
+  display: flex;
+  flex-flow: column;
+
+  align-items: center;
+}
+
+.gameover .stats .score:before {
+  content: "Score: ";
+}
+.gameover .stats .lines:before {
+  content: "Lines cleared: ";
+}
+.gameover .stats .level:before {
+  content: "Level: ";
+}

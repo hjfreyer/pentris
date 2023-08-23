@@ -59,9 +59,13 @@ export default function InGame({
         <Footer />
       </aside>
       <div className="modal" hidden={!game.toppedOut}>
-        <div className="card">
+        <div className="card gameover">
           <h1>OWNED!</h1>
-          <p>Score: {game.score}</p>
+          <div className="stats">
+            <p className="stat score">{game.score}</p>
+            <p className="stat lines">{game.lines}</p>
+            <p className="stat level">{view.getLevel(game) + 1}</p>
+          </div>
           <button className="btn btn-primary" onClick={startGame}>
             New Game
           </button>
