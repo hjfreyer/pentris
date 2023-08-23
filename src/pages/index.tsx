@@ -20,11 +20,9 @@ function keyToInput(key: KeyboardEvent): input.RawInput | null {
     case "ArrowDown":
       return { button: "DOWN", pressed };
     case "ArrowUp":
-      if (key.shiftKey) {
-        return { button: "COUNTER_SPIN", pressed };
-      } else {
-        return { button: "SPIN", pressed };
-      }
+      return { button: "SPIN", pressed };
+    case "Shift":
+      return { button: "COUNTER_SPIN", pressed };
     case " ":
       return { button: "DROP", pressed };
     case "p":

@@ -39,6 +39,7 @@ export default function InGame({
         <div className="controls">
           <span className="control">
             <span className="key material-icons">keyboard_arrow_up</span>
+            <span className="key">SHIFT</span>
             <span className="action">Rotate</span>
           </span>
           <span className="control">
